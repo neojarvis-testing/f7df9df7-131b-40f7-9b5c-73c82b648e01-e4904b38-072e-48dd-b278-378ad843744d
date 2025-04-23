@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int feedbackId;
+    long feedbackId;
     String feedbackText;
     String date;
     @ManyToOne
@@ -20,10 +20,10 @@ public class Feedback {
     @JoinColumn(name = "investmentId" ,nullable=true)
     Investment investment;
     String category;
-    public int getFeedbackId() {
+    public long getFeedbackId() {
         return feedbackId;
     }
-    public void setFeedbackId(int feedbackId) {
+    public void setFeedbackId(long feedbackId) {
         this.feedbackId = feedbackId;
     }
     public String getFeedbackText() {
@@ -56,17 +56,7 @@ public class Feedback {
     public void setCategory(String category) {
         this.category = category;
     }
-    public Feedback() {
-    }
-    public Feedback(int feedbackId, String feedbackText, String date, User user, Investment investment,
-            String category) {
-        this.feedbackId = feedbackId;
-        this.feedbackText = feedbackText;
-        this.date = date;
-        this.user = user;
-        this.investment = investment;
-        this.category = category;
-    }
+    
     
 
 }

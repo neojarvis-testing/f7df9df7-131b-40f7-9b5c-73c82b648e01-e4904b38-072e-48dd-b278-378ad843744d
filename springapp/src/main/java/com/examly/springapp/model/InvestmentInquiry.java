@@ -15,12 +15,12 @@ public class InvestmentInquiry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long inquiryId;
-    User user;
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
-    Investment investment;
+    User user;
     @ManyToOne
     @JoinColumn(name = "investmentId", nullable = false)
+    Investment investment;
     String message;
     String status;
     String priority;
@@ -89,6 +89,4 @@ public class InvestmentInquiry {
     public void setContactDetails(String contactDetails) {
         this.contactDetails = contactDetails;
     }
-
-    
 }

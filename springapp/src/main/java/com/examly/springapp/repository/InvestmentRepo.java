@@ -9,6 +9,6 @@ import com.examly.springapp.model.Investment;
 @Repository
 public interface InvestmentRepo extends JpaRepository<Investment, Long>{
 
-    @Query("select i from Investment i where i.name = ?1")
+    @Query("select investment from Investment investment where investment.name = ?1")
     Investment getInvestmentByName(String name);
 }

@@ -27,19 +27,16 @@ public class UserController {
         user = userService.registerUser(user);
         return ResponseEntity.status(201).body("registered");
     }
-
     // @PostMapping("/registers")
     // public ResponseEntity<User>userRegisters(@RequestBody User user){
     //     user = userService.registerUser(user);
     //     return ResponseEntity.status(201).body(user);
     // }
 
-    
     //EndPoint for user login
     @PostMapping("/login")
-    public ResponseEntity<?>loginUser(@RequestBody User user){
+    public ResponseEntity<LoginDTO>loginUser(@RequestBody User user){
         LoginDTO loginDTO  = userService.loginUser(user);
-        user.setPassword(null);
         return ResponseEntity.status(200).body(loginDTO);
     }
 

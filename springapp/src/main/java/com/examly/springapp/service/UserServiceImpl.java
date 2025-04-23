@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
+import com.examly.springapp.utility.UserMapper;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
@@ -27,7 +28,6 @@ public class UserServiceImpl implements UserService {
     //Business Logic for User login
     public LoginDTO loginUser(User user) {
         user =  userRepo.findByEmail(user.getEmail());
-        return new LoginDTO("token", user.getUsername(), user.getUserRole(), user.getUserId());
-
+        return UserMapper.mappedToLoginDTO(user);
     }
 }

@@ -19,4 +19,4 @@ public class User {
     private String username;        // User's username
     private String mobileNumber;    // User's mobile number
     private String userRole;        // Role of the user -> ADMIN/USER
-}
+} 

@@ -48,10 +48,10 @@ public class UserController {
         }
     }
 
-    // @PostMapping("/logins")
-    // public ResponseEntity<User>loginUsers(@RequestBody User user){
-    //     user = userService.loginUser(user);
-    //     user.setPassword(null);
-    //     return ResponseEntity.status(201).body(user);
-    // }
+    //  @PostMapping("/logins")
+    // // public ResponseEntity<User>loginUsers(@RequestBody User user){
+    // //     user = userService.loginUser(user);
+    // //     user.setPassword(null);
+    // //     return ResponseEntity.status(201).body(user);
+    // // }
 }

@@ -1,5 +1,4 @@
 package com.examly.springapp.model;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,8 +21,3 @@ public class Feedback {
     @JoinColumn(name = "investmentId" ,nullable=true)
     Investment investment;
     String category;
-    
-    
-    
-
-}

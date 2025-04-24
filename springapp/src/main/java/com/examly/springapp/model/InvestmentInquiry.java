@@ -28,7 +28,6 @@ public class InvestmentInquiry {
     LocalDateTime responseDate;
     String adminResponse;
     String contactDetails;
-    
     public long getInquiryId() {
         return inquiryId;
     }
@@ -89,4 +88,5 @@ public class InvestmentInquiry {
     public void setContactDetails(String contactDetails) {
         this.contactDetails = contactDetails;
     }
+    
 }

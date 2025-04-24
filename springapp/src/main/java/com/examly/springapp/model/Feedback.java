@@ -56,17 +56,7 @@ public class Feedback {
     public void setCategory(String category) {
         this.category = category;
     }
-    public Feedback() {
-    }
-    public Feedback(int feedbackId, String feedbackText, String date, User user, Investment investment,
-            String category) {
-        this.feedbackId = feedbackId;
-        this.feedbackText = feedbackText;
-        this.date = date;
-        this.user = user;
-        this.investment = investment;
-        this.category = category;
-    }
+    
     
 
 }

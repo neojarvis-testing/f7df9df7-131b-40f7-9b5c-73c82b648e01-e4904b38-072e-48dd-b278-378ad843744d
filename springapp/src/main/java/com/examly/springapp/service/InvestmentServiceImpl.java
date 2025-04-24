@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.exceptions.DuplicateInvestmentException;
 import com.examly.springapp.model.Investment;
 import com.examly.springapp.repository.InvestmentRepo;
 
@@ -16,6 +17,10 @@ public class InvestmentServiceImpl implements InvestmentService{
 
     @Override
     public Investment addInvestment(Investment investment) {
+        if (investmentRepo.existsById(investment.getInvestmentId())) {
+            throw new DuplicateInvestmentException("Investment already exists with ID: " + investment.getInvestmentId());
+        }
+        
         return investmentRepo.save(investment);
     }
 

@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;             //Unique identifier for the user
+    private long userId;             //Unique identifier for the user
     @Column(unique=true)
     private String email;           //User's Email Address must be unique for registration purpose
     private String password;        //User's Password
@@ -19,10 +19,10 @@ public class User {
     private String userRole;        //Role of the user->ADMIN/USER
 
     //Getters and Setters
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
     public String getEmail() {

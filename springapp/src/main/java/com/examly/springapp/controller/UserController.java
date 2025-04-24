@@ -29,8 +29,7 @@ public class UserController {
             return ResponseEntity.status(201).body("registered");
         }else{
             return ResponseEntity.status(400).body(null);
-        }
-        
+        }  
     }
     // @PostMapping("/registers")
     // public ResponseEntity<User>userRegisters(@RequestBody User user){

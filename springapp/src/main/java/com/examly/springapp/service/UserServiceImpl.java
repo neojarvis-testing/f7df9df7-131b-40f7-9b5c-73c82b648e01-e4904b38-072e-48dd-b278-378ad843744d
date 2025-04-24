@@ -2,6 +2,8 @@ package com.examly.springapp.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,9 @@ import com.examly.springapp.utility.UserMapper;
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
 
-    //Constructor based Injection
     @Autowired
-    public UserServiceImpl(UserRepo userRepo){
-        this.userRepo=userRepo;
+    public UserServiceImpl(UserRepo userRepo) {
+        this.userRepo = userRepo;
     }
     @Autowired
     PasswordEncoder encoder;
@@ -29,8 +30,9 @@ public class UserServiceImpl implements UserService {
         return userRepo.save(user);
     }
 
+    @Override
     //Business Logic for User login
-    public LoginDTO loginUser(User user) {
+    public LoginDTO loginUser(User user){
         logger.info("Method login started..");
         user =  userRepo.findByEmail(user.getEmail());
         if(user!=null){
@@ -39,4 +41,13 @@ public class UserServiceImpl implements UserService {
         logger.info("Method login ended..!!");
         return UserMapper.mappedToLoginDTO(user);
     }
+
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserDetails user = userRepo.findByName(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found: " + username);
+        }
+        return user;
+    }
+
 }

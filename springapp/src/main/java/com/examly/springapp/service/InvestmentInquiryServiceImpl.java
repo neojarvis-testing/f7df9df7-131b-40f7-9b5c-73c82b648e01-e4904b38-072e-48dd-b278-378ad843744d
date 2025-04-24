@@ -7,12 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.model.InvestmentInquiry;
+import com.examly.springapp.model.User;
 import com.examly.springapp.repository.InvestmentInquiryRepo;
+import com.examly.springapp.repository.UserRepo;
 
 @Service
 public class InvestmentInquiryServiceImpl implements InvestmentInquiryService{
     @Autowired
     InvestmentInquiryRepo investmentInquiryRepo;
+
+    @Autowired
+    UserRepo userRepo;
+
 
     public InvestmentInquiry createInquiry(InvestmentInquiry investmentinquiry) {
         investmentinquiry.setInquiryDate(LocalDateTime.now());
@@ -45,8 +51,9 @@ public class InvestmentInquiryServiceImpl implements InvestmentInquiryService{
         return false;
     }
 
+    @Override
     public List<InvestmentInquiry> getInquiriesByUserId(long userId) {
+        User user=userRepo.findById(userId).orElse(null);
         return investmentInquiryRepo.findByUser_UserId(userId);
     }
-
 }

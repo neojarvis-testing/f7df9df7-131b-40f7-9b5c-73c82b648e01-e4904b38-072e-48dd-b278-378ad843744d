@@ -10,7 +10,6 @@ import lombok.Data;
 @Entity
 @Data // Generates getters, setters, toString, equals, and hashCode
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;            // Unique identifier for the user

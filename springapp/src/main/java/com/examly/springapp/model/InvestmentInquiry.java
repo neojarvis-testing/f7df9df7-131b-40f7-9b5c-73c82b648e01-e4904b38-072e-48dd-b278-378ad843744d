@@ -1,7 +1,5 @@
 package com.examly.springapp.model;
-
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,5 +28,4 @@ public class InvestmentInquiry {
     LocalDateTime responseDate;
     String adminResponse;
     String contactDetails;
-    
 }

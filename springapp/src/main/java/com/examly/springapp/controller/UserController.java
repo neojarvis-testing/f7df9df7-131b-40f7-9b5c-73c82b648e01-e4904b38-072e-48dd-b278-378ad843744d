@@ -25,7 +25,12 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?>userRegister(@RequestBody User user){
         user = userService.registerUser(user);
-        return ResponseEntity.status(201).body("registered");
+        if(user != null){
+            return ResponseEntity.status(201).body("registered");
+        }else{
+            return ResponseEntity.status(400).body(null);
+        }
+        
     }
     // @PostMapping("/registers")
     // public ResponseEntity<User>userRegisters(@RequestBody User user){
@@ -37,7 +42,11 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<LoginDTO>loginUser(@RequestBody User user){
         LoginDTO loginDTO  = userService.loginUser(user);
-        return ResponseEntity.status(200).body(loginDTO);
+        if(loginDTO != null){
+            return ResponseEntity.status(200).body(loginDTO);
+        }else{
+            return ResponseEntity.status(400).body(null);
+        }
     }
 
     // @PostMapping("/logins")

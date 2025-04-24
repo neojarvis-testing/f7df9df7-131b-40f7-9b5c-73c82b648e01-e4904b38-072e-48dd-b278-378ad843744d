@@ -34,7 +34,6 @@ public class InvestmentInquiryController {
         }
     }
     
-
     @GetMapping
     public ResponseEntity<?> getAllInquries(){
         List<InvestmentInquiry> list=investmentinquiryService.getAllInquries();
@@ -50,6 +49,16 @@ public class InvestmentInquiryController {
         InvestmentInquiry investmentInquiry=investmentinquiryService.getInquiryById(inquiryId);
         if(investmentInquiry!=null){
             return ResponseEntity.status(200).body(investmentInquiry);
+        } else {
+            return ResponseEntity.status(403).body(null);
+        }
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getInquiriesByUserId(@PathVariable long userId){
+        List<InvestmentInquiry> list=investmentinquiryService.getInquiriesByUserId(userId);
+        if(!list.isEmpty()){
+            return ResponseEntity.status(200).body(list);
         } else {
             return ResponseEntity.status(403).body(null);
         }

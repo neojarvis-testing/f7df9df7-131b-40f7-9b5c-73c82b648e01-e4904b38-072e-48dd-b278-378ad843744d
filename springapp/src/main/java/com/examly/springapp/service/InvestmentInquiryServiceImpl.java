@@ -16,7 +16,7 @@ public class InvestmentInquiryServiceImpl implements InvestmentInquiryService{
 
     public InvestmentInquiry createInquiry(InvestmentInquiry investmentinquiry) {
         investmentinquiry.setInquiryDate(LocalDateTime.now());
-        investmentinquiry.setStatus("Enquiry");
+        investmentinquiry.setStatus("Inquiry");
         return investmentInquiryRepo.save(investmentinquiry);
     }
 
@@ -45,5 +45,8 @@ public class InvestmentInquiryServiceImpl implements InvestmentInquiryService{
         return false;
     }
 
+    public List<InvestmentInquiry> getInquiriesByUserId(long userId) {
+        return investmentInquiryRepo.findByUser_UserId(userId);
+    }
 
 }

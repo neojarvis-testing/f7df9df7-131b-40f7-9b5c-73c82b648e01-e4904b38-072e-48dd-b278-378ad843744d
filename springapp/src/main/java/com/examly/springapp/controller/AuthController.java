@@ -12,13 +12,13 @@ import com.examly.springapp.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/api")
-public class UserController {
+public class AuthController {
 
     private final UserServiceImpl userService;
 
     //Constructor based Injection
     @Autowired
-    public UserController(UserServiceImpl userService){
+    public AuthController(UserServiceImpl userService){
         this.userService=userService;
     }
     //EndPoint to register a new user

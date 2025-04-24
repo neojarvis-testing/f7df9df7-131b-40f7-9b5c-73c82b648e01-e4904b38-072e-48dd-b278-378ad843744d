@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
+
 @Entity
 @Data
 public class Feedback {
@@ -21,3 +22,4 @@ public class Feedback {
     @JoinColumn(name = "investmentId" ,nullable=true)
     Investment investment;
     String category;
+}

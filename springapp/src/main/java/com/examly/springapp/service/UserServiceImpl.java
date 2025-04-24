@@ -9,6 +9,7 @@ import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.utility.UserMapper;
+
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;

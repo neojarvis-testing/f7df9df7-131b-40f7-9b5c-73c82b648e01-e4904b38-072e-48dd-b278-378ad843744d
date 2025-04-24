@@ -29,8 +29,7 @@ public class UserController {
             return ResponseEntity.status(201).body("registered");
         }else{
             return ResponseEntity.status(400).body(null);
-        }
-        
+        }  
     }
     // @PostMapping("/registers")
     // public ResponseEntity<User>userRegisters(@RequestBody User user){
@@ -49,10 +48,10 @@ public class UserController {
         }
     }
 
-    // @PostMapping("/logins")
-    // public ResponseEntity<User>loginUsers(@RequestBody User user){
-    //     user = userService.loginUser(user);
-    //     user.setPassword(null);
-    //     return ResponseEntity.status(201).body(user);
-    // }
+    //  @PostMapping("/logins")
+    // // public ResponseEntity<User>loginUsers(@RequestBody User user){
+    // //     user = userService.loginUser(user);
+    // //     user.setPassword(null);
+    // //     return ResponseEntity.status(201).body(user);
+    // // }
 }

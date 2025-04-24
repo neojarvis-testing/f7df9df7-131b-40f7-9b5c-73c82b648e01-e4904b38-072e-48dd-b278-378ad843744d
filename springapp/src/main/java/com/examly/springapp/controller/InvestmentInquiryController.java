@@ -33,6 +33,7 @@ public class InvestmentInquiryController {
             return ResponseEntity.status(403).body(null);
         }
     }
+    
 
     @GetMapping
     public ResponseEntity<?> getAllInquries(){

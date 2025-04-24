@@ -88,5 +88,4 @@ public class InvestmentInquiry {
     public void setContactDetails(String contactDetails) {
         this.contactDetails = contactDetails;
     }
-    
 }

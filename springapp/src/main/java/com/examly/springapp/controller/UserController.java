@@ -31,11 +31,11 @@ public class UserController {
             return ResponseEntity.status(400).body(null);
         }  
     }
-    // @PostMapping("/registers")
-    // public ResponseEntity<User>userRegisters(@RequestBody User user){
-    //     user = userService.registerUser(user);
-    //     return ResponseEntity.status(201).body(user);
-    // }
+    @PostMapping("/registers")
+    public ResponseEntity<User>userRegisters(@RequestBody User user){
+        user = userService.registerUser(user);
+        return ResponseEntity.status(201).body(user);
+    }
 
     //EndPoint for user login
     @PostMapping("/login")

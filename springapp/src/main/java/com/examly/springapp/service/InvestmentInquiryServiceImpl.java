@@ -44,6 +44,4 @@ public class InvestmentInquiryServiceImpl implements InvestmentInquiryService{
         }
         return false;
     }
-
-
 }

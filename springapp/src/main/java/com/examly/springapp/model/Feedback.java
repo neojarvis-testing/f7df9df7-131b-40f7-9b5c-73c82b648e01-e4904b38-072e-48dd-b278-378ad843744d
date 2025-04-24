@@ -5,7 +5,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Data;
 @Entity
+@Data
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,40 +21,3 @@ public class Feedback {
     @JoinColumn(name = "investmentId" ,nullable=true)
     Investment investment;
     String category;
-    public long getFeedbackId() {
-        return feedbackId;
-    }
-    public void setFeedbackId(long feedbackId) {
-        this.feedbackId = feedbackId;
-    }
-    public String getFeedbackText() {
-        return feedbackText;
-    }
-    public void setFeedbackText(String feedbackText) {
-        this.feedbackText = feedbackText;
-    }
-    public String getDate() {
-        return date;
-    }
-    public void setDate(String date) {
-        this.date = date;
-    }
-    public User getUser() {
-        return user;
-    }
-    public void setUser(User user) {
-        this.user = user;
-    }
-    public Investment getInvestment() {
-        return investment;
-    }
-    public void setInvestment(Investment investment) {
-        this.investment = investment;
-    }
-    public String getCategory() {
-        return category;
-    }
-    public void setCategory(String category) {
-        this.category = category;
-    }
-}

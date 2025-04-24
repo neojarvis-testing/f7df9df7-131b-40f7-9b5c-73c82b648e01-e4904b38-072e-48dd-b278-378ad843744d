@@ -7,8 +7,8 @@
     <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
       <file>logs/myapp.log</file>
       <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-         <fileNamePattern>myapp-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-         <maxFileSize>10MB</maxFileSize>
+         <fileNamePattern>logs/myapp-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+         <maxFileSize>100KB</maxFileSize>
          <maxHistory>30</maxHistory>
       </rollingPolicy>
       <encoder>
@@ -24,11 +24,9 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
- 
     </appender>
     <root level="INFO">
       <appender-ref ref="CONSOLE"/>
       <appender-ref ref="ROLLING_FILE"/>
     </root>
 </configuration>
- 

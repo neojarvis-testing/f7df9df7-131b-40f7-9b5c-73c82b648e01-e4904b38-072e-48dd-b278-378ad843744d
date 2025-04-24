@@ -12,13 +12,13 @@ import com.examly.springapp.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/api")
-public class UserController {
+public class AuthController {
 
     private final UserServiceImpl userService;
 
     //Constructor based Injection
     @Autowired
-    public UserController(UserServiceImpl userService){
+    public AuthController(UserServiceImpl userService){
         this.userService=userService;
     }
     //EndPoint to register a new user
@@ -31,11 +31,11 @@ public class UserController {
             return ResponseEntity.status(400).body(null);
         }  
     }
-    // @PostMapping("/registers")
-    // public ResponseEntity<User>userRegisters(@RequestBody User user){
-    //     user = userService.registerUser(user);
-    //     return ResponseEntity.status(201).body(user);
-    // }
+    @PostMapping("/registers")
+    public ResponseEntity<User>userRegisters(@RequestBody User user){
+        user = userService.registerUser(user);
+        return ResponseEntity.status(201).body(user);
+    }
 
     //EndPoint for user login
     @PostMapping("/login")

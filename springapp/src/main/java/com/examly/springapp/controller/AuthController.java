@@ -10,6 +10,8 @@ import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.service.UserServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class AuthController {
@@ -21,18 +23,8 @@ public class AuthController {
     public AuthController(UserServiceImpl userService){
         this.userService=userService;
     }
-    //EndPoint to register a new user
     @PostMapping("/register")
-    public ResponseEntity<?>userRegister(@RequestBody User user){
-        user = userService.registerUser(user);
-        if(user != null){
-            return ResponseEntity.status(201).body("registered");
-        }else{
-            return ResponseEntity.status(400).body(null);
-        }  
-    }
-    @PostMapping("/registers")
-    public ResponseEntity<User>userRegisters(@RequestBody User user){
+    public ResponseEntity<User>userRegisters(@Valid @RequestBody User user){
         user = userService.registerUser(user);
         return ResponseEntity.status(201).body(user);
     }
@@ -47,11 +39,4 @@ public class AuthController {
             return ResponseEntity.status(400).body(null);
         }
     }
-
-    //  @PostMapping("/logins")
-    // // public ResponseEntity<User>loginUsers(@RequestBody User user){
-    // //     user = userService.loginUser(user);
-    // //     user.setPassword(null);
-    // //     return ResponseEntity.status(201).body(user);
-    // // }
 }

@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(FeedbackException.class)
     public ResponseEntity<String>feedbackMethod(FeedbackException e){
-        return ResponseEntity.status(400).body(e.getMessage());
+        return ResponseEntity.status(403).body(e.getMessage());
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException e) {

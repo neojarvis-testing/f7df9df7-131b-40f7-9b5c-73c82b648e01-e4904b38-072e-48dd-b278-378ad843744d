@@ -1,5 +1,7 @@
 package com.examly.springapp.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,7 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -23,8 +25,8 @@ public class Feedback {
     @Size(max = 500, message = "Feedback text cannot exceed 500 characters")
     private String feedbackText;
 
-    @NotBlank(message = "Date cannot be blank")
-    private String date;
+    @PastOrPresent(message = "Feedback date cannot be future")
+    private LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)

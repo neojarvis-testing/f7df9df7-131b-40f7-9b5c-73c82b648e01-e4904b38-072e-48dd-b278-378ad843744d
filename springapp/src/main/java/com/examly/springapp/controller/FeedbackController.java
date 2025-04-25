@@ -15,61 +15,41 @@ import org.springframework.web.bind.annotation.RestController;
 import com.examly.springapp.model.Feedback;
 import com.examly.springapp.service.FeedbackServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/feedback")
 public class FeedbackController {
     @Autowired
     FeedbackServiceImpl feedbackServiceImpl;
     @PostMapping
-    public ResponseEntity<?> createFeedback(@RequestBody Feedback feedback){
-        Feedback feedback2=feedbackServiceImpl.createFeedback(feedback);
-        if(feedback2!=null){
-            return ResponseEntity.status(201).body(feedback2);
-        }
-        else{
-            return ResponseEntity.status(403).body(null);
-        }
-        
+    public ResponseEntity<?> createFeedback(@Valid @RequestBody Feedback feedback){
+            feedback=feedbackServiceImpl.createFeedback(feedback);
+            return ResponseEntity.status(201).body(feedback);
     }
     @GetMapping("/{feedbackId}")
     public ResponseEntity<?> getFeedbackById(@PathVariable long feedbackId){
         Feedback feedback=feedbackServiceImpl.getFeedbackById(feedbackId);
-        if(feedback!=null){
             return ResponseEntity.status(200).body(feedback);
-        }
-        else{
-        return ResponseEntity.status(404).body(null);
-        }
     }
     @GetMapping
     public ResponseEntity<?> getAllFeedbacks(){
         List<Feedback> list=feedbackServiceImpl.getAllFeedbacks();
-        if(!list.isEmpty()){
             return ResponseEntity.status(200).body(list);
-        }
-        else{
-            return ResponseEntity.status(400).body(null);
-        }
-        
     }
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getFeedbacksByUserId(@PathVariable Long userId){
         List<Feedback> list=feedbackServiceImpl.getFeedbacksByUserId(userId);
-        if(!list.isEmpty()){
-            return ResponseEntity.status(200).body(list);
-        }
-        else{
-         return ResponseEntity.status(404).body(list);
-        }
+            return ResponseEntity.status(200).body(list); 
     }
-    @DeleteMapping("/{feebackId}")
-    public ResponseEntity<?> deleteFeedbackById(@PathVariable long feebackId){
-        boolean result=feedbackServiceImpl.deleteFeedbackById(feebackId);
+    @DeleteMapping("/{feedbackId}")
+    public ResponseEntity<?> deleteFeedbackById(@PathVariable long feedbackId){
+        boolean result=feedbackServiceImpl.deleteFeedbackById(feedbackId);
         if(result){
-            return ResponseEntity.status(200).body(result);
+            return ResponseEntity.status(200).body("Feedback with ID "+feedbackId+" deleted Successfully.");
         }
         else{
-            return ResponseEntity.status(404).body(null);
+            return ResponseEntity.status(404).body("Feedback with ID "+feedbackId+" not found!");
         }
 
     }

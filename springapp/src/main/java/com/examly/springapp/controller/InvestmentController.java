@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.examly.springapp.model.Investment;
 import com.examly.springapp.service.InvestmentServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/investments")
 public class InvestmentController {
@@ -25,7 +27,7 @@ public class InvestmentController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<?> addInvestment(@RequestBody Investment investment){
+    public ResponseEntity<?> addInvestment(@Valid @RequestBody Investment investment){
         investment = investmentServiceImpl.addInvestment(investment);
         if(investment != null){
             return ResponseEntity.status(201).body(investment);
@@ -55,7 +57,7 @@ public class InvestmentController {
     }
 
     @PutMapping("/{investmentId}")
-    public ResponseEntity<?> updateInvestment(@PathVariable long investmentId, @RequestBody Investment investment){
+    public ResponseEntity<?> updateInvestment( @PathVariable long investmentId, @Valid @RequestBody Investment investment){
         investment = investmentServiceImpl.updateInvestment(investmentId, investment);
         if(investment != null){
             return ResponseEntity.status(200).body(investment);

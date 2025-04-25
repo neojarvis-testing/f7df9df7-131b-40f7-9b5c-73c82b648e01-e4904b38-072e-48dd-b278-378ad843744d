@@ -1,11 +1,9 @@
 package com.examly.springapp.config;
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +20,6 @@ public class JwtUtils {
           .setExpiration(new Date(System.currentTimeMillis()+(30*60*1000)))
           .signWith(SignatureAlgorithm.HS256,SECRET_KEY)
           .compact();
-
     }
     public String extractUsername(String token){
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
@@ -45,4 +42,3 @@ public class JwtUtils {
          return !isTokenExpired(token);
     }
 }
-

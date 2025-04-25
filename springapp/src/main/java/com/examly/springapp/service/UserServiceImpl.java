@@ -1,7 +1,7 @@
 package com.examly.springapp.service;
 
 import java.util.Collection;
-
+ 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.utility.UserMapper;
-
+ 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     public LoginDTO loginUser(User user) {
       logger.info("Login attempt started for email: {}", user.getEmail());
-
+ 
       User existingUser = repo.findByEmail(user.getEmail());
       if (existingUser == null) {
           logger.error("User not found with email: {}", user.getEmail());
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
       logger.info("Login successful for email: {}", user.getEmail());
       return UserMapper.mappedToLoginDTO(existingUser);
     }
-
+ 
     @Override
     public UserDetails loadUserByEmail(String email) throws UsernameNotFoundException {
       User user = repo.findByEmail(email);

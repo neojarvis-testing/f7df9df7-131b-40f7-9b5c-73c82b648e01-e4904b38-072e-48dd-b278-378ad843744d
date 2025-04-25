@@ -11,4 +11,3 @@ public class CrosConfig {
     public PasswordEncoder createPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
-}

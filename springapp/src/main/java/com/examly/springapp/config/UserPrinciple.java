@@ -18,12 +18,12 @@ public class UserPrinciple implements UserDetails{
     public static UserDetails build(User user) {
        return new UserPrinciple(user);
     }
-
+  
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(()->"ROLE_"+user.getUserRole());
     }
-
+  
     @Override
     public String getPassword() {
         return user.getPassword();
@@ -53,5 +53,4 @@ public class UserPrinciple implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
-
 }

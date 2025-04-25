@@ -3,9 +3,11 @@ package com.examly.springapp.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data // Generates getters, setters, toString, equals, and hashCode
+@ToString
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

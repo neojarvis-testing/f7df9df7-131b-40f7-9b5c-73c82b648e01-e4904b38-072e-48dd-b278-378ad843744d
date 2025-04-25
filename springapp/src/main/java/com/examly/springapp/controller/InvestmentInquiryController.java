@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.examly.springapp.model.InvestmentInquiry;
 import com.examly.springapp.service.InvestmentInquiryServiceImpl;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/inquiries")
@@ -24,54 +26,49 @@ public class InvestmentInquiryController {
     @Autowired
     InvestmentInquiryServiceImpl investmentinquiryService;
 
+    //To add a nre Invest Inquiry
     @PostMapping
-    public ResponseEntity<?> createInquiry(@RequestBody InvestmentInquiry investmentinquiry){
+    public ResponseEntity<InvestmentInquiry> createInquiry(@Valid @RequestBody InvestmentInquiry investmentinquiry){
         investmentinquiry=investmentinquiryService.createInquiry(investmentinquiry);
-        if(investmentinquiry!=null){
-            return ResponseEntity.status(201).body(investmentinquiry);
-        } else {
-            return ResponseEntity.status(403).body(null);
-        }
+        return ResponseEntity.status(201).body(investmentinquiry);
     }
     
-
+    //To get a list of Inquries
     @GetMapping
-    public ResponseEntity<?> getAllInquries(){
+    public ResponseEntity<List<InvestmentInquiry>> getAllInquries(){
         List<InvestmentInquiry> list=investmentinquiryService.getAllInquries();
-        if(!list.isEmpty()){
-            return ResponseEntity.status(200).body(list);
-        } else {
-            return ResponseEntity.status(403).body(null);
-        }
+        return ResponseEntity.status(200).body(list);
     }
 
+    //To get a Inquiry by their Inquiry ID
     @GetMapping("/{inquiryId}")
-    public ResponseEntity<?> getInquiryById(@PathVariable long inquiryId){
+    public ResponseEntity<InvestmentInquiry> getInquiryById(@PathVariable long inquiryId){
         InvestmentInquiry investmentInquiry=investmentinquiryService.getInquiryById(inquiryId);
-        if(investmentInquiry!=null){
-            return ResponseEntity.status(200).body(investmentInquiry);
-        } else {
-            return ResponseEntity.status(403).body(null);
-        }
+        return ResponseEntity.status(200).body(investmentInquiry);
     }
 
+    //To get list of Inquries by User ID
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<InvestmentInquiry>> getInquiriesByUserId(@PathVariable long userId){
+        List<InvestmentInquiry> list=investmentinquiryService.getInquiriesByUserId(userId);
+        return ResponseEntity.status(200).body(list);
+    }
+
+    //To Update the Investment Inquiry
     @PutMapping("/{inquiryId}")
-    public ResponseEntity<?> updateInquiry(@PathVariable long inquiryId,@RequestBody InvestmentInquiry investmentinquiry){
+    public ResponseEntity<InvestmentInquiry> updateInquiry(@PathVariable long inquiryId,@Valid @RequestBody InvestmentInquiry investmentinquiry){
         InvestmentInquiry existinginvestmentinquiry=investmentinquiryService.updateInquiry(inquiryId, investmentinquiry);
-        if(existinginvestmentinquiry!=null){
-            return ResponseEntity.status(200).body(existinginvestmentinquiry);
-        } else {
-            return ResponseEntity.status(403).body(null);
-        }
+        return ResponseEntity.status(200).body(existinginvestmentinquiry);
     }
     
+    //To Delete Inquiry by their ID
     @DeleteMapping("/{inquiryId}")
     public ResponseEntity<?> deleteInquiry(@PathVariable long inquiryId){
         boolean result=investmentinquiryService.deleteInquiry(inquiryId);
         if(result){
-            return ResponseEntity.status(200).body(result);
+            return ResponseEntity.status(200).body("Inquiry deleted successfully...");
         } else {
-            return ResponseEntity.status(403).body(null);
+            return ResponseEntity.status(403).body("Inquiry ID does not exist!...");
         }
     }
 

@@ -11,7 +11,5 @@ import com.examly.springapp.model.User;
 public interface UserRepo extends JpaRepository<User, Long> {
     //Custom Query to find a User by their Email
     @Query("select user from User user where user.email=?1")
-    User findByEmail(String email);
- 
-   
+    User findByEmail(String email); 
 }

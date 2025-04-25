@@ -69,7 +69,7 @@ public class InvestmentServiceImpl implements InvestmentService{
         } 
         return listWithKeyword;
     }
-
+    
     @Override
     public boolean deleteInvestment(long investmentId) {
         Investment investment = investmentRepo.findById(investmentId).orElse(null);

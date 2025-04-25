@@ -1,5 +1,5 @@
 package com.examly.springapp.service;
- 
+
 import java.util.Collection;
  
 import org.slf4j.Logger;
@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
- 
+
 import com.examly.springapp.config.UserPrinciple;
 import com.examly.springapp.exceptions.DuplicateInvestmentException;
 import com.examly.springapp.exceptions.InvalidCredentialsException;
@@ -22,13 +22,13 @@ import com.examly.springapp.utility.UserMapper;
  
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
- 
+
     Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired
     UserRepo repo;
     @Autowired
     PasswordEncoder encoder;
- 
+
     public LoginDTO loginUser(User user) {
       logger.info("Login attempt started for email: {}", user.getEmail());
  
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
           logger.error("User not found with email: {}", user.getEmail());
           throw new InvalidCredentialsException("Invalid login credentials!");
       }
- 
+
       logger.info("Login successful for email: {}", user.getEmail());
       return UserMapper.mappedToLoginDTO(existingUser);
     }
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
       UserDetails u =UserPrinciple.build(user);
       return u;
     }
- 
+
     // Business Logic to register a new User
     public User registerUser(User user) {
         logger.info("Registering user with email: {}", user.getEmail());
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         System.out.println(user);
         return repo.save(user);
     }
- 
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
       System.out.println("Email:"+ email);

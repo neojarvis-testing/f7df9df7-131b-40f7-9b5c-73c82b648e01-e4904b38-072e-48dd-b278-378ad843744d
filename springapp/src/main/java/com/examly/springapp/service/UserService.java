@@ -1,5 +1,5 @@
 package com.examly.springapp.service;
- 
+
 import org.springframework.security.core.userdetails.UserDetails;
  
 import com.examly.springapp.model.LoginDTO;

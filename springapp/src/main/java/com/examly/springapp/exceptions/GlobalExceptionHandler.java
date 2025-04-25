@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvestmentInquiryException.class)
     public ResponseEntity<String>investmentInquiryMethod(InvestmentInquiryException e){
-        return ResponseEntity.status(400).body(e.getMessage());
+        return ResponseEntity.status(403).body(e.getMessage());
     }
 
     @ExceptionHandler(InvalidCredentialsException.class)

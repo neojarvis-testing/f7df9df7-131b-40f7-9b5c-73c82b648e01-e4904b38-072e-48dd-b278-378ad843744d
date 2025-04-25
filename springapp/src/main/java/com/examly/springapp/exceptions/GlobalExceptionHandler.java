@@ -31,10 +31,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String>invalidCredentialsMethod(InvalidCredentialsException e){
         return ResponseEntity.status(400).body(e.getMessage());
     }
-    @ExceptionHandler(FeedbackException.class)
-    public ResponseEntity<String>feedbackMethod(FeedbackException e){
-        return ResponseEntity.status(403).body(e.getMessage());
-    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException e) {
         List<FieldError> errors = e.getBindingResult().getFieldErrors();

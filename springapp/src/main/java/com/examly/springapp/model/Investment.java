@@ -35,7 +35,7 @@ public class Investment {
     @Positive(message = "Investment Quantity must be positive")
     int quantity;
     @NotBlank(message = "Purchase Date cannot be blank")
-    @Size(max = 10, message = "Purchase Date cannot exceed 10 characters")
+    //@Size(max = 10, message = "Purchase Date cannot exceed 10 characters")
     String purchaseDate;
     @NotBlank(message = "Investment Status cannot be blank")
     @Size(max = 100, message = "Investment Status  cannot exceed 100 characters")

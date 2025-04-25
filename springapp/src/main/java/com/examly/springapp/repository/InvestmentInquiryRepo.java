@@ -14,4 +14,5 @@ public interface InvestmentInquiryRepo extends JpaRepository<InvestmentInquiry, 
 
     //To get a list of InvestmentInquires by UserId
     List<InvestmentInquiry> findByUser_UserId(long userId);
+   
 }

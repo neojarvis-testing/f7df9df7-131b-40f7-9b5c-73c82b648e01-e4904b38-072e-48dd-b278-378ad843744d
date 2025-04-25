@@ -15,66 +15,11 @@ import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.service.UserServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class AuthController {
-
-    // private final UserServiceImpl userService;
-
-    // //Constructor based Injection
-    // @Autowired
-    // public AuthController(UserServiceImpl userService){
-    //     this.userService=userService;
-    // }
-    // @Autowired
-    // AuthenticationManager authenticationManager;
-    // @Autowired
-    // JwtUtils jwtUtils;
-    /* 
-    //EndPoint to register a new user
-    @PostMapping("/register")
-    public ResponseEntity<?>userRegister(@RequestBody User user){
-        user = userService.registerUser(user);
-        if(user != null){
-            return ResponseEntity.status(201).body("registered");
-        }else{
-            return ResponseEntity.status(400).body(null);
-        }  
-    }
-    @PostMapping("/registers")
-    public ResponseEntity<User>userRegisters(@RequestBody User user){
-        user = userService.registerUser(user);
-        return ResponseEntity.status(201).body(user);
-    }
-    */
-    //EndPoint for user login
-    // @PostMapping("/login")
-    // public ResponseEntity<LoginDTO>loginUser(@RequestBody User user){
-    //     LoginDTO loginDTO  = userService.loginUser(user);
-    //     if(loginDTO != null){
-    //         return ResponseEntity.status(200).body(loginDTO);
-    //     }else{
-    //         return ResponseEntity.status(400).body(null);
-    //     }
-    // }
-
-    /*
-    @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody User user){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtUtils.generateToken(authentication);
-        LoginDTO loginDTO = userService.loginUser(user);
-        loginDTO.setToken(token);
-        return ResponseEntity.status(201).body(loginDTO);
-    }
-    */
-    //  @PostMapping("/logins")
-    // public ResponseEntity<User>loginUsers(@RequestBody User user){
-    //     user = userService.loginUser(user);
-    //     user.setPassword(null);
-    //     return ResponseEntity.status(201).body(user);
-    // }
     @Autowired
     UserServiceImpl service;
     @Autowired

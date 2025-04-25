@@ -31,7 +31,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String>invalidCredentialsMethod(InvalidCredentialsException e){
         return ResponseEntity.status(400).body(e.getMessage());
     }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException e) {
         List<FieldError> errors = e.getBindingResult().getFieldErrors();

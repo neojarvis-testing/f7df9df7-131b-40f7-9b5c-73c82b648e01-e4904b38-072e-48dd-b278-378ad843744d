@@ -51,7 +51,7 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.POST,"/api/inquiries","/api/feedback").hasRole("User")
         .requestMatchers(HttpMethod.GET,"/api/inquiries/user/{userId}","/api/feedback/user/{userId}").hasRole("User")
         .requestMatchers(HttpMethod.DELETE,"/api/inquiries/{inquiryId}","/api/feedback/{feedbackId}").hasRole("User")
-        .anyRequest().authenticated())
+        .anyRequest().permitAll())
         .exceptionHandling(exception->exception.authenticationEntryPoint(entryPoint))
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

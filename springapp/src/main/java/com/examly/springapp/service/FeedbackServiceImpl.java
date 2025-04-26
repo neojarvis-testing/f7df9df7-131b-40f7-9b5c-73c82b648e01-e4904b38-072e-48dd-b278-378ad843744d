@@ -85,5 +85,4 @@ public class FeedbackServiceImpl implements FeedbackService{
         }
         return feedbackRepo.findByInvestment(investment);
     }
-    
 }

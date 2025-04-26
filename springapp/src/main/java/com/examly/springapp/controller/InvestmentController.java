@@ -25,7 +25,6 @@ public class InvestmentController {
     @Autowired
     InvestmentServiceImpl investmentServiceImpl;
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> addInvestment(@Valid @RequestBody Investment investment){
         investment = investmentServiceImpl.addInvestment(investment);

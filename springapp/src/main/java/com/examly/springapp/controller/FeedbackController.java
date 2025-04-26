@@ -30,7 +30,10 @@ public class FeedbackController {
     @GetMapping("/{feedbackId}")
     public ResponseEntity<?> getFeedbackById(@PathVariable long feedbackId){
         Feedback feedback=feedbackServiceImpl.getFeedbackById(feedbackId);
+        if(feedback != null)
             return ResponseEntity.status(200).body(feedback);
+        else
+            return ResponseEntity.status(404).body(null);
     }
     @GetMapping
     public ResponseEntity<?> getAllFeedbacks(){

@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.examly.springapp.exceptions.FeedbackException;
 import com.examly.springapp.model.Feedback;
@@ -41,9 +43,10 @@ public class FeedbackServiceImpl implements FeedbackService{
     @Override
     public Feedback getFeedbackById(Long feedbackId) {
         Feedback feedback= feedbackRepo.findById(feedbackId).orElse(null); 
-        if(feedback==null){
-            throw new FeedbackException("Feedback id is invalid");
-        } 
+        if (!feedbackRepo.existsById(feedbackId)) {
+            return null;
+            //throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Feedback not found");
+        }
         return feedback;
     }
 

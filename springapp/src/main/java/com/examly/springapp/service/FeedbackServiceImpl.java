@@ -42,7 +42,7 @@ public class FeedbackServiceImpl implements FeedbackService{
     public Feedback getFeedbackById(Long feedbackId) {
         Feedback feedback= feedbackRepo.findById(feedbackId).orElse(null); 
         if(feedback==null){
-            throw new FeedbackException("Feedback id is invalid");
+            return null;
         } 
         return feedback;
     }

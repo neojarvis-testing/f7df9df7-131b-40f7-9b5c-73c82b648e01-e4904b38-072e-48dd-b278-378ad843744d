@@ -13,11 +13,16 @@ import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.service.UserServiceImpl;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api") // Base URL mapping for authentication-related endpoints
+@Tag(name = "Authentication", description = "APIs for user authentication and registration")
 public class AuthController {
+
     @Autowired
     private UserServiceImpl service; // Service layer for user operations
     @Autowired
@@ -28,9 +33,10 @@ public class AuthController {
     /**
      * Register a new user.
      * 
-     * user The user object containing registration details.
-     * return HTTP 201 (Created) response with registration status.
+     * @param user The user object containing registration details.
+     * @return HTTP 201 (Created) response with registration status.
      */
+    @Operation(summary = "Register a new user", description = "Registers a new user with the provided details.")
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user) {
         try {
@@ -44,9 +50,10 @@ public class AuthController {
     /**
      * Authenticate and log in a user.
      * 
-     * user The user object containing login credentials.
-     * return HTTP 200 (OK) response with login details and JWT token.
+     * @param user The user object containing login credentials.
+     * @return HTTP 200 (OK) response with login details and JWT token.
      */
+    @Operation(summary = "Authenticate and log in a user", description = "Authenticates user credentials and generates a JWT token.")
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody User user) {
         try {
@@ -56,7 +63,7 @@ public class AuthController {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            String token = jwtUtils.genrateToken(authentication); 
+            String token = jwtUtils.genrateToken(authentication);
 
             LoginDTO loginDTO = service.loginUser(user);
             loginDTO.setToken(token);

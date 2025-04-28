@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import com.examly.springapp.model.Feedback;
 import com.examly.springapp.service.FeedbackServiceImpl;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/feedback") // Base URL mapping for all feedback-related endpoints
+@Tag(name = "Feedback Management", description = "APIs for managing feedback entries")
 public class FeedbackController {
 
     @Autowired
@@ -21,11 +25,12 @@ public class FeedbackController {
     /**
      * Create a new feedback entry.
      * 
-     * feedback The feedback object to be created.
-     * return HTTP 201 (Created) response containing the saved feedback.
+     * @param feedback The feedback object to be created.
+     * @return HTTP 201 (Created) response containing the saved feedback.
      */
+    @Operation(summary = "Create Feedback", description = "Creates a new feedback entry with the provided details.")
     @PostMapping
-    public ResponseEntity<?> createFeedback(@Valid @RequestBody Feedback feedback) {
+    public ResponseEntity<Feedback> createFeedback(@Valid @RequestBody Feedback feedback) {
         feedback = feedbackServiceImpl.createFeedback(feedback);
         return ResponseEntity.status(201).body(feedback);
     }
@@ -33,9 +38,10 @@ public class FeedbackController {
     /**
      * Retrieve a feedback entry by its ID.
      * 
-     * feedbackId The ID of the feedback.
-     * return HTTP 200 (OK) if found, otherwise HTTP 404 (Not Found).
+     * @param feedbackId The ID of the feedback.
+     * @return HTTP 200 (OK) if found, otherwise HTTP 404 (Not Found).
      */
+    @Operation(summary = "Get Feedback by ID", description = "Retrieves feedback details by its unique ID.")
     @GetMapping("/{feedbackId}")
     public ResponseEntity<?> getFeedbackById(@PathVariable long feedbackId) {
         Feedback feedback = feedbackServiceImpl.getFeedbackById(feedbackId);
@@ -48,8 +54,9 @@ public class FeedbackController {
     /**
      * Retrieve all feedback entries.
      * 
-     * return HTTP 200 (OK) response containing a list of feedbacks.
+     * @return HTTP 200 (OK) response containing a list of feedbacks.
      */
+    @Operation(summary = "Get All Feedbacks", description = "Retrieves all feedback entries available.")
     @GetMapping
     public ResponseEntity<?> getAllFeedbacks() {
         List<Feedback> list = feedbackServiceImpl.getAllFeedbacks();
@@ -59,9 +66,10 @@ public class FeedbackController {
     /**
      * Retrieve all feedback entries submitted by a specific user.
      * 
-     * userId The ID of the user.
-     * return HTTP 200 (OK) response containing the list of feedbacks by the user.
+     * @param userId The ID of the user.
+     * @return HTTP 200 (OK) response containing the list of feedbacks by the user.
      */
+    @Operation(summary = "Get Feedbacks by User ID", description = "Retrieves all feedback entries submitted by a specific user.")
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getFeedbacksByUserId(@PathVariable Long userId) {
         List<Feedback> list = feedbackServiceImpl.getFeedbacksByUserId(userId);
@@ -71,9 +79,10 @@ public class FeedbackController {
     /**
      * Delete a feedback entry by its ID.
      * 
-     * feedbackId The ID of the feedback to be deleted.
-     * return HTTP 200 (OK) if deleted successfully, otherwise HTTP 404 (Not Found).
+     * @param feedbackId The ID of the feedback to be deleted.
+     * @return HTTP 200 (OK) if deleted successfully, otherwise HTTP 404 (Not Found).
      */
+    @Operation(summary = "Delete Feedback by ID", description = "Deletes a feedback entry by its unique ID.")
     @DeleteMapping("/{feedbackId}")
     public ResponseEntity<?> deleteFeedbackById(@PathVariable long feedbackId) {
         boolean result = feedbackServiceImpl.deleteFeedbackById(feedbackId);

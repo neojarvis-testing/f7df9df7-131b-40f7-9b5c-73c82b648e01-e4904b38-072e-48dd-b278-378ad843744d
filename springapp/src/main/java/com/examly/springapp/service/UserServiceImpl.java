@@ -1,11 +1,8 @@
 package com.examly.springapp.service;
 
-import java.util.Collection;
- 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,6 +30,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
       logger.info("Login attempt started for email: {}", user.getEmail());
  
       User existingUser = repo.findByEmail(user.getEmail());
+      System.out.println(existingUser);
       if (existingUser == null) {
           logger.error("User not found with email: {}", user.getEmail());
           throw new InvalidCredentialsException("Invalid login credentials!");

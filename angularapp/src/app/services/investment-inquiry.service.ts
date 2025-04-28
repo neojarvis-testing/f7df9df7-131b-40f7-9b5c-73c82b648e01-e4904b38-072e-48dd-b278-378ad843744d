@@ -9,30 +9,29 @@ import { APIURL } from '../constant/api_url';
 })
 export class InvestmentInquiryService {
 
-  private apiUrl: string;
+  private APIurl:string = APIURL.APIUrl;
 
-  constructor(private http: HttpClient, private apiBaseUrl: APIURL) { 
-    this.apiUrl = this.apiBaseUrl.APIurl;
+  constructor(private http: HttpClient) { 
   }
 
   addInquiry(inquiry: InvestmentInquiry):Observable<InvestmentInquiry>{
-    return this.http.post<InvestmentInquiry>(`${this.apiUrl}/inquiries`, inquiry);
+    return this.http.post<InvestmentInquiry>(`${this.APIurl}/inquiries`, inquiry);
   }
 
   getAllInquries():Observable<InvestmentInquiry[]>{
-    return this.http.get<InvestmentInquiry[]>(`${this.apiUrl}/inquiries`)
+    return this.http.get<InvestmentInquiry[]>(`${this.APIurl}/inquiries`)
   }
 
   getInquriesByUserId(userId: number):Observable<InvestmentInquiry>{
-    return this.http.get<InvestmentInquiry>(`${this.apiUrl}/inquiries/user/${userId}`);
+    return this.http.get<InvestmentInquiry>(`${this.APIurl}/inquiries/user/${userId}`);
   }
 
   updateInquiry(inquiryId: number, inquiry: InvestmentInquiry):Observable<InvestmentInquiry>{
-    return this.http.put<InvestmentInquiry>(`${this.apiUrl}/inquiries/${inquiryId}`, inquiry);
+    return this.http.put<InvestmentInquiry>(`${this.APIurl}/inquiries/${inquiryId}`, inquiry);
   }
 
   deleteInquiry(inquiryId: number):Observable<void>{
-    return this.http.delete<void>(`${this.apiUrl}/inquiries/${inquiryId}`);
+    return this.http.delete<void>(`${this.APIurl}/inquiries/${inquiryId}`);
   }
 
 }

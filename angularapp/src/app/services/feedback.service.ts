@@ -9,21 +9,20 @@ import { Observable } from 'rxjs';
 })
 export class FeedbackService {
 
-  private apiUrl:string;
-  constructor(private http:HttpClient, private apiBaseUrl:APIURL) {
-    this.apiUrl = this.apiBaseUrl.APIurl
+  private APIurl:string = APIURL.APIUrl;
+  constructor(private http:HttpClient) {
   }
   
   sendFeedback(feedback:Feedback):Observable<Feedback>{
-    return this.http.post<Feedback>(`${this.apiUrl}/feedback`,feedback);
+    return this.http.post<Feedback>(`${this.APIurl}/feedback`,feedback);
   }
   getAllFeedbacksByUserId(userId:number):Observable<Feedback[]>{
-    return this.http.get<Feedback[]>(`${this.apiUrl}/feedback/user/${userId}`)
+    return this.http.get<Feedback[]>(`${this.APIurl}/feedback/user/${userId}`)
   }
   deleteFeedback(feedbackId:number):Observable<void>{
-    return this.http.delete<void>(`${this.apiUrl}/feedback/${feedbackId}`)
+    return this.http.delete<void>(`${this.APIurl}/feedback/${feedbackId}`)
   }
   getFeedbacks():Observable<Feedback[]>{
-    return this.http.get<Feedback[]>(`${this.apiUrl}/feedback`)
+    return this.http.get<Feedback[]>(`${this.APIurl}/feedback`)
   }
 }

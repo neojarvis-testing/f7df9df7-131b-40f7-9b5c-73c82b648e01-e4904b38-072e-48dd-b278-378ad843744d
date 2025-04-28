@@ -14,5 +14,4 @@ public interface FeedbackRepo extends JpaRepository<Feedback,Long>{
     List<Feedback> findByUser(User user);
     List<Feedback> findByInvestment(Investment investment);
 
-    
 }

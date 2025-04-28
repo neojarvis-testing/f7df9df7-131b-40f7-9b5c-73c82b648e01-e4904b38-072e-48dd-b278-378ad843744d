@@ -24,6 +24,7 @@ public class AuthController {
     AuthenticationManager authenticationManager;
     @Autowired
     JwtUtils jwtUtlis;
+    
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user){
         user = service.registerUser(user);

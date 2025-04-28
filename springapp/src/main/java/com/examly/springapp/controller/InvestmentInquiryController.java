@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.examly.springapp.model.InvestmentInquiry;
 import com.examly.springapp.service.InvestmentInquiryServiceImpl;
 
@@ -26,42 +25,73 @@ public class InvestmentInquiryController {
     @Autowired
     InvestmentInquiryServiceImpl investmentinquiryService;
 
-    //To add a nre Invest Inquiry
+     /**
+     * Creates a new investment inquiry.
+     * 
+     * Investmentinquiry The investment inquiry object received in request body.
+     * return ResponseEntity containing the created inquiry with HTTP status 201 (Created).
+     */
     @PostMapping
     public ResponseEntity<InvestmentInquiry> createInquiry(@Valid @RequestBody InvestmentInquiry investmentinquiry){
         investmentinquiry=investmentinquiryService.createInquiry(investmentinquiry);
         return ResponseEntity.status(201).body(investmentinquiry);
     }
     
-    //To get a list of Inquries
+    /**
+     * Retrieves all investment inquiries.
+     * 
+     * return ResponseEntity containing the list of all inquiries with HTTP status 200 (OK).
+     */
     @GetMapping
     public ResponseEntity<List<InvestmentInquiry>> getAllInquries(){
         List<InvestmentInquiry> list=investmentinquiryService.getAllInquries();
         return ResponseEntity.status(200).body(list);
     }
 
-    //To get a Inquiry by their Inquiry ID
+
+    /**
+     * Retrieves an inquiry by its unique inquiry ID.
+     * 
+     * InquiryId The ID of the inquiry to retrieve.
+     * return ResponseEntity containing the inquiry object with HTTP status 200 (OK).
+     */
     @GetMapping("/{inquiryId}")
     public ResponseEntity<InvestmentInquiry> getInquiryById(@PathVariable long inquiryId){
         InvestmentInquiry investmentInquiry=investmentinquiryService.getInquiryById(inquiryId);
         return ResponseEntity.status(200).body(investmentInquiry);
     }
 
-    //To get list of Inquries by User ID
+    /**
+     * Retrieves all inquiries related to a specific user ID.
+     * 
+     * UserId The user ID for which inquiries should be fetched.
+     * return ResponseEntity containing the list of inquiries associated with the given user ID.
+     */
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<InvestmentInquiry>> getInquiriesByUserId(@PathVariable long userId){
         List<InvestmentInquiry> list=investmentinquiryService.getInquiriesByUserId(userId);
         return ResponseEntity.status(200).body(list);
     }
 
-    //To Update the Investment Inquiry
+    /**
+     * Updates an existing investment inquiry.
+     * 
+     * InquiryId The ID of the inquiry to update.
+     * Investmentinquiry The updated inquiry details received in request body.
+     * return ResponseEntity containing the updated inquiry object with HTTP status 200 (OK).
+     */
     @PutMapping("/{inquiryId}")
     public ResponseEntity<InvestmentInquiry> updateInquiry(@PathVariable long inquiryId,@Valid @RequestBody InvestmentInquiry investmentinquiry){
         InvestmentInquiry existinginvestmentinquiry=investmentinquiryService.updateInquiry(inquiryId, investmentinquiry);
         return ResponseEntity.status(200).body(existinginvestmentinquiry);
     }
     
-    //To Delete Inquiry by their ID
+    /**
+     * Deletes an inquiry by its ID.
+     * 
+     * InquiryId The ID of the inquiry to delete.
+     * return ResponseEntity indicating whether the deletion was successful or failed.
+     */
     @DeleteMapping("/{inquiryId}")
     public ResponseEntity<?> deleteInquiry(@PathVariable long inquiryId){
         boolean result=investmentinquiryService.deleteInquiry(inquiryId);

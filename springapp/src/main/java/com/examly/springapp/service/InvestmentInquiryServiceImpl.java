@@ -25,7 +25,7 @@ public class InvestmentInquiryServiceImpl implements InvestmentInquiryService{
     @Autowired
     InvestmentRepo investmentRepo;
 
-     //To add a nre Invest Inquiry
+     //To add a Investment Inquiry
     public InvestmentInquiry createInquiry(InvestmentInquiry investmentinquiry) {
         User user = userRepo.findById(investmentinquiry.getUser().getUserId()).orElse(null);
         Investment investment=investmentRepo.findById(investmentinquiry.getInvestment().getInvestmentId()).orElse(null);

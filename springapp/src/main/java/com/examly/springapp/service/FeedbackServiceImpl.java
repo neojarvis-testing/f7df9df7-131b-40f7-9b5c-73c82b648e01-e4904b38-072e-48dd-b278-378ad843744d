@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.exceptions.FeedbackException;
@@ -25,6 +26,7 @@ public class FeedbackServiceImpl implements FeedbackService{
     @Autowired
     InvestmentRepo investmentRepo;
 
+    // Creates a new feedback 
     @Override
     public Feedback createFeedback(Feedback feedback) {
         User user = userRepo.findById(feedback.getUser().getUserId()).orElse(null);
@@ -38,15 +40,18 @@ public class FeedbackServiceImpl implements FeedbackService{
         return feedbackRepo.save(feedback);
     }
 
+    // Retrieves a feedback entry by its ID.
     @Override
     public Feedback getFeedbackById(Long feedbackId) {
         Feedback feedback= feedbackRepo.findById(feedbackId).orElse(null); 
-        if(feedback==null){
-            throw new FeedbackException("Feedback id is invalid");
-        } 
+        if (!feedbackRepo.existsById(feedbackId)) {
+            return null;
+            //throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Feedback not found");
+        }
         return feedback;
     }
 
+    // Retrieves list of feedbacks
     @Override
     public List<Feedback> getAllFeedbacks() {
         List<Feedback> list=feedbackRepo.findAll();
@@ -56,6 +61,7 @@ public class FeedbackServiceImpl implements FeedbackService{
        return list;
     }
 
+    // Deletes feedback by its ID
     @Override
     public boolean deleteFeedbackById(Long feedbackId) {
         if(feedbackRepo.existsById(feedbackId)){
@@ -65,6 +71,7 @@ public class FeedbackServiceImpl implements FeedbackService{
         return false;
     }
 
+    // Retrieves the list of feedbacks by userId
     @Override
     public List<Feedback> getFeedbacksByUserId(Long userId) {
          User user=userRepo.findById(userId).orElse(null);
@@ -74,6 +81,7 @@ public class FeedbackServiceImpl implements FeedbackService{
         return feedbackRepo.findByUser(user);
     }
 
+    // Retrieves the list of feedbacks by investmentId
     @Override
     public List<Feedback> getFeedbacksByInvestmentId(Long investmentId) {
         Investment investment=investmentRepo.findById(investmentId).orElse(null);
@@ -82,5 +90,4 @@ public class FeedbackServiceImpl implements FeedbackService{
         }
         return feedbackRepo.findByInvestment(investment);
     }
-    
 }

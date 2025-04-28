@@ -15,6 +15,7 @@ public class InvestmentServiceImpl implements InvestmentService{
     @Autowired
     InvestmentRepo investmentRepo;
 
+    // Creates a new investment entry.
     @Override
     public Investment addInvestment(Investment investment) {
         if (investmentRepo.existsById(investment.getInvestmentId())) {
@@ -24,6 +25,7 @@ public class InvestmentServiceImpl implements InvestmentService{
         return investmentRepo.save(investment);
     }
 
+    //Updates an existing investment record.
     @Override
     public Investment updateInvestment(long investmentId, Investment updateInvestment) {
         Investment existingInvestment = investmentRepo.findById(investmentId).orElse(null);
@@ -34,26 +36,31 @@ public class InvestmentServiceImpl implements InvestmentService{
         return investmentRepo.save(updateInvestment);
     }
 
+     //Retrieves an investment by its unique ID.
     @Override
     public Investment getInvestmentById(long investmentId) {
         return investmentRepo.findById(investmentId).orElse(null);
     }
 
+    //Retrieves all investments from the database.
     @Override
     public List<Investment> getAllInvestments() {
         return investmentRepo.findAll();
     }
 
+    //To get a list of Investments by their Type
     @Override
     public List<Investment> getInvestmentsByType(String type) {
         return investmentRepo.getInvestmentsByType(type);
     }
 
+    //To get a list of Investments by their Status
     @Override
     public List<Investment> getInvestmentsByStatus(String status) {
         return investmentRepo.getInvestmentsByStatus(status);
     }
 
+    //To search an Investment wether it is present or not
     @Override
     public List<Investment> searchInvestments(String keyword) {
         List<Investment> list = getAllInvestments();
@@ -70,6 +77,7 @@ public class InvestmentServiceImpl implements InvestmentService{
         return listWithKeyword;
     }
     
+    //Deletes an investment record by its ID.
     @Override
     public boolean deleteInvestment(long investmentId) {
         Investment investment = investmentRepo.findById(investmentId).orElse(null);

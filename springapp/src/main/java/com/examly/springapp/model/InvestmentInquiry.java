@@ -34,7 +34,6 @@ public class InvestmentInquiry {
     private String priority;
 
     private LocalDateTime inquiryDate;
-
     private LocalDateTime responseDate;
 
     @Size(max = 500, message = "Admin response cannot exceed 500 characters")

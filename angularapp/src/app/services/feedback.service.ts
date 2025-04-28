@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class FeedbackService {
 
-  private APIurl:string = APIURL.APIUrl;
+  private APIurl:string = APIURL.APIurl;
   constructor(private http:HttpClient) {
   }
   

@@ -9,14 +9,14 @@ import { Login } from '../models/login.model';
   providedIn: 'root'
 })
 export class AuthService {
-
+  APIurl = APIURL.APIUrl;
   constructor(private http: HttpClient) { }
 
   register(user: User): Observable<any>{
-    return this.http.post<any>(`${APIURL.APIurl}/register`, user);
+    return this.http.post<any>(`${this.APIurl}/register`, user);
   }
 
   login(login: Login): Observable<any>{
-    return this.http.post<any>(`${APIURL.APIurl}/login`, login);
+    return this.http.post<any>(`${this.APIurl}/login`, login);
   }
 }

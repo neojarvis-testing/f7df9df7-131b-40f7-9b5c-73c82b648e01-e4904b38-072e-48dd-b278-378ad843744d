@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
       User user = repo.findByEmail(email);
       if(user==null)
          throw new UsernameNotFoundException("User not found");
-      UserDetails u =UserPrinciple.build(user);
+      UserDetails u =UserPrinciple.build(user); 
       return u;
     }
 

@@ -9,7 +9,7 @@ import { APIURL } from '../constant/api_url';
 })
 export class InvestmentInquiryService {
 
-  private APIurl:string = APIURL.APIUrl;
+  private APIurl:string = APIURL.APIurl;
 
   constructor(private http: HttpClient) { 
   }
@@ -33,5 +33,4 @@ export class InvestmentInquiryService {
   deleteInquiry(inquiryId: number):Observable<void>{
     return this.http.delete<void>(`${this.APIurl}/inquiries/${inquiryId}`);
   }
-
 }

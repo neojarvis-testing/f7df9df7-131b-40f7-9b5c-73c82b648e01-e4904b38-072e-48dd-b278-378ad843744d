@@ -9,7 +9,7 @@ import { Login } from '../models/login.model';
   providedIn: 'root'
 })
 export class AuthService {
-  APIurl = APIURL.APIUrl;
+  APIurl = APIURL.APIurl;
   constructor(private http: HttpClient) { }
 
   register(user: User): Observable<any>{

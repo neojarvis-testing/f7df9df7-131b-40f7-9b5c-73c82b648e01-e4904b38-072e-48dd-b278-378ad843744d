@@ -23,7 +23,6 @@ import { UsernavComponent } from './components/usernav/usernav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import { AuthInterceptor } from './auth.interceptor';
-import {HttpClientModule} from '@angular/common/http'
 import { AdminAddInvestmentComponent } from './components/admin-add-investment/admin-add-investment.component';
 
 @NgModule({

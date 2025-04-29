@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-admin-view-feedback',
   templateUrl: './admin-view-feedback.component.html',
@@ -8,8 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AdminViewFeedbackComponent implements OnInit {
 
   constructor() { }
-
   ngOnInit(): void {
+    
   }
-
 }

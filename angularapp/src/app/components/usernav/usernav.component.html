@@ -1,3 +1,52 @@
-<a routerLink="/signup">Register</a>
-<a routerLink="/login">Login</a>
-<router-outlet></router-outlet>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvestTrack User Navbar</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .navbar-custom {
+      background-color: #000; /* Black background */
+    }
+    .navbar-custom .navbar-brand {
+      color: #00FF00; /* Green color for logo */
+    }
+    .navbar-custom .nav-link {
+      color: #FFF; /* White color for links */
+    }
+    .navbar-custom .nav-link.green {
+      color: #00FF00; /* Green color for specific links */
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <a class="navbar-brand" href="#">InvestTrack</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link green" href="#">Start Now</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Top 10 Investors</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">My Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link green" href="#">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

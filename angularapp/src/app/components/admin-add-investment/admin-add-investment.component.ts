@@ -42,7 +42,6 @@ export class AdminAddInvestmentComponent implements OnInit {
       });
     }
   }
-
   closePopup(): void {
     this.showSuccessPopup = false;
     this.investmentForm.reset();

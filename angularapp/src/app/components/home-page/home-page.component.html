@@ -1,1 +1,7 @@
-<p>home-page works!</p>
+<div *ngIf="authService.isAdmin()">
+    <app-adminnav></app-adminnav>
+</div>
+<div *ngIf="authService.isUser()">
+    <app-usernav></app-usernav>
+</div>
+<router-outlet></router-outlet>

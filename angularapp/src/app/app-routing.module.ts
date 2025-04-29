@@ -34,8 +34,8 @@ const routes: Routes = [
   {path:'user/view-inquiry', component:UserViewInquiryComponent},
   {path:'user/add/feedback', component:UserAddFeedbackComponent},
   {path:'user/view-feedback', component:UserViewFeedbackComponent},
-  {path:'**', component:ErrorComponent},
-  {path:'', redirectTo:'login', pathMatch:'full'}
+  {path:'', redirectTo:'/login', pathMatch:'full'},
+  {path:'**', component:ErrorComponent}
 ];
 
 @NgModule({

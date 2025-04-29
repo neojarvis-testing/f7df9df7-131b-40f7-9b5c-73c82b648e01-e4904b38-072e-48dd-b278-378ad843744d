@@ -1,49 +1,122 @@
-<div class="registration-form" class="mb-3">
-    <h2>Registration</h2>
+<div class="registration-form container mt-5">
+    <h2 class="text-center mb-4">Registration</h2>
     <form [formGroup]="form" (ngSubmit)="register()">
-    
-    <br/>
-    <label for="email">Email*</label><br/>
-    <input type="email" name="email" id="email" formControlName="email">
-    <div class="error-message" *ngIf="form.controls.email.invalid && (form.controls.email.touched||form.controls.email.dirty)">
-    <div class="error-message" *ngIf="form.controls.email.errors.required">
-                    *Email is required
-    </div>
-    <div class="error-message" *ngIf="form.controls.email.errors.email">
-                    *Email does not meet the required criteria
-    </div>
-    </div>
-    <br/>
-    <label for="password">Password*</label><br/>
-    <input type="text" name="password" id="password" formControlName="password">
-    <div class="error-message" *ngIf="form.controls.password.invalid && (form.controls.password.touched||form.controls.password.dirty)">
-    <div class="error-message" *ngIf="form.controls.password.errors.required">
-                        *Password is required
-    </div>
-    <div class="error-message" *ngIf="form.controls.password.errors.pattern">
-                        *Password does not meet the required criteria
-    </div>
-    </div>
-    <br/>
-    <label for="username">Username*</label><br/>
-    <input type="text" name="username" id="username" formControlName="username">
-    <div class="error-message" *ngIf="form.controls.username.invalid && (form.controls.username.touched||form.controls.username.dirty)">
-    <div class="error-message" *ngIf="form.controls.username.errors.required">
-                    *Username is required
-    </div>
-    </div>
-    <br/>
-    <label for="mobileNumber">Mobile Number*</label><br/>
-    <input type="tel" name="mobileNumber" id="mobileNumber" formControlName="mobileNumber">
-    <div class="error-message" *ngIf="form.controls.mobileNumber.invalid && (form.controls.mobileNumber.touched||form.controls.mobileNumber.dirty)">
-    <div class="error-message" *ngIf="form.controls.mobileNumber.errors.required">
-                        *Mobile Number is required
-    </div>
-    <div class="error-message" *ngIf="form.controls.mobileNumber.errors.pattern">
-                        *Mobile Number must be 10 digits
-    </div>
-    </div>
-    <br/>  
-    <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-block">Register</button>
+      
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">Username*</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-control"
+          placeholder="Enter your username"
+        />
+        <small class="text-danger" *ngIf="form.controls.username.touched || form.controls.username.dirty">
+          <span *ngIf="form.controls.username.errors?.required">
+            *Username is required
+          </span>
+        </small>
+      </div>
+  
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email*</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Enter your email"
+        />
+        <small class="text-danger" *ngIf="form.controls.email.touched || form.controls.email.dirty">
+          <span *ngIf="form.controls.email.errors?.required">
+            *Email is required
+          </span>
+          <span *ngIf="form.controls.email.errors?.email">
+            *Invalid email format
+          </span>
+        </small>
+      </div>
+  
+      <!-- Mobile Number -->
+      <div class="form-group">
+        <label for="mobileNumber">Mobile Number*</label>
+        <input
+          type="tel"
+          id="mobileNumber"
+          formControlName="mobileNumber"
+          class="form-control"
+          placeholder="Enter your mobile number"
+        />
+        <small class="text-danger" *ngIf="form.controls.mobileNumber.touched || form.controls.mobileNumber.dirty">
+          <span *ngIf="form.controls.mobileNumber.errors?.required">
+            *Mobile Number is required
+          </span>
+          <span *ngIf="form.controls.mobileNumber.errors?.pattern">
+            *Mobile Number must be exactly 10 digits
+          </span>
+        </small>
+      </div>
+  
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password*</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          placeholder="Enter your password"
+        />
+        <small class="text-danger" *ngIf="form.controls.password.touched || form.controls.password.dirty">
+          <span *ngIf="form.controls.password.errors?.required">
+            *Password is required
+          </span>
+          <span *ngIf="form.controls.password.errors?.minlength">
+            *Password must be at least 8 characters long
+          </span>
+        </small>
+      </div>
+  
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password*</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          class="form-control"
+          placeholder="Confirm your password"
+        />
+        <small class="text-danger" *ngIf="form.controls.confirmPassword.touched || form.controls.confirmPassword.dirty">
+          <span *ngIf="form.controls.confirmPassword.errors?.required">
+            *Confirm Password is required
+          </span>
+          <span *ngIf="form.controls.confirmPassword.errors?.passwordMismatch">
+            *Passwords do not match
+          </span>
+        </small>
+      </div>
+  
+      <!-- User Role -->
+      <div class="form-group">
+        <label for="userRole">User Role*</label>
+        <select id="userRole" formControlName="userRole" class="form-control">
+          <option value="" disabled>Select Your Role</option>
+          <option value="Admin">Admin</option>
+          <option value="User">User</option>
+        </select>
+        <small class="text-danger" *ngIf="form.controls.userRole.touched || form.controls.userRole.dirty">
+          <span *ngIf="form.controls.userRole.errors?.required">
+            *User Role is required
+          </span>
+        </small>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-block">
+        Register
+      </button>
     </form>
-    </div>
+  </div>

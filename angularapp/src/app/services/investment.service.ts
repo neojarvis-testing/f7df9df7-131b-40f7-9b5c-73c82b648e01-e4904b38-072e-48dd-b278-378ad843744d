@@ -12,11 +12,11 @@ export class InvestmentService {
   }
 
   getAllInvestments():Observable<Investment[]>{
-    return this.http.get<Investment[]>(`${this.APIurl}/investments`)
+    return this.http.get<Investment[]>(`${this.APIurl}/api/investments`)
   }
 
   getInvestmentById(investmentId:number):Observable<Investment>{
-    return this.http.get<Investment>(`${this.APIurl}/investments/${investmentId}`)
+    return this.http.get<Investment>(`${this.APIurl}/api/investments/${investmentId}`)
   }
  
   addInvestment(investment:Investment):Observable<any>{
@@ -24,10 +24,10 @@ export class InvestmentService {
   }
 
   updateInvestment(investmentId:number,investment:Investment):Observable<Investment>{
-    return this.http.put<Investment>(`${this.APIurl}/investments/${investmentId}`,investment)
+    return this.http.put<Investment>(`${this.APIurl}/api/investments/${investmentId}`,investment)
   }
 
   deleteInvestment(investmentId:number):Observable<void>{
-    return this.http.delete<void>(`${this.APIurl}/investments/${investmentId}`)
+    return this.http.delete<void>(`${this.APIurl}/api/investments/${investmentId}`)
   }
 }

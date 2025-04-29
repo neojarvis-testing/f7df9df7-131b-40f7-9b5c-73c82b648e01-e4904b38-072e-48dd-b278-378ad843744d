@@ -16,6 +16,7 @@ import { UserViewInquiryComponent } from './components/user-view-inquiry/user-vi
 import { UserAddFeedbackComponent } from './components/user-add-feedback/user-add-feedback.component';
 import { UserViewFeedbackComponent } from './components/user-view-feedback/user-view-feedback.component';
 import { ErrorComponent } from './components/error/error.component';
+import { AdminViewInvestmentComponent } from './components/admin-view-investment/admin-view-investment.component';
 
 const routes: Routes = [
   {path:'signup', component: SignupComponent},
@@ -24,7 +25,7 @@ const routes: Routes = [
   {path:'admin', component: AdminnavComponent},
   {path:'user', component: UsernavComponent},
   {path:'admin/add-investment', component: AdminAddInvestmentComponent},
-  {path:'admin/view-investment', component: AdminAddInvestmentComponent},
+  {path:'admin/view-investment', component: AdminViewInvestmentComponent},
   {path:'admin/edit-investment/:investmentId', component: AdminEditInvestmentComponent},
   {path:'admin/view-inquiries', component:AdminViewInquiryComponent},
   {path:'admin/view/feedback', component:AdminViewFeedbackComponent},
@@ -34,8 +35,8 @@ const routes: Routes = [
   {path:'user/view-inquiry', component:UserViewInquiryComponent},
   {path:'user/add/feedback', component:UserAddFeedbackComponent},
   {path:'user/view-feedback', component:UserViewFeedbackComponent},
-  {path:'**', component:ErrorComponent},
-  {path:'', redirectTo:'login', pathMatch:'full'}
+  {path:'', redirectTo:'/login', pathMatch:'full'},
+  {path:'**', component:ErrorComponent}
 ];
 
 @NgModule({

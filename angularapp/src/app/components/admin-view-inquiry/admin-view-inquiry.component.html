@@ -1,1 +1,74 @@
-<p>admin-view-inquiry works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Investment Inquiries</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+  <h2>Manage Investment Inquiries</h2>
+  <hr>
+  <div class="filters">
+    <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="filterInquiries()">
+    <label for="status">Filter by Status:</label>
+    <select [(ngModel)]="selectedStatus" (change)="filterInquiries()">
+      <option value="">All</option>
+      <option value="Pending">Pending</option>
+      <option value="Resolved">Resolved</option>
+    </select>
+    <label for="priority">Filter by Priority:</label>
+    <select [(ngModel)]="selectedPriority" (change)="filterInquiries()">
+      <option value="">All</option>
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+    </select>
+  </div>
+
+  <table class="table table-dark table-striped" *ngIf="filteredInquiries.length > 0; else noData">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>USER</th>
+        <th>MESSAGE</th>
+        <th>STATUS</th>
+        <th>PRIORITY</th>
+        <th>ADMIN RESPONSE</th>
+        <th>ACTIONS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inquiry of filteredInquiries">
+        <td>{{ inquiry.inquiryId }}</td>
+        <td>{{ inquiry.user.name }}</td>
+        <td>{{ inquiry.message }}</td>
+        <td>
+          <select class="form-control" [(ngModel)]="inquiry.status">
+            <option value="">Select</option>
+            <option value="Pending">Pending</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+        </td>
+        <td>{{ inquiry.priority }}</td>
+        <td>{{ inquiry.adminResponse || 'No response yet' }}</td>
+        <td>
+          <button class="btn btn-custom" (click)="addAdminResponse(inquiry)">Add Response</button>
+          <button class="btn btn-danger" (click)="deleteInquiry(inquiry.inquiryId!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noData>
+    <p class="no-data">No inquiries found</p>
+  </ng-template>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

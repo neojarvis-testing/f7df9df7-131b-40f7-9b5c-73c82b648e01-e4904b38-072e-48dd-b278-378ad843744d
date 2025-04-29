@@ -1,1 +1,105 @@
-<p>admin-view-investment works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Investments</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+        }
+        .form-container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .form-control,
+        .btn {
+            background-color: #444 !important;
+            color: #0f0 !important;
+        }
+        .btn:hover {
+            background-color: #555 !important;
+        }
+        .popup {
+            background-color: #222;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .table-dark {
+            background-color: #222;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center my-4">Manage Investments</h2>
+    <!-- Search and Filter -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Search by Name" [(ngModel)]="searchTerm" (input)="onSearch()" />
+        </div>
+        <div class="col-md-6">
+            <select class="form-control" [(ngModel)]="selectedCategory" (change)="onFilter()">
+                <option value="">All Types</option>
+                <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Investment Table -->
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Purchase Price</th>
+                <th>Current Price</th>
+                <th>Quantity</th>
+                <th>Purchase Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let investment of filteredInvestments">
+                <td>{{ investment.name }}</td>
+                <td>{{ investment.description }}</td>
+                <td>{{ investment.type }}</td>
+                <td>{{ investment.purchasePrice }}</td>
+                <td>{{ investment.currentPrice }}</td>
+                <td>{{ investment.quantity }}</td>
+                <td>{{ investment.purchaseDate | date }}</td>
+                <td>{{ investment.status }}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" (click)="onEdit(investment.investmentId)">Edit</button>
+                    <button class="btn btn-sm btn-danger" (click)="onDeleteConfirm(investment.investmentId)">Delete</button>
+                </td>
+            </tr>
+            <tr *ngIf="filteredInvestments.length === 0">
+                <td colspan="9" class="text-center">No investments available. Add some investments to view here.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Delete Confirmation Popup -->
+    <div *ngIf="showDeletePopup" class="popup alert alert-danger">
+        <p>Are you sure you want to delete this investment?</p>
+        <button class="btn btn-sm btn-danger" (click)="onDelete()">Confirm</button>
+        <button class="btn btn-sm btn-secondary" (click)="closeDeletePopup()">Cancel</button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

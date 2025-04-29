@@ -60,7 +60,7 @@ export class AdminViewInvestmentComponent implements OnInit {
     this.showDeletePopup = true;
     this.investmentToDelete = investmentId;
   }
-
+  
   onDelete(): void {
     if (this.investmentToDelete !== null) {
       this.investmentService.deleteInvestment(this.investmentToDelete).subscribe({

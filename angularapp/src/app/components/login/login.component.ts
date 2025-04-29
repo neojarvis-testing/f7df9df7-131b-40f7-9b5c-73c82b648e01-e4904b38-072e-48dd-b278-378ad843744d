@@ -9,13 +9,16 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  login: Login;
+  login: Login = {
+    email:'',
+    password:''
+  };
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
   loginUser(){
-    this.authService.login(this.login);
+    this.authService.login(this.login).subscribe();
     this.login = null;
     this.router.navigate(["/"]);
   }

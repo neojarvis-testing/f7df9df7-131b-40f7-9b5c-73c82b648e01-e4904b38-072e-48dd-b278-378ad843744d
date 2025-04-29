@@ -2,8 +2,14 @@
 <form [formGroup]="investmentForm" (ngSubmit)="onSubmit()">
     <label for="name">Investment Name:</label><br>
     <input type ="text" id="name" formControlName="name"><br>
+    <div *ngIf="investmentForm.controls.name?.invalid && (investmentForm.controls.name?.touched || investmentForm.controls.name?.dirty)"> 
+          Name is required
+    </div>
     <label for="description">Description:</label><br>
-    <textarea id="description" formControlName="brief"></textarea><br>
+    <textarea id="description" formControlName="description"></textarea><br>
+    <div *ngIf="investmentForm.controls.description?.invalid && (investmentForm.controls.description?.touched || investmentForm.controls.description?.dirty)"> 
+        Description is required 
+  </div>
     <label for="type">Type:</label><br>
     <select id="type" formControlName="type">
         <option value="">Select</option>
@@ -13,17 +19,29 @@
     </select><br>
     <label for="purchasePrice">Purchase Price:</label><br>
     <input type="number" id="purchasePrice" formControlName="purchasePrice"><br>
+    <div *ngIf="investmentForm.controls.purchasePrice?.invalid && (investmentForm.controls.purchasePrice?.touched || investmentForm.controls.purchasePrice?.dirty)"> 
+        Purchase Price is required 
+  </div>
     <label for="currentPrice">Current Price:</label><br>
     <input type="number" id="currentPrice" formControlName="currentPrice"><br>
+    <div *ngIf="investmentForm.controls.currentPrice?.invalid && (investmentForm.controls.currentPrice?.touched || investmentForm.controls.currentPrice?.dirty)"> 
+       Current Price is required 
+  </div>
     <label for="quantity">Quantity:</label><br>
     <input type="number" id="quantity" formControlName="quantity"><br>
+    <div *ngIf="investmentForm.controls.quantity?.invalid && (investmentForm.controls.quantity?.touched || investmentForm.controls.quantity?.dirty)"> 
+        Quantity is required 
+  </div>
     <label for="purchaseDate">Purchase Date:</label><br>
     <input type="date" id="purchaseDate" formControlName="purchaseDate"><br>
+    <div *ngIf="investmentForm.controls.purchaseDate?.invalid && (investmentForm.controls.purchaseDate?.touched || investmentForm.controls.purchaseDate?.dirty)"> 
+        Purchase Date is required
+  </div>
     <label for="status">Status:</label><br>
     <select id="status" formControlName="status">
         <option value="">Select</option>
-        <option value="Active">Stock</option>
-        <option value="Inactive">Bond</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
     </select><br>
     <button type="submit" [disabled]="investmentForm.invalid">Add Investment</button>
 </form>

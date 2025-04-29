@@ -1,1 +1,33 @@
-<p>admin-add-investment works!</p>
+<h2>Add New Investment</h2>
+<form [formGroup]="investmentForm" (ngSubmit)="onSubmit()">
+    <label for="name">Investment Name:</label><br>
+    <input type ="text" id="name" formControlName="name"><br>
+    <label for="description">Description:</label><br>
+    <textarea id="description" formControlName="brief"></textarea><br>
+    <label for="type">Type:</label><br>
+    <select id="type" formControlName="type">
+        <option value="">Select</option>
+        <option value="Stock">Stock</option>
+        <option value="Bond">Bond</option>
+        <option value="Real Estate">Real Estate</option>
+    </select><br>
+    <label for="purchasePrice">Purchase Price:</label><br>
+    <input type="number" id="purchasePrice" formControlName="purchasePrice"><br>
+    <label for="currentPrice">Current Price:</label><br>
+    <input type="number" id="currentPrice" formControlName="currentPrice"><br>
+    <label for="quantity">Quantity:</label><br>
+    <input type="number" id="quantity" formControlName="quantity"><br>
+    <label for="purchaseDate">Purchase Date:</label><br>
+    <input type="date" id="purchaseDate" formControlName="purchaseDate"><br>
+    <label for="status">Status:</label><br>
+    <select id="status" formControlName="status">
+        <option value="">Select</option>
+        <option value="Active">Stock</option>
+        <option value="Inactive">Bond</option>
+    </select><br>
+    <button type="submit" [disabled]="investmentForm.invalid">Add Investment</button>
+</form>
+<div *ngIf="showSuccessPopup" class="popup">
+    <p>Investment added successfully!</p>
+    <button (click)="closePopup()">Close</button>
+</div>

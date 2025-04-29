@@ -1,5 +1,68 @@
-<div class="registration-form container mt-5">
-    <h2 class="text-center mb-4">Registration</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .container-fluid {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+    }
+
+    .background-img {
+      width: 50%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .registration-form {
+      width: 50%;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      color: #fff; /* White text color */
+    }
+
+    .registration-form h2 {
+      color: #00ff00; /* Green color */
+    }
+
+    .registration-form .form-control {
+      background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent input background */
+      color: #fff; /* White text color */
+      border: none;
+    }
+
+    .registration-form .form-control::placeholder {
+      color: #ccc; /* Light grey placeholder color */
+    }
+
+    .registration-form .btn-success {
+      background-color: #00ff00; /* Green color */
+      border: none;
+    }
+
+    .login-link {
+      color: #00ff00; /* Green color */
+      text-align: center;
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <img src="https://investinghaven.com/wp-content/uploads/2024/05/silver_supply_shortage_icon.jpg" alt="Background Image" class="background-img">
+  
+  <div class="registration-form">
+    <h2 class="text-center mb-4">Signup</h2>
     <form [formGroup]="form" (ngSubmit)="register()">
       
       <!-- Username -->
@@ -115,8 +178,15 @@
       </div>
   
       <!-- Submit Button -->
-      <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-block">
+      <button type="submit" [disabled]="form.invalid" class="btn btn-success btn-block">
         Register
       </button>
     </form>
+    <a href="#" class="login-link">Already have an account? Login</a>
   </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>

@@ -57,5 +57,4 @@ export class AdminViewInquiryComponent implements OnInit {
     }
   }
 
-
 }

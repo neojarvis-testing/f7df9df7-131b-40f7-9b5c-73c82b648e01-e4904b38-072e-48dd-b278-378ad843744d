@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  login: Login = {email: '', password: ''};
   
   user:User={
     email: '',
@@ -27,15 +29,16 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(){
-    console.log(this.user)
-     this.service.login(this.user).subscribe((data)=>{
+    console.log(this.login)
+     this.service.login(this.login).subscribe((data)=>{
+      this.user = data;
       localStorage.setItem('userId', data.userId+"")
       localStorage.setItem('username', data.username)
       localStorage.setItem('token', data.token)
       localStorage.setItem('userRole', data.userRole)
-      if(this.user.userRole==='ADMIN')
-      this.router.navigate(['/admin'])
-      else if(this.user.userRole==='USER')
+      if(this.user.userRole==='Admin')
+        this.router.navigate(['/admin'])
+      else if(this.user.userRole==='User')
         this.router.navigate(['/user'])
     },
     (error)=>{

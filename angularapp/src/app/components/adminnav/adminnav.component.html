@@ -1,1 +1,55 @@
-<p>adminnav works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvestTrack Admin Navbar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #000;
+      padding: 10px 20px;
+    }
+    .navbar .logo {
+      color: #00FF00; /* Green color */
+      font-size: 24px;
+    }
+    .navbar .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .navbar .nav-links a {
+      color: #FFF; /* White color */
+      text-decoration: none;
+    }
+    .navbar .logout-button {
+      background-color: #FFF; /* White color */
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="navbar">
+  <div class="logo">InvestTrack</div>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">Admin Console</a>
+    <a href="#">View Investments</a>
+    <a href="#">Add Investment</a>
+    <a href="#">Invoices</a>
+    <a href="#">Feedback</a>
+  </div>
+  <div class="user-role">Logged in as Admin</div>
+  <button class="logout-button">Logout</button>
+</div>
+</body>
+</html>

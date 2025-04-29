@@ -100,7 +100,7 @@ public class InvestmentController {
     public ResponseEntity<?> deleteInvestment(@PathVariable long investmentId) {
         boolean result = investmentServiceImpl.deleteInvestment(investmentId);
         if (result) {
-            return ResponseEntity.status(200).body("Deleted successfully");
+            return ResponseEntity.status(200).body(investmentId);
         } else {
             return ResponseEntity.status(403).body("Investment with " + investmentId + " not found");
         }

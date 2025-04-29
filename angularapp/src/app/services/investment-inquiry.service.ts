@@ -19,7 +19,7 @@ export class InvestmentInquiryService {
   }
 
   getAllInquries():Observable<InvestmentInquiry[]>{
-    return this.http.get<InvestmentInquiry[]>(`${this.APIurl}/inquiries`)
+    return this.http.get<InvestmentInquiry[]>(`${this.APIurl}/api/inquiries`)
   }
 
   getInquriesByUserId(userId: number):Observable<InvestmentInquiry>{
@@ -31,6 +31,6 @@ export class InvestmentInquiryService {
   }
 
   deleteInquiry(inquiryId: number):Observable<void>{
-    return this.http.delete<void>(`${this.APIurl}/inquiries/${inquiryId}`);
+    return this.http.delete<void>(`${this.APIurl}/api/inquiries/${inquiryId}`);
   }
 }

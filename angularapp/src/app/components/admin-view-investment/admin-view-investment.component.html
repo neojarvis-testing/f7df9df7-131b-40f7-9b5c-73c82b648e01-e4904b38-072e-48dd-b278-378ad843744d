@@ -80,8 +80,8 @@
                 <td>{{ investment.purchaseDate | date }}</td>
                 <td>{{ investment.status }}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary" (click)="onEdit(investment.id)">Edit</button>
-                    <button class="btn btn-sm btn-danger" (click)="onDeleteConfirm(investment.id)">Delete</button>
+                    <button class="btn btn-sm btn-primary" (click)="onEdit(investment.investmentId)">Edit</button>
+                    <button class="btn btn-sm btn-danger" (click)="onDeleteConfirm(investment.investmentId)">Delete</button>
                 </td>
             </tr>
             <tr *ngIf="filteredInvestments.length === 0">

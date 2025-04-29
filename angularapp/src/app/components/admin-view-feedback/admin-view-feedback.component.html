@@ -1,1 +1,39 @@
-<p>admin-view-feedback works!</p>
+<div class="container">
+    <h2>Feedback Received</h2>
+    <div class="form-group">
+      <label for="categoryFilter">Filter by Category:</label>
+      <select id="categoryFilter" class="form-control" [(ngModel)]="selectedCategory" (change)="filterFeedbacks()">
+        <option value="">All</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Investment</th>
+          <th>Category</th>
+          <th>Feedback Message</th>
+          <th>Posted Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="filteredFeedbacks.length === 0">
+          <td colspan="6" class="text-center">No data found</td>
+        </tr>
+        <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ feedback.investment }}</td>
+          <td>{{ feedback.category }}</td>
+          <td>{{ feedback.feedbackText }}</td>
+          <td>{{ feedback.date }}</td>
+          <td>
+            <button class="btn btn-info" (click)="showProfile(feedback.user)">Show Profile</button>
+            <button class="btn btn-info" (click)="viewInvestmentDetails(feedback.investment)">View Investment Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

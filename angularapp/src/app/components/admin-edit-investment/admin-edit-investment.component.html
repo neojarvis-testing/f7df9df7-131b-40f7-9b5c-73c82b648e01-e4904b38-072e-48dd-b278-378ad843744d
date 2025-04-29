@@ -49,7 +49,7 @@
         <!-- Investment Name -->
         <div class="form-group">
             <label for="name">Investment Name:</label>
-            <input type="text" id="name" class="form-control" formControlName="name">
+            <input type="text" id="name" class="form-control" formControlName="name" [(ngModel)]="investData.name">
             <div *ngIf="investmentForm.controls.name?.invalid && (investmentForm.controls.name?.touched || investmentForm.controls.name?.dirty)" class="text-danger"> 
                 Name is required
             </div>
@@ -58,7 +58,7 @@
         <!-- Description -->
         <div class="form-group">
             <label for="description">Description:</label>
-            <textarea id="description" class="form-control" formControlName="description"></textarea>
+            <textarea id="description" class="form-control" formControlName="description" [(ngModel)]="investData.description"></textarea>
             <div *ngIf="investmentForm.controls.description?.invalid && (investmentForm.controls.description?.touched || investmentForm.controls.description?.dirty)" class="text-danger"> 
                 Description is required
             </div>
@@ -67,7 +67,7 @@
         <!-- Type -->
         <div class="form-group">
             <label for="type">Type:</label>
-            <select id="type" class="form-control" formControlName="type">
+            <select id="type" class="form-control" formControlName="type" [(ngModel)]="investData.type">
                 <option value="">Select</option>
                 <option value="Stock">Stock</option>
                 <option value="Bond">Bond</option>
@@ -78,7 +78,7 @@
         <!-- Purchase Price -->
         <div class="form-group">
             <label for="purchasePrice">Purchase Price:</label>
-            <input type="number" id="purchasePrice" class="form-control" formControlName="purchasePrice">
+            <input type="number" id="purchasePrice" class="form-control" formControlName="purchasePrice" [(ngModel)]="investData.purchasePrice">
             <div *ngIf="investmentForm.controls.purchasePrice?.invalid && (investmentForm.controls.purchasePrice?.touched || investmentForm.controls.purchasePrice?.dirty)" class="text-danger"> 
                 Purchase Price is required
             </div>
@@ -87,7 +87,7 @@
         <!-- Current Price -->
         <div class="form-group">
             <label for="currentPrice">Current Price:</label>
-            <input type="number" id="currentPrice" class="form-control" formControlName="currentPrice">
+            <input type="number" id="currentPrice" class="form-control" formControlName="currentPrice" [(ngModel)]="investData.currentPrice">
             <div *ngIf="investmentForm.controls.currentPrice?.invalid && (investmentForm.controls.currentPrice?.touched || investmentForm.controls.currentPrice?.dirty)" class="text-danger"> 
                 Current Price is required
             </div>
@@ -96,7 +96,7 @@
         <!-- Quantity -->
         <div class="form-group">
             <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" class="form-control" formControlName="quantity">
+            <input type="number" id="quantity" class="form-control" formControlName="quantity" [(ngModel)]="investData.quantity">
             <div *ngIf="investmentForm.controls.quantity?.invalid && (investmentForm.controls.quantity?.touched || investmentForm.controls.quantity?.dirty)" class="text-danger"> 
                 Quantity is required
             </div>
@@ -105,7 +105,7 @@
         <!-- Purchase Date -->
         <div class="form-group">
             <label for="purchaseDate">Purchase Date:</label>
-            <input type="date" id="purchaseDate" class="form-control" formControlName="purchaseDate">
+            <input type="date" id="purchaseDate" class="form-control" formControlName="purchaseDate" [(ngModel)]="investData.purchaseDate">
             <div *ngIf="investmentForm.controls.purchaseDate?.invalid && (investmentForm.controls.purchaseDate?.touched || investmentForm.controls.purchaseDate?.dirty)" class="text-danger"> 
                 Purchase Date is required
             </div>
@@ -114,7 +114,7 @@
         <!-- Status -->
         <div class="form-group">
             <label for="status">Status:</label>
-            <select id="status" class="form-control" formControlName="status">
+            <select id="status" class="form-control" formControlName="status" [(ngModel)]="investData.status">
                 <option value="">Select</option>
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>

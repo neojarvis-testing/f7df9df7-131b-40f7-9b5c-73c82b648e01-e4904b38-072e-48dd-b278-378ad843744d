@@ -12,22 +12,22 @@ export class InvestmentService {
   }
 
   getAllInvestments():Observable<Investment[]>{
-    return this.http.get<Investment[]>(`${this.APIurl}/api/investments`)
+    return this.http.get<Investment[]>(`${this.APIurl}/investments`)
   }
 
   getInvestmentById(investmentId:number):Observable<Investment>{
-    return this.http.get<Investment>(`${this.APIurl}/api/investments/${investmentId}`)
+    return this.http.get<Investment>(`${this.APIurl}/investments/${investmentId}`)
   }
  
   addInvestment(investment:Investment):Observable<any>{
-    return this.http.post<any>(`${this.APIurl}/api/investments`,investment)
+    return this.http.post<any>(`${this.APIurl}/investments`,investment)
   }
 
   updateInvestment(investmentId:number,investment:Investment):Observable<Investment>{
-    return this.http.put<Investment>(`${this.APIurl}/api/investments/${investmentId}`,investment)
+    return this.http.put<Investment>(`${this.APIurl}/investments/${investmentId}`,investment)
   }
 
   deleteInvestment(investmentId:number):Observable<void>{
-    return this.http.delete<void>(`${this.APIurl}/api/investments/${investmentId}`)
+    return this.http.delete<void>(`${this.APIurl}/investments/${investmentId}`)
   }
 }

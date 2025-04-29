@@ -19,4 +19,24 @@ export class AuthService {
   login(login: Login): Observable<any>{
     return this.http.post<any>(`${this.APIurl}/api/login`, login);
   }
+  isAdmin():boolean{
+    let role=localStorage.getItem('userRole')
+    return role=='ADMIN'
+  }
+ 
+  isUser():boolean{
+    let role=localStorage.getItem('userRole')
+    return role=='USER'
+  }
+ 
+  isLoggedUser():boolean{
+    let role=localStorage.getItem('userRole')
+    return role!=null
+  }
+ 
+  loggedOut():void{
+    // localStorage.removeItem('userId')
+    // localStorage.removeItem('userRole')
+    localStorage.clear()
+  }
 }

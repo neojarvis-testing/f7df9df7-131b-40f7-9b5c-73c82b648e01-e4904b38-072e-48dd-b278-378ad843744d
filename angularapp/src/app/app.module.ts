@@ -21,6 +21,8 @@ import { UserViewInquiryComponent } from './components/user-view-inquiry/user-vi
 import { UserViewInvestmentComponent } from './components/user-view-investment/user-view-investment.component';
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
+import { AuthInterceptor } from './auth.interceptor';
 import {HttpClientModule} from '@angular/common/http'
 import { AdminAddInvestmentComponent } from './components/admin-add-investment/admin-add-investment.component';
 
@@ -53,7 +55,13 @@ import { AdminAddInvestmentComponent } from './components/admin-add-investment/a
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true // Allow multiple interceptors
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

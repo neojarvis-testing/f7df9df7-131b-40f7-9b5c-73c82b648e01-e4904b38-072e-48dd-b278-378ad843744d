@@ -59,6 +59,7 @@ export class AdminViewInvestmentComponent implements OnInit {
   onDeleteConfirm(investmentId: number): void {
     this.showDeletePopup = true;
     this.investmentToDelete = investmentId;
+    console.log(investmentId)
   }
   
   onDelete(): void {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InvestmentService } from '../../services/investment.service';
 import { Investment } from '../../models/investment.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-add-investment',
@@ -14,7 +15,7 @@ export class AdminAddInvestmentComponent implements OnInit {
   showSuccessPopup = false;
   investmentForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private investmentService: InvestmentService) {
+  constructor(private fb: FormBuilder, private investmentService: InvestmentService, private router:Router) {
     this.investmentForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -45,5 +46,6 @@ export class AdminAddInvestmentComponent implements OnInit {
   closePopup(): void {
     this.showSuccessPopup = false;
     this.investmentForm.reset();
+    this.router.navigate(['/admin/view-investment'])
   }
 }

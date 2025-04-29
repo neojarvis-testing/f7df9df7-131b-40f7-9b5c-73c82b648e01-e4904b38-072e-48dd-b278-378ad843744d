@@ -10,6 +10,7 @@
 
 <div class="container mt-4">
   <h2>Manage Investment Inquiries</h2>
+  <hr>
   <div class="filters">
     <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="filterInquiries()">
     <label for="status">Filter by Status:</label>
@@ -46,6 +47,7 @@
         <td>{{ inquiry.message }}</td>
         <td>
           <select class="form-control" [(ngModel)]="inquiry.status">
+            <option value="">Select</option>
             <option value="Pending">Pending</option>
             <option value="Resolved">Resolved</option>
           </select>

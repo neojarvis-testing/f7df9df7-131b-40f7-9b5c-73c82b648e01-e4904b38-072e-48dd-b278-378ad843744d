@@ -14,15 +14,15 @@ export class FeedbackService {
   }
   
   sendFeedback(feedback:Feedback):Observable<Feedback>{
-    return this.http.post<Feedback>(`${this.APIurl}/feedback`,feedback);
+    return this.http.post<Feedback>(`${this.APIurl}/api/feedback`,feedback);
   }
   getAllFeedbacksByUserId(userId:number):Observable<Feedback[]>{
-    return this.http.get<Feedback[]>(`${this.APIurl}/feedback/user/${userId}`)
+    return this.http.get<Feedback[]>(`${this.APIurl}/api/feedback/user/${userId}`)
   }
   deleteFeedback(feedbackId:number):Observable<void>{
-    return this.http.delete<void>(`${this.APIurl}/feedback/${feedbackId}`)
+    return this.http.delete<void>(`${this.APIurl}/api/feedback/${feedbackId}`)
   }
   getFeedbacks():Observable<Feedback[]>{
-    return this.http.get<Feedback[]>(`${this.APIurl}/feedback`)
+    return this.http.get<Feedback[]>(`${this.APIurl}/api/feedback`)
   }
 }

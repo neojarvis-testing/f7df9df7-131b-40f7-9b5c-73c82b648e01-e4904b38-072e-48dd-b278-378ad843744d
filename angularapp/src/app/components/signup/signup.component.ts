@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,23 +10,61 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignupComponent implements OnInit {
   form: FormGroup;
-  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) { }
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      email: [''],
-      password: [''],
-      username: [''],
-      mobileNumber: [''],
-      userRole: ['Admin']
-    })
+    this.initializeForm();
   }
-  register(){
-    if(this.form.valid){
-      this.authService.register(this.form.value).subscribe(()=>{
+
+  private initializeForm(): void {
+    this.form = this.fb.group(
+      {
+        username: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        mobileNumber: [
+          '',
+          [Validators.required, Validators.pattern(/^[0-9]{10}$/)]
+        ],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', Validators.required],
+        userRole: ['', Validators.required]
+      },
+      {
+        validators: [this.passwordMismatchValidator]
+      }
+    );
+  }
+
+  register(): void {
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.authService.register(this.form.value).subscribe(
+      () => {
         this.form.reset();
-        this.router.navigate(["/login"]);
-      });
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.error('Registration error:', error);
+        alert('Registration failed. Please try again later.');
+      }
+    );
+  }
+
+  private passwordMismatchValidator(formGroup: FormGroup): void {
+    const password = formGroup.get('password');
+    const confirmPassword = formGroup.get('confirmPassword');
+
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+      confirmPassword.setErrors({ passwordMismatch: true });
+    } else if (confirmPassword) {
+      confirmPassword.setErrors(null);
     }
   }
 }

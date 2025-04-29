@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Feedback } from 'src/app/models/feedback.model';
-import { FeedbackService } from 'src/app/services/feedback.service';
 
 
 @Component({
@@ -10,22 +8,8 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 })
 export class AdminViewFeedbackComponent implements OnInit {
 
-  feedbackList: Feedback[] = [];
-
-  constructor(private feedbackService: FeedbackService) { }
-
+  constructor() { }
   ngOnInit(): void {
-    this.loadFeedback();
-  }
-
-  loadFeedback(): void {
-    this.feedbackService.getFeedbacks().subscribe(
-      (data: Feedback[]) => {
-        this.feedbackList = data;
-      },
-      error => {
-        console.error('Error fetching feedback', error);
-      }
-    );
+    
   }
 }

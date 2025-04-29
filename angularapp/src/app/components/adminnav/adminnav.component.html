@@ -4,84 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InvestTrack Admin Navbar</title>
-  <!-- Add Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      padding-top: 56px; /* To prevent content overlap with fixed navbar */
     }
-    .navbar-brand {
-      color: #00FF00 !important; /* Green logo */
-      font-size: 1.5rem;
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #000;
+      padding: 10px 20px;
     }
-    .user-role {
-      color: white;
-      margin-right: 20px;
+    .navbar .logo {
+      color: #00FF00; /* Green color */
+      font-size: 24px;
+    }
+    .navbar .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .navbar .nav-links a {
+      color: #FFF; /* White color */
+      text-decoration: none;
+    }
+    .navbar .logout-button {
+      background-color: #FFF; /* White color */
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <div class="container-fluid">
-    <!-- Logo -->
-    <a class="navbar-brand" routerLink="/home">InvestTrack</a>
-    
-    <!-- Navbar toggler for small screens -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/admin-console">Admin Console</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/view-investments">View Investments</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/add-investment">Add Investment</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/invoices">Invoices</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/feedback">Feedback</a>
-        </li>
-      </ul>
-      <span class="user-role">Logged in as Admin</span>
-      <button class="btn btn-outline-light" (click)="logout()">Logout</button>
-    </div>
+<div class="navbar">
+  <div class="logo">InvestTrack</div>
+  <div class="nav-links">
+    <a routerLink="/home">Home</a>
+    <a routerLink="/admin/console">Admin Console</a>
+    <a routerLink="/admin/view-investment">View Investments</a>
+    <a routerLink="/admin/add-investment">Add Investment</a>
+    <a routerLink="admin/view-inquiries">Inquiry</a>
+    <a routerLink="/admin/view/feedback">Feedback</a>
   </div>
-</nav>
-
-<!-- Router Outlet -->
-<div class="container mt-4">
-  <router-outlet></router-outlet>
+  <div class="user-role">Logged in as Admin</div>
+  <button class="logout-button">Logout</button>
 </div>
-
-<!-- Add Bootstrap JS -->
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-></script>
 </body>
 </html>

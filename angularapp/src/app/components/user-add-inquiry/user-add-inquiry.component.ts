@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Investment } from 'src/app/models/investment.model';
 import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.se
 export class UserAddInquiryComponent implements OnInit {
 
   investmentinquiryForm: FormGroup
+  investment: Investment;
 
   constructor(private investmentinquiryService: InvestmentInquiryService, private fb: FormBuilder, private router: Router) { 
     this.investmentinquiryForm=this.fb.group({

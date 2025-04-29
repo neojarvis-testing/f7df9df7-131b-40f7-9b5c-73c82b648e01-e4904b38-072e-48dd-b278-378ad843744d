@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InvestmentService } from '../../services/investment.service';
 import { Investment } from '../../models/investment.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-view-investment',
@@ -16,7 +17,7 @@ export class AdminViewInvestmentComponent implements OnInit {
   showDeletePopup = false;
   investmentToDelete: number | null = null;
 
-  constructor(private investmentService: InvestmentService) {}
+  constructor(private investmentService: InvestmentService,private router:Router) {} 
 
   ngOnInit(): void {
     this.loadInvestments();
@@ -51,9 +52,8 @@ export class AdminViewInvestmentComponent implements OnInit {
     });
   }
 
-  onEdit(investmentId: number): void {
-    // Navigate to the edit-investment component
-    console.log('Navigate to edit investment:', investmentId);
+  onEdit(investmentId: number){
+    this.router.navigate(['/admin/edit-investment',investmentId])
   }
 
   onDeleteConfirm(investmentId: number): void {
@@ -61,7 +61,7 @@ export class AdminViewInvestmentComponent implements OnInit {
     this.investmentToDelete = investmentId;
     console.log(investmentId)
   }
-
+  
   onDelete(): void {
     if (this.investmentToDelete !== null) {
       this.investmentService.deleteInvestment(this.investmentToDelete).subscribe({

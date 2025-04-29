@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AdminAddInvestmentComponent } from './components/admin-add-investment/admin-add-investment.component';
 import { AdminConsoleComponent } from './components/admin-console/admin-console.component';
 import { AdminEditInvestmentComponent } from './components/admin-edit-investment/admin-edit-investment.component';
 import { AdminViewFeedbackComponent } from './components/admin-view-feedback/admin-view-feedback.component';
@@ -23,6 +22,7 @@ import { UserViewInvestmentComponent } from './components/user-view-investment/u
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http'
+import { AdminAddInvestmentComponent } from './components/admin-add-investment/admin-add-investment.component';
 
 @NgModule({
   declarations: [

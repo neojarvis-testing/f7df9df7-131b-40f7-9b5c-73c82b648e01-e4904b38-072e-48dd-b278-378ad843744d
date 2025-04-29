@@ -1,49 +1,86 @@
-<div class="registration-form" class="mb-3">
+<div class="registration-form mb-3">
     <h2>Registration</h2>
     <form [formGroup]="form" (ngSubmit)="register()">
-    
-    <br/>
-    <label for="email">Email*</label><br/>
-    <input type="email" name="email" id="email" formControlName="email">
-    <div class="error-message" *ngIf="form.controls.email.invalid && (form.controls.email.touched||form.controls.email.dirty)">
-    <div class="error-message" *ngIf="form.controls.email.errors.required">
-                    *Email is required
-    </div>
-    <div class="error-message" *ngIf="form.controls.email.errors.email">
-                    *Email does not meet the required criteria
-    </div>
-    </div>
-    <br/>
-    <label for="password">Password*</label><br/>
-    <input type="text" name="password" id="password" formControlName="password">
-    <div class="error-message" *ngIf="form.controls.password.invalid && (form.controls.password.touched||form.controls.password.dirty)">
-    <div class="error-message" *ngIf="form.controls.password.errors.required">
-                        *Password is required
-    </div>
-    <div class="error-message" *ngIf="form.controls.password.errors.pattern">
-                        *Password does not meet the required criteria
-    </div>
-    </div>
-    <br/>
-    <label for="username">Username*</label><br/>
-    <input type="text" name="username" id="username" formControlName="username">
-    <div class="error-message" *ngIf="form.controls.username.invalid && (form.controls.username.touched||form.controls.username.dirty)">
-    <div class="error-message" *ngIf="form.controls.username.errors.required">
-                    *Username is required
-    </div>
-    </div>
-    <br/>
-    <label for="mobileNumber">Mobile Number*</label><br/>
-    <input type="tel" name="mobileNumber" id="mobileNumber" formControlName="mobileNumber">
-    <div class="error-message" *ngIf="form.controls.mobileNumber.invalid && (form.controls.mobileNumber.touched||form.controls.mobileNumber.dirty)">
-    <div class="error-message" *ngIf="form.controls.mobileNumber.errors.required">
-                        *Mobile Number is required
-    </div>
-    <div class="error-message" *ngIf="form.controls.mobileNumber.errors.pattern">
-                        *Mobile Number must be 10 digits
-    </div>
-    </div>
-    <br/>  
-    <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-block">Register</button>
+      
+      <!-- Username -->
+      <label for="username">Username*</label><br>
+      <input type="text" id="username" formControlName="username" />
+      <div *ngIf="form.controls.username.touched || form.controls.username.dirty">
+        <div *ngIf="form.controls.username.errors?.required" class="error-message">
+          *Username is required
+        </div>
+      </div>
+      <br>
+      
+      <!-- Email -->
+      <label for="email">Email*</label><br>
+      <input type="email" id="email" formControlName="email" />
+      <div *ngIf="form.controls.email.touched || form.controls.email.dirty">
+        <div *ngIf="form.controls.email.errors?.required" class="error-message">
+          *Email is required
+        </div>
+        <div *ngIf="form.controls.email.errors?.email" class="error-message">
+          *Invalid email format
+        </div>
+      </div>
+      <br>
+      
+      <!-- Mobile Number -->
+      <label for="mobileNumber">Mobile Number*</label><br>
+      <input type="tel" id="mobileNumber" formControlName="mobileNumber" />
+      <div *ngIf="form.controls.mobileNumber.touched || form.controls.mobileNumber.dirty">
+        <div *ngIf="form.controls.mobileNumber.errors?.required" class="error-message">
+          *Mobile Number is required
+        </div>
+        <div *ngIf="form.controls.mobileNumber.errors?.pattern" class="error-message">
+          *Mobile Number must be exactly 10 digits
+        </div>
+      </div>
+      <br>
+      
+      <!-- Password -->
+      <label for="password">Password*</label><br>
+      <input type="password" id="password" formControlName="password" />
+      <div *ngIf="form.controls.password.touched || form.controls.password.dirty">
+        <div *ngIf="form.controls.password.errors?.required" class="error-message">
+          *Password is required
+        </div>
+        <div *ngIf="form.controls.password.errors?.minlength" class="error-message">
+          *Password must be at least 8 characters long
+        </div>
+      </div>
+      <br>
+      
+      <!-- Confirm Password -->
+      <label for="confirmPassword">Confirm Password*</label><br>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" />
+      <div *ngIf="form.controls.confirmPassword.touched || form.controls.confirmPassword.dirty">
+        <div *ngIf="form.controls.confirmPassword.errors?.required" class="error-message">
+          *Confirm Password is required
+        </div>
+        <div *ngIf="form.controls.confirmPassword.errors?.passwordMismatch" class="error-message">
+          *Passwords do not match
+        </div>
+      </div>
+      <br>
+      
+      <!-- User Role -->
+      <label for="userRole">User Role*</label><br>
+      <select id="userRole" formControlName="userRole">
+        <option value="" disabled>Select Your Role</option>
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+      </select>
+      <div *ngIf="form.controls.userRole.touched || form.controls.userRole.dirty">
+        <div *ngIf="form.controls.userRole.errors?.required" class="error-message">
+          *User Role is required
+        </div>
+      </div>
+      <br>
+      
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-block">
+        Register
+      </button>
     </form>
-    </div>
+  </div>

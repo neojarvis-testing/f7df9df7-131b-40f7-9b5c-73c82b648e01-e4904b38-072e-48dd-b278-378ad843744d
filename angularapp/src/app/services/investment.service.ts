@@ -19,8 +19,8 @@ export class InvestmentService {
     return this.http.get<Investment>(`${this.APIurl}/investments/${investmentId}`)
   }
  
-  addInvestment(investment:Investment):Observable<Investment>{
-    return this.http.post<Investment>(`${this.APIurl}/investments`,investment)
+  addInvestment(investment:Investment):Observable<any>{
+    return this.http.post<any>(`${this.APIurl}/api/investments`,investment)
   }
 
   updateInvestment(investmentId:number,investment:Investment):Observable<Investment>{

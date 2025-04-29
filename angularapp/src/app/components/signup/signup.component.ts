@@ -23,9 +23,10 @@ export class SignupComponent implements OnInit {
   }
   register(){
     if(this.form.valid){
-      this.authService.register(this.form.value);
-      this.form.reset();
-      this.router.navigate(["/"]);
+      this.authService.register(this.form.value).subscribe(()=>{
+        this.form.reset();
+        this.router.navigate(["/login"]);
+      });
     }
   }
 }

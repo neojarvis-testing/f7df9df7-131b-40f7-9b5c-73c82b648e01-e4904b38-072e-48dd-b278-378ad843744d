@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Feedback } from 'src/app/models/feedback.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
 
@@ -13,9 +12,9 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 export class UserAddFeedbackComponent implements OnInit {
   feedbackForm: FormGroup;
   investments: string[] = ['Investment 1', 'Investment 2', 'Investment 3']; // Example investments
-  categories: string[] = ['Category 1', 'Category 2', 'Category 3']; // Example categories
+  categories: string[] = ['Portfolio', 'Advice', 'General']; 
 
-  constructor(private fb: FormBuilder, private feedbackService: FeedbackService, private router: Router) {
+  constructor(private fb: FormBuilder, private feedbackService: FeedbackService) {
     this.feedbackForm = this.fb.group({
       investment: ['', Validators.required],
       category: ['', Validators.required],
@@ -25,6 +24,7 @@ export class UserAddFeedbackComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
   onSubmit(): void {
@@ -34,7 +34,6 @@ export class UserAddFeedbackComponent implements OnInit {
         console.log('Feedback submitted successfully', response);
         this.feedbackForm.reset();
         alert('Feedback submitted successfully');
-        this.router.navigate(['user/view-feedback']);
       }, error => {
         console.error('Error submitting feedback', error);
       });

@@ -21,12 +21,12 @@ export class AuthService {
   }
   isAdmin():boolean{
     let role=localStorage.getItem('userRole')
-    return role=='ADMIN'
+    return role=='Admin'
   }
  
   isUser():boolean{
     let role=localStorage.getItem('userRole')
-    return role=='USER'
+    return role=='User'
   }
  
   isLoggedUser():boolean{

@@ -45,9 +45,11 @@
     <!-- Search and Filter -->
     <div class="row mb-3">
         <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Search by Name" [(ngModel)]="searchTerm" (input)="onSearch()" />
+            Search by Name:
+         <input type="text" class="form-control" placeholder="Search by Name" [(ngModel)]="searchTerm" (input)="onSearch()"/>
         </div>
         <div class="col-md-6">
+            Filter by Type:
             <select class="form-control" [(ngModel)]="selectedCategory" (change)="onFilter()">
                 <option value="">All Types</option>
                 <option *ngFor="let category of categories" [value]="category">{{ category }}</option>

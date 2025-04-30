@@ -7,7 +7,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #333;
+            background-color: #fff; /* White background for the entire page */
             color: #0f0;
             display: flex;
             justify-content: center;
@@ -19,33 +19,61 @@
             max-width: 600px;
             width: 100%;
             padding: 20px;
-            background-color: #222;
+            background-color: #000; /* Black background for the form */
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s ease; /* Smooth transition for opacity */
+        }
+        .form-container.transparent {
+            opacity: 0.5; /* Make the form semi-transparent */
         }
         .form-control,
         .btn {
-            background-color: #444 !important;
+            background-color: #000 !important; /* Black background for input fields */
+            border-color: #0f0 !important;
+            color: #fff !important; /* White text inside the fields */
+        }
+        .form-control::placeholder {
+            color: #fff !important; /* White placeholder text */
+        }
+        label {
             color: #0f0 !important;
         }
         .btn:hover {
-            background-color: #555 !important;
+            background-color: #111 !important;
+            border-color: #0f0 !important;
+            color: #0f0 !important;
+        }
+        .btn:disabled {
+            background-color: rgba(128, 128, 128, 0.5) !important; /* Transparent gray when disabled */
+            border-color: rgba(128, 128, 128, 0.5) !important;
+            color: #fff !important;
+        }
+        h2 {
+           color: #0f0;
         }
         .popup {
-            background-color: #222;
+            background-color: #111;
             color: #0f0;
             border: 1px solid #0f0;
             padding: 10px;
             border-radius: 5px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            display: none; /* Hidden by default */
+        }
+        .popup.show {
+            display: block; /* Show popup */
         }
     </style>
 </head>
 <body>
 
-<div class="form-container">
+<div class="form-container" [ngClass]="{'transparent': showSuccessPopup}">
     <h2 class="text-center">Add New Investment</h2>
     <form [formGroup]="investmentForm" (ngSubmit)="onSubmit()">
-        
         <!-- Investment Name -->
         <div class="form-group">
             <label for="name">Investment Name:</label>
@@ -122,11 +150,11 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-success btn-block" [disabled]="investmentForm.invalid">Add Investment</button>
-    </form>
+        <button type="submit" class="btn btn-success btn-block" [disabled]="investmentForm.invalid">ADD INVESTMENT</button>
+    </form> 
 
     <!-- Success Popup -->
-    <div *ngIf="showSuccessPopup" class="popup mt-3">
+    <div *ngIf="showSuccessPopup" class="popup show">
         <div class="alert alert-success">
             <p>Investment added successfully!</p> 
             <button class="btn btn-sm btn-outline-success" (click)="closePopup()">Close</button>
@@ -137,4 +165,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+</body>
+</html>

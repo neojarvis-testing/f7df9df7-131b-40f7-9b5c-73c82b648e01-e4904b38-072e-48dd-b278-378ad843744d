@@ -1,36 +1,81 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Investment } from 'src/app/models/investment.model';
-import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { InvestmentInquiry } from "src/app/models/investment-inquiry.model";
+import { Investment } from "src/app/models/investment.model";
+import { InvestmentInquiryService } from "src/app/services/investment-inquiry.service";
+import { InvestmentService } from "src/app/services/investment.service";
 
 @Component({
   selector: 'app-user-add-inquiry',
   templateUrl: './user-add-inquiry.component.html',
   styleUrls: ['./user-add-inquiry.component.css']
 })
+
 export class UserAddInquiryComponent implements OnInit {
 
-  investmentinquiryForm: FormGroup
-  investment: Investment;
+  inquiry: InvestmentInquiry = {
+    user: null,
+    investment: null,
+    message: '',
+    status: 'Pending',
+    inquiryDate: new Date()+'',
+    responseDate: '',
+    adminResponse: 'No response yet',
+    priority: '',
+    contactDetails: ''
+  };
 
-  constructor(private investmentinquiryService: InvestmentInquiryService, private fb: FormBuilder, private router: Router) { 
-    this.investmentinquiryForm=this.fb.group({
-      investment:['', Validators.required],
-      message:['', Validators.required],
-      priority:['', Validators.required]
-    })
-  }
+  investment: Investment = {
+    name: '',
+    description: "",
+    type: "",
+    purchasePrice: 0,
+    currentPrice: 0,
+    quantity: 0,
+    purchaseDate: "",
+    status: ""
+  };  // Initialize properly
 
-  addInquiry(){
-    this.investmentinquiryService.addInquiry(this.investmentinquiryForm.value).subscribe((data)=>{
-        this.investmentinquiryForm.reset();
-        //pop up window
-        this.router.navigate(['/user/view-inquiry']);
-    })
+  constructor(private investmentinquiryService: InvestmentInquiryService, private investmentService: InvestmentService, 
+    private router: Router, private activatedRoute: ActivatedRoute) { }
+
+  addInquiry() {
+    this.inquiry.investment = this.investment;  // Assign investment before submitting
+    this.investmentinquiryService.addInquiry(this.inquiry).subscribe((data) => {
+      this.resetInquiry();
+      alert("Inquiry submitted successfully!")
+      this.router.navigate(['/user/view-inquiry']);
+    });
   }
 
   ngOnInit(): void {
+    let investmentId = +this.activatedRoute.snapshot.params['investmentId'];
+    this.investmentService.getInvestmentById(investmentId).subscribe((data) => {
+      this.investment = data;
+    });
   }
 
+  resetInquiry() {
+    this.inquiry = {
+      user: null,
+      investment: null,
+      message: '',
+      status: 'Pending',
+      inquiryDate: new Date()+'',
+      responseDate: '',
+      adminResponse: 'No response yet',
+      priority: '',
+      contactDetails: ''
+    };
+    this.investment = {
+      name: '',
+      description: "",
+      type: "",
+      purchasePrice: 0,
+      currentPrice: 0,
+      quantity: 0,
+      purchaseDate: "",
+      status: ""
+    };  // Reset investment properly
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
 import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
 
 @Component({
@@ -9,9 +9,15 @@ import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.se
 })
 export class UserViewInquiryComponent implements OnInit {
 
-  constructor() {}
 
-  ngOnInit(): void {
-  }
+  inquiries: InvestmentInquiry[] = [];
 
+    constructor(private inquiryService: InvestmentInquiryService) {}
+  
+    ngOnInit(): void {
+     this.inquiryService.getAllInquries().subscribe((data) => {
+     this.inquiries = data;
+     });
+   }
+  
 }

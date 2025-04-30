@@ -1,1 +1,137 @@
-<p>user-view-investment works!</p>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Investments</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #333;
+            color: #0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .card {
+            background-color: #444 !important;
+            color: #0f0 !important;
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background-color: #555 !important;
+        }
+        .btn {
+            background-color: #444 !important;
+            color: #0f0 !important;
+        }
+        .btn:hover {
+            background-color: #555 !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center">Explore Investments</h2>
+    <div *ngFor="let investment of investments" class="card">
+        <div class="card-header">
+            <h3>{{ investment.name }}</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>Description:</strong> {{ investment.description }}</p>
+            <p><strong>Type:</strong> {{ investment.type }}</p>
+            <p><strong>Purchase Price:</strong> {{ investment.purchasePrice | currency }}</p>
+            <p><strong>Current Price:</strong> {{ investment.currentPrice | currency }}</p>
+            <p><strong>Quantity:</strong> {{ investment.quantity }}</p>
+            <p><strong>Purchase Date:</strong> {{ investment.purchaseDate | date }}</p>
+            <p><strong>Status:</strong> {{ investment.status }}</p>
+            <button class="btn btn-success">Inquire</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Investments</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #333;
+            color: #0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .card {
+           -color: #444 !important;
+            color: #0f0 !important;
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background-color: #555 !important;
+        }
+        .btn {
+            background-color: #444 !important;
+            color: #0f0 !important;
+        }
+        .btn:hover {
+            background-color: #555 !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center">Explore Investments</h2>
+    <div *ngFor="let investment of investments" class="card">
+        <div class="card-header">
+            <h3>{{ investment.name }}</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>Description:</strong> {{ investment.description }}</p>
+            <p><strong>Type:</strong> {{ investment.type }}</p>
+            <p><strong>Purchase Price:</strong> {{ investment.purchasePrice | currency }}</p>
+            <p><strong>Current Price:</strong> {{ investment.currentPrice | currency }}</p>
+            <p><strong>Quantity:</strong> {{ investment.quantity }}</p>
+            <p><strong>Purchase Date:</strong> {{ investment.purchaseDate | date }}</p>
+            <p><strong>Status:</strong> {{ investment.status }}</p>
+            <button class="btn btn-success" (click)="inquire(investment.investmentId)">Inquire</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

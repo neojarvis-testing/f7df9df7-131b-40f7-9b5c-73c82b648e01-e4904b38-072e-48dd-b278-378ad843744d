@@ -29,6 +29,6 @@ loadInvestments(): void {
  
  
 inquire(investmentId: number): void {
-   this.router.navigate(['/user/add-inquiry', investmentId]);
-}
+   this.router.navigate(['/user/add-inquiry', investmentId]); 
+} 
 }

@@ -6,9 +6,17 @@
     <title>Manage Investments</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
+        html, body {
+            height: 100%;
+            margin: 0;
             background-color: #000;
             color: #0f0;
+        }
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px; /* Add padding to the top */
         }
         .form-container {
             max-width: 600px;

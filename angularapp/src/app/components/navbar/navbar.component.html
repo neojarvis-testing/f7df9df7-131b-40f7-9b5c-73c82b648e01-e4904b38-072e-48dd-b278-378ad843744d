@@ -1,6 +1,8 @@
-<nav *ngIf="userRole === 'Admin'" aria-label="Admin Navigation">
-    <app-adminnav></app-adminnav>
-</nav>
-<nav *ngIf="userRole === 'User'" aria-label="User Navigation">
-    <app-usernav></app-usernav>
-</nav>
+<div class="container-fluid">
+    <nav *ngIf="authService.isAdmin()" aria-label="Admin Navigation">
+        <app-adminnav></app-adminnav>
+    </nav>
+    <nav *ngIf="authService.isUser()" aria-label="User Navigation">
+        <app-usernav></app-usernav>
+    </nav>
+</div>

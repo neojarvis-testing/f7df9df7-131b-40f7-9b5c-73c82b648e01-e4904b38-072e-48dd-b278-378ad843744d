@@ -1,6 +1,6 @@
 package com.examly.springapp.service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class FeedbackServiceImpl implements FeedbackService{
         if(user==null || investment==null){
             throw new FeedbackException("User or Investment details not found");
         }
-        feedback.setDate(LocalDateTime.now());
+        feedback.setDate(LocalDate.now());
         feedback.setUser(user);
         feedback.setInvestment(investment);
         return feedbackRepo.save(feedback);

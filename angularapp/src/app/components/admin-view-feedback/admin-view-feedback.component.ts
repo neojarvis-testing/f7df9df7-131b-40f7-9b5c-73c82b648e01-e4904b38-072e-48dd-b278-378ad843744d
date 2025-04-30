@@ -11,7 +11,7 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 export class AdminViewFeedbackComponent implements OnInit {
   feedbacks: Feedback[] = [];
   filteredFeedbacks: Feedback[] = [];
-  categories: string[] = ['Category 1', 'Category 2', 'Category 3']; // Example categories
+  categories: string[] = ['Portfolio', 'Advice', 'General']; 
   selectedCategory: string = '';
 
   constructor(private feedbackService: FeedbackService) { }

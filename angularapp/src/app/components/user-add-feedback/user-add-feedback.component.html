@@ -1,27 +1,71 @@
-<div class="container">
-  <h2 class="header">Add Feedback</h2>
-  <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="selectInvestment">Select Investment:</label>
-      <select id="selectInvestment" class="form-control" formControlName="investment" required>
-        <option *ngFor="let investment of investments" [value]="investment">{{ investment }}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="category">Feedback Category:</label>
-      <select id="category" class="form-control" formControlName="category" required>
-        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="date">Date:</label>
-      <input type="date" id="date" class="form-control" formControlName="date" required>
-    </div>
-    <div class="form-group">
-      <label for="feedbackText">Feedback Message:</label>
-      <textarea id="feedbackText" class="form-control" formControlName="feedbackText" required placeholder="Enter your feedback message"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!feedbackForm.valid">Submit Feedback</button>
-    <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
-  </form>
+
+<div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <div style="background-color: black; padding: 20px; border-radius: 10px; width: 50%;">
+    <h2 class="header" style="color: green; text-align: center;">Add Feedback</h2>
+    <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
+      <div class="form-group">
+        <label for="investmentId" style="color: green;">Select Investment:</label>
+        <select id="investmentId" class="form-control" [(ngModel)]="investmentId" name="investmentId" required>
+          <option *ngFor="let investment of investments" [value]="investment.investmentId">{{ investment.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="category" style="color: green;">Feedback Category:</label>
+        <select id="category" class="form-control" [(ngModel)]="feedback.category" name="category" required>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="date" style="color: green;">Date:</label>
+        <input type="date" id="date" class="form-control" [(ngModel)]="feedback.date" name="date" required>
+      </div>
+      <div class="form-group">
+        <label for="feedbackText" style="color: green;">Feedback Message:</label>
+        <textarea id="feedbackText" class="form-control" rows="3" [(ngModel)]="feedback.feedbackText" name="feedbackText" placeholder="Enter your feedback" required></textarea>
+      </div>
+      <div style="text-align: center;">
+        <button type="submit" class="btn btn-success" [disabled]="feedbackForm.invalid">Submit Feedback</button>
+        <button type="button" class="btn btn-danger" (click)="resetForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
 </div>
+<!-- <div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <div style="background-color: black; padding: 20px; border-radius: 10px; width: 50%;">
+    <h2 class="header" style="color: green; text-align: center;">Add Feedback</h2>
+    <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
+      <div class="form-group">
+        <label for="investmentId" style="color: green;">Select Investment:</label>
+        <select id="investmentId" class="form-control" [(ngModel)]="investmentId" name="investmentId" required>
+          <option *ngFor="let investment of investments" [value]="investment.investmentId">{{ investment.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="category" style="color: green;">Feedback Category:</label>
+        <select id="category" class="form-control" [(ngModel)]="feedback.category" name="category" required>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="date" style="color: green;">Date:</label>
+        <input type="date" id="date" class="form-control" [(ngModel)]="feedback.date" name="date" required>
+      </div>
+      <div class="form-group">
+        <label for="feedbackText" style="color: green;">Feedback Message:</label>
+        <textarea id="feedbackText" class="form-control" rows="3" [(ngModel)]="feedback.feedbackText" name="feedbackText" placeholder="Enter your feedback" required></textarea>
+      </div>
+      <div style="text-align: center;">
+        <button type="submit" class="btn btn-success" [disabled]="feedbackForm.invalid">Submit Feedback</button>
+        <button type="button" class="btn btn-danger" (click)="resetForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="popupMessage" class="popup">
+  <div style="background-color: white; padding: 20px; border-radius: 10px; text-align: center;">
+    <p>Feedback submitted successfully!</p>
+    <button class="btn btn-primary" (click)="closePopup()">Close</button>
+  </div>
+</div> -->
+

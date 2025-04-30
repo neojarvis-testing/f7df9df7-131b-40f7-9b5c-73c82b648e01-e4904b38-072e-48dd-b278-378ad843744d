@@ -1,22 +1,44 @@
-<p>user-view-inquiry works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Inquiries</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 
-<h2>Your Inquiries</h2>
+<div class="container">
+    <h2>Your Inquiries</h2>
+    <div *ngIf="inquiries.length > 0; else noInquiries">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Investment</th>
+                    <th>Message</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Admin Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let inquiry of inquiries">
+                    <td>{{ inquiry.investment.name }}</td>
+                    <td>{{ inquiry.message }}</td>
+                    <td>{{ inquiry.priority }}</td>
+                    <td>{{ inquiry.status }}</td>
+                    <td>{{ inquiry.adminResponse }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #noInquiries>
+        <p class="no-data">You have not submitted any inquiries yet.</p>
+    </ng-template>
+</div>
 
-<table>
-    <thead>
-        <tr>
-            <th>Investment</th>
-            <th>Message</th>
-            <th>Priority</th>
-            <th>Status</th>
-            <th>Admin Response</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-            <td></td>
-        </tr>
-    </tbody>
-
-</table>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

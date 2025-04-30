@@ -31,7 +31,7 @@ const routes: Routes = [
   {path:'admin/view/feedback', component:AdminViewFeedbackComponent},
   {path:'admin/console', component:AdminConsoleComponent},
   {path:'user/view-investment', component:UserViewInvestmentComponent},
-  {path:'user/add-inquiry/:inquiryId', component:UserAddInquiryComponent},
+  { path: 'user/add-inquiry/:investmentId', component: UserAddInquiryComponent },
   {path:'user/view-inquiry', component:UserViewInquiryComponent},
   {path:'user/add/feedback', component:UserAddFeedbackComponent},
   {path:'user/view-feedback', component:UserViewFeedbackComponent},

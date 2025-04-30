@@ -38,18 +38,18 @@
   </style>
 </head>
 <body>
-<div class="navbar">
-  <div class="logo">InvestTrack</div>
-  <div class="nav-links">
-    <a routerLink="/home">Home</a>
-    <a routerLink="/admin/console">Admin Console</a>
-    <a routerLink="/admin/view-investment">View Investments</a>
-    <a routerLink="/admin/add-investment">Add Investment</a>
-    <a routerLink="admin/view-inquiries">Inquiry</a>
-    <a routerLink="/admin/view/feedback">Feedback</a>
+  <div class="navbar navbar-expand-lg navbar-custom" aria-label="InvestTrack Navigation Bar">
+    <div class="logo navbar-brand" aria-label="Application Logo">InvestTrack</div>
+    <div class="nav-links collapse navbar-collapse" aria-label="Navigation Links">
+      <a class="nav-link" routerLink="/home" aria-label="Home Page">Home</a>
+      <a class="nav-link" routerLink="/admin/console" aria-label="Admin Console">Admin Console</a>
+      <a class="nav-link" routerLink="/admin/view-investment" aria-label="View Investments">View Investments</a>
+      <a class="nav-link" routerLink="/admin/add-investment" aria-label="Add Investment">Add Investment</a>
+      <a class="nav-link" routerLink="/admin/view-inquiries" aria-label="Inquiries Section">Inquiry</a>
+      <a class="nav-link" routerLink="/admin/view/feedback" aria-label="Feedback Section">Feedback</a>
+    </div>
+    <div class="user-role nav-item" aria-label="User Role Indicator">Logged in as Admin</div>
+    <button class="logout-button btn" (click)="logout()" aria-label="Logout Button">Logout</button>
   </div>
-  <div class="user-role">Logged in as Admin</div>
-  <button class="logout-button">Logout</button>
-</div>
 </body>
 </html>

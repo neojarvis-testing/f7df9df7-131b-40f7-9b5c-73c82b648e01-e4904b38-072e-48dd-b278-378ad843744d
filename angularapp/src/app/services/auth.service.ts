@@ -35,8 +35,8 @@ export class AuthService {
   }
  
   loggedOut():void{
-    // localStorage.removeItem('userId')
-    // localStorage.removeItem('userRole')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('userRole')
     localStorage.clear()
   }
 }

@@ -1,5 +1,6 @@
 package com.examly.springapp.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -26,7 +27,7 @@ public class Feedback {
     private String feedbackText;
 
     @PastOrPresent(message = "Feedback date cannot be future")
-    private LocalDateTime date;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)

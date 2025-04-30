@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { InvestmentInquiry } from "src/app/models/investment-inquiry.model";
 import { Investment } from "src/app/models/investment.model";
+import { User } from "src/app/models/user.model";
 import { InvestmentInquiryService } from "src/app/services/investment-inquiry.service";
 import { InvestmentService } from "src/app/services/investment.service";
 
@@ -12,14 +13,13 @@ import { InvestmentService } from "src/app/services/investment.service";
 })
 
 export class UserAddInquiryComponent implements OnInit {
-
+  investmentId:any
   inquiry: InvestmentInquiry = {
-    user: null,
-    investment: null,
+    
     message: '',
     status: 'Pending',
-    inquiryDate: new Date()+'',
-    responseDate: '',
+    inquiryDate: new Date(),
+    responseDate: new Date(),
     adminResponse: 'No response yet',
     priority: '',
     contactDetails: ''
@@ -39,30 +39,46 @@ export class UserAddInquiryComponent implements OnInit {
   constructor(private investmentinquiryService: InvestmentInquiryService, private investmentService: InvestmentService, 
     private router: Router, private activatedRoute: ActivatedRoute) { }
 
+    ngOnInit(): void {
+      this.investmentId = +this.activatedRoute.snapshot.params['investmentId'];
+      this.investmentService.getInvestmentById(this.investmentId).subscribe((data) => {
+        this.investment = data;
+      });
+    }
+  
+
+
   addInquiry() {
-    this.inquiry.investment = this.investment;  // Assign investment before submitting
+    let userId = localStorage.getItem('userId');
+    this.inquiry.user={
+        userId: Number(userId)
+      }
+    this.inquiry.investment={
+        investmentId:this.investmentId
+      }
+    console.log(this.investment)
+  
+  
     this.investmentinquiryService.addInquiry(this.inquiry).subscribe((data) => {
       this.resetInquiry();
       alert("Inquiry submitted successfully!")
-      this.router.navigate(['/user/view-inquiry']);
-    });
+      this.router.navigateByUrl('/user/view-inquiry');
+    },
+    (error) => {
+      console.error('Error submitting Inquiry', error);
+    }
+    );
   }
 
-  ngOnInit(): void {
-    let investmentId = +this.activatedRoute.snapshot.params['investmentId'];
-    this.investmentService.getInvestmentById(investmentId).subscribe((data) => {
-      this.investment = data;
-    });
-  }
-
+ 
   resetInquiry() {
     this.inquiry = {
       user: null,
       investment: null,
       message: '',
       status: 'Pending',
-      inquiryDate: new Date()+'',
-      responseDate: '',
+      inquiryDate: new Date(),
+    responseDate: new Date(),
       adminResponse: 'No response yet',
       priority: '',
       contactDetails: ''

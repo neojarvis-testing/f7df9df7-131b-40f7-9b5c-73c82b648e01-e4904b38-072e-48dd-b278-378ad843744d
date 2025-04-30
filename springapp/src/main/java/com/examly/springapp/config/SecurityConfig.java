@@ -49,7 +49,7 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.GET,"/api/feedback").hasRole("Admin")
         .requestMatchers(HttpMethod.PUT,"/api/inquiries/{inquiryId}","/api/investments/{investmentId}").hasRole("Admin")
         .requestMatchers(HttpMethod.GET,"/api/inquiries/{inquiryId}","/api/inquiries").hasAnyRole("Admin","User")
-        .requestMatchers(HttpMethod.DELETE,"/api/investments/{investmentId}","/api/feedback/{feedbackId}").hasRole("Admin")
+        .requestMatchers(HttpMethod.DELETE,"/api/investments/{investmentId}","/api/feedback/{feedbackId}", "/api/inquiries/{inquiryId}").hasRole("Admin")
         .requestMatchers(HttpMethod.POST,"/api/inquiries","/api/feedback").hasRole("User")
         .requestMatchers(HttpMethod.GET,"/api/inquiries/user/{userId}","/api/feedback/user/{userId}","/api/feedback/{feedbackId}").hasRole("User")
         .requestMatchers(HttpMethod.DELETE,"/api/inquiries/{inquiryId}","/api/feedback/{feedbackId}").hasRole("User")

@@ -1,6 +1,6 @@
 package com.examly.springapp.service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +32,8 @@ public class InvestmentInquiryServiceImpl implements InvestmentInquiryService{
         if(user==null || investment==null){
             throw new InvestmentInquiryException("Investment Inquiry details not found!...");
         }
-        investmentinquiry.setInquiryDate(LocalDateTime.now());
-        investmentinquiry.setStatus("Inquiry");
+        investmentinquiry.setInquiryDate(LocalDate.now());
+        investmentinquiry.setStatus("Pending");
         investmentinquiry.setUser(user);
         investmentinquiry.setInvestment(investment);
         return investmentInquiryRepo.save(investmentinquiry);

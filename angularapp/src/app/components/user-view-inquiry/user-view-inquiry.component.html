@@ -16,18 +16,18 @@
                 <tr>
                     <th>Investment</th>
                     <th>Message</th>
+                    <th>Priority</th>
                     <th>Status</th>
                     <th>Admin Response</th>
-                    <th>Priority</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let inquiry of inquiries">
                     <td>{{ inquiry.investment.name }}</td>
                     <td>{{ inquiry.message }}</td>
+                    <td>{{ inquiry.priority }}</td>
                     <td>{{ inquiry.status }}</td>
                     <td>{{ inquiry.adminResponse }}</td>
-                    <td>{{ inquiry.priority }}</td>
                 </tr>
             </tbody>
         </table>

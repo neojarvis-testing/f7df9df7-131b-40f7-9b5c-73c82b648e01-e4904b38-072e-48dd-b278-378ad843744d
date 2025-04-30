@@ -9,13 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   userRole: String = '';
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router) { 
+    this.userRole = localStorage.getItem('userRole');
+  }
 
   ngOnInit(): void {
     this.userRole = localStorage.getItem('userRole');
-  }
-  logout(){
-    this.authService.loggedOut();
-    this.router.navigate(['/login']);
   }
 }

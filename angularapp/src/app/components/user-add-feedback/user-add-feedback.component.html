@@ -1,70 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feedback Form</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: #000;
-      color: #fff;
-    }
-    .container {
-      margin-top: 50px;
-    }
-    .header {
-      color: #28a745;
-    }
-    .form-group label {
-      color: #fff;
-    }
-    .form-control {
-      background-color: #333;
-      color: #fff;
-      border: 1px solid #28a745;
-    }
-    .btn-primary {
-      background-color: #28a745;
-      border-color: #28a745;
-    }
-    .btn-secondary {
-      background-color: #dc3545;
-      border-color: #dc3545;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2 class="header">Add Feedback</h2>
-    <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+<div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <div style="background-color: black; padding: 20px; border-radius: 10px; width: 50%;">
+    <h2 class="header" style="color: green; text-align: center;">Add Feedback</h2>
+    <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
       <div class="form-group">
-        <label for="selectInvestment">Select Investment:</label>
-        <select id="selectInvestment" class="form-control" formControlName="investment" required>
-          <option *ngFor="let investment of investments" [value]="investment.id">{{ investment.name }}</option>
+        <label for="investmentId" style="color: green;">Select Investment:</label>
+        <select id="investmentId" class="form-control" [(ngModel)]="investmentId" name="investmentId" required>
+          <option *ngFor="let investment of investments" [value]="investment.investmentId">{{ investment.name }}</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="category">Feedback Category:</label>
-        <select class="form-control" id="category" formControlName="category" required>
+        <label for="category" style="color: green;">Feedback Category:</label>
+        <select id="category" class="form-control" [(ngModel)]="feedback.category" name="category" required>
           <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="date">Date:</label>
-        <input type="date" class="form-control" id="date" formControlName="date" required>
+        <label for="date" style="color: green;">Date:</label>
+        <input type="date" id="date" class="form-control" [(ngModel)]="feedback.date" name="date" required>
       </div>
       <div class="form-group">
-        <label for="feedbackText">Feedback Message:</label>
-        <textarea class="form-control" id="feedbackText" rows="3" formControlName="feedbackText" placeholder="Enter your feedback message" required></textarea>
+        <label for="feedbackText" style="color: green;">Feedback Message:</label>
+        <textarea id="feedbackText" class="form-control" rows="3" [(ngModel)]="feedback.feedbackText" name="feedbackText" placeholder="Enter your feedback" required></textarea>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!feedbackForm.valid">Submit Feedback</button>
-      <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+      <div style="text-align: center;">
+        <button type="submit" class="btn btn-success" [disabled]="feedbackForm.invalid">Submit Feedback</button>
+        <button type="button" class="btn btn-danger" (click)="resetForm()">Cancel</button>
+      </div>
     </form>
   </div>
+</div>
+<!-- <div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <div style="background-color: black; padding: 20px; border-radius: 10px; width: 50%;">
+    <h2 class="header" style="color: green; text-align: center;">Add Feedback</h2>
+    <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
+      <div class="form-group">
+        <label for="investmentId" style="color: green;">Select Investment:</label>
+        <select id="investmentId" class="form-control" [(ngModel)]="investmentId" name="investmentId" required>
+          <option *ngFor="let investment of investments" [value]="investment.investmentId">{{ investment.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="category" style="color: green;">Feedback Category:</label>
+        <select id="category" class="form-control" [(ngModel)]="feedback.category" name="category" required>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="date" style="color: green;">Date:</label>
+        <input type="date" id="date" class="form-control" [(ngModel)]="feedback.date" name="date" required>
+      </div>
+      <div class="form-group">
+        <label for="feedbackText" style="color: green;">Feedback Message:</label>
+        <textarea id="feedbackText" class="form-control" rows="3" [(ngModel)]="feedback.feedbackText" name="feedbackText" placeholder="Enter your feedback" required></textarea>
+      </div>
+      <div style="text-align: center;">
+        <button type="submit" class="btn btn-success" [disabled]="feedbackForm.invalid">Submit Feedback</button>
+        <button type="button" class="btn btn-danger" (click)="resetForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
  
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+<div id="popupMessage" class="popup">
+  <div style="background-color: white; padding: 20px; border-radius: 10px; text-align: center;">
+    <p>Feedback submitted successfully!</p>
+    <button class="btn btn-primary" (click)="closePopup()">Close</button>
+  </div>
+</div> -->

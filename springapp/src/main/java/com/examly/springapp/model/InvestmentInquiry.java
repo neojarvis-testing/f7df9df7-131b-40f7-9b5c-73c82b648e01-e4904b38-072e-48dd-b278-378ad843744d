@@ -1,6 +1,6 @@
 package com.examly.springapp.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -33,12 +33,12 @@ public class InvestmentInquiry {
     @NotBlank(message = "Priority cannot be empty")
     private String priority;
 
-    private LocalDateTime inquiryDate;
-    private LocalDateTime responseDate;
+    private LocalDate inquiryDate;
+    private LocalDate responseDate;
 
     @Size(max = 500, message = "Admin response cannot exceed 500 characters")
     private String adminResponse;
 
-    @NotBlank(message = "Contact details cannot be empty")
+    // @NotBlank(message = "Contact details cannot be empty")
     private String contactDetails;
 }

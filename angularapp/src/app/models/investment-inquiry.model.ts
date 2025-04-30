@@ -3,13 +3,13 @@ import { User } from "./user.model";
 
 export interface InvestmentInquiry{
     inquiryId?:number;
-    user: User;
-    investment: Investment;
-    message: string;
+    user?: User;
+    investment?: Investment;
+    message?: string;
     status?:string;
-    inquiryDate?:string;
-    responseDate?:string;
+    inquiryDate?:Date;
+    responseDate?:Date;
     adminResponse?:string;
-    priority:string;
+    priority?:string;
     contactDetails?:string;
 }

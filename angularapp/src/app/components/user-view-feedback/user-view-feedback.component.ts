@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Feedback } from 'src/app/models/feedback.model';
+import { Investment } from 'src/app/models/investment.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
 
 
@@ -10,6 +11,7 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 })
 export class UserViewFeedbackComponent implements OnInit {
   feedbacks: Feedback[] = [];
+  investment: Investment[]=[];
 
   constructor(private feedbackService: FeedbackService) { }
 
@@ -18,10 +20,8 @@ export class UserViewFeedbackComponent implements OnInit {
   }
 
   loadFeedbacks(): void {
-    this.feedbackService.getFeedbacks().subscribe(response => {
+    this.feedbackService.getFeedbacks().subscribe((response) => {
       this.feedbacks = response;
-    }, error => {
-      console.error('Error loading feedbacks', error);
     });
   }
 }

@@ -7,7 +7,7 @@ import com.examly.springapp.model.InvestmentInquiry;
 public interface InvestmentInquiryService {
 
     InvestmentInquiry createInquiry(InvestmentInquiry investmentinquiry);
-    List<InvestmentInquiry> getAllInquries();
+    List<InvestmentInquiry> getAllInquiries();
     InvestmentInquiry getInquiryById(long inquiryId);
     InvestmentInquiry updateInquiry(long inquiryId, InvestmentInquiry investmentinquiry);
     boolean deleteInquiry(long inquiryId);

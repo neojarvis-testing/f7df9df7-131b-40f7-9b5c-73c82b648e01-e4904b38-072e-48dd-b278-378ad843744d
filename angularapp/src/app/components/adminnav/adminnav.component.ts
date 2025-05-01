@@ -8,15 +8,28 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./adminnav.component.css']
 })
 export class AdminnavComponent implements OnInit {
+  showLogoutModal: boolean = false; // Controls modal visibility
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  // Opens the modal and adds blur effect
+  logout(): void {
+    this.showLogoutModal = true;
+    document.body.classList.add('modal-open'); // Apply blur
   }
-  logout(){
-    if(confirm("Are you sure you want to logout?")){
-      this.authService.loggedOut();
-      this.router.navigate(['/login']);
-    }
+
+  // Closes the modal and removes blur effect
+  closeModal(): void {
+    this.showLogoutModal = false;
+    document.body.classList.remove('modal-open'); // Remove blur
+  }
+
+  // Confirms logout and navigates to login
+  confirmLogout(): void {
+    this.authService.loggedOut();
+    this.router.navigate(['/login']);
+    this.closeModal(); // Close modal after logout
   }
 }

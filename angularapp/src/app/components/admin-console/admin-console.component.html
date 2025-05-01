@@ -23,8 +23,8 @@
         .admin-console-title {
             text-align: center;
             margin-top: 20px;
-            margin-bottom: 20px;
-            font-size: 24px;
+            margin-bottom: 10px; /* Reduced margin-bottom */
+            font-size: 30px;
             color: #00ff00;
         }
         .container {
@@ -34,11 +34,27 @@
         .card {
             background-color: #111 !important;
             border-color: #00ff00 !important;
+            height: 210px; /* Ensuring uniform height */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            transition: transform 0.2s; /* Smooth transition for hover effect */
+        }
+        .card:hover {
+            transform: scale(1.1); /* Slightly enlarge the card on hover */
         }
         .card-body {
             text-align: center;
             font-size: 18px;
             color: #fff; /* Ensuring text is visible */
+        }
+        .card-body p {
+            color: #00ff00;
+            margin: 0;
+        }
+        .card-body .number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
         }
         .navbar .nav-links a {
             color: #00ff00;
@@ -58,36 +74,36 @@
     </style>
 </head>
 <body>
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">InvestTrack</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto nav-links">
-                <li class="nav-item"><a class="nav-link" routerLink="/home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/admin/console">Admin Console</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/admin/view-investment">View Investments</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/admin/add-investment">Add Investment</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/admin/view-inquiries">Inquiry</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/admin/view/feedback">Feedback</a></li>
-            </ul>
-            <span class="user-role">Logged in as Admin</span>
-            <button class="logout-button">Logout</button>
-        </div>
-    </nav> -->
-
     <div class="container">
         <h1 class="admin-console-title">Admin Console</h1>
         <div class="row">
             <div class="col-md-3">
-                <div class="card"><div class="card-body"><p>Total Feedbacks: 0</p></div></div>
+                <div class="card">
+                    <div class="card-body">
+                        <p>Total Feedbacks: <br><br><br><span class="number">{{noOfFeeddback}}</span></p>
+                    </div>
+                </div>
             </div>
             <div class="col-md-3">
-                <div class="card"><div class="card-body"><p>Total Inquiries: 0</p></div></div>
+                <div class="card">
+                    <div class="card-body">
+                        <p>Total Inquiries: <br><br><br><span class="number">{{noOfInquiries}}</span></p>
+                    </div>
+                </div>
             </div>
             <div class="col-md-3">
-                <div class="card"><div class="card-body"><p>Total Investments: </p></div></div>
+                <div class="card">
+                    <div class="card-body">
+                        <p>Total Investments: <br><br><br><span class="number">{{noOfInvestment}}</span></p>
+                    </div>
+                </div>
             </div>
             <div class="col-md-3">
-                <div class="card"><div class="card-body"><p>Unresolved Inquiries: 0</p></div></div>
+                <div class="card">
+                    <div class="card-body">
+                        <p>Unresolved Inquiries: <br><br><br><span class="number">0</span></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

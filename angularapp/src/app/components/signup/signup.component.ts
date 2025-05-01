@@ -10,12 +10,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignupComponent implements OnInit {
   form: FormGroup;
+  elementRef: any;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -44,11 +45,11 @@ export class SignupComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
+  
     this.authService.register(this.form.value).subscribe(
       () => {
         this.form.reset();
-        this.router.navigate(['/login']);
+        this.showSuccessModal(); // Show modal instead of direct navigation
       },
       (error) => {
         console.error('Registration error:', error);
@@ -66,5 +67,17 @@ export class SignupComponent implements OnInit {
     } else if (confirmPassword) {
       confirmPassword.setErrors(null);
     }
+  }
+
+  showSuccessModal(): void {
+    const modal = this.elementRef.nativeElement.querySelector('#successModal');
+    if (modal) {
+      (window as any).$(`#successModal`).modal('show'); // Use jQuery Bootstrap modal trigger
+    }
+  }
+
+  navigateToLogin(): void {
+    (window as any).$(`#successModal`).modal('hide'); // Hide modal before navigating
+    this.router.navigate(['/login']);
   }
 }

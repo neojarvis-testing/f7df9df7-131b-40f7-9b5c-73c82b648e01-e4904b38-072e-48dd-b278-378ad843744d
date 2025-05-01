@@ -1,13 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Submit Your Inquiry</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body, h2, label, input, textarea, select, button {
       font-family: 'Times New Roman', Times, serif;
+    }
+
+    body {
+      background-color: #000;
     }
 
     .form-container {
@@ -15,79 +20,137 @@
       padding: 30px;
       border-radius: 10px;
       width: 400px;
-      margin: 50px auto;
-      color: #00ff00;
-      box-shadow: 0 0 10px #00ff00;
-    }
-
-    .form-control {
-      border: 2px solid #00ff00 !important;
-      background-color: #000;
-      color: #00ff00;
-      font-family: 'Times New Roman', Times, serif;
-    }
-
-    .form-control:focus {
-      border-color: #00ff00;
-      box-shadow: none;
-    }
-
-    .btn-submit {
-      background-color: #00ff00;
-      color: black;
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      border: none;
-    }
-
-    .btn-submit:hover {
-      background-color: #00cc00;
+      margin: 60px auto;
+      color: #f1f4f1;
+      box-shadow: 0 0 15px #00ff00;
+      animation: fadeInUp 1s ease-out;
     }
 
     h2 {
       text-align: center;
       color: #00ff00;
+      margin-bottom: 25px;
+      font-weight: bold;
     }
 
     label {
-      color: #00ff00;
+      color: #f6faf6;
+      font-weight: 500;
+    }
+
+    .form-control {
+      border: 2px solid #00ff00 !important;
+      background-color: #000 !important;
+      color: #f7fdf7 !important;
+    }
+
+    .form-control:focus {
+      border-color: #00ff00;
+      box-shadow: 0 0 5px #00ff00;
+    }
+
+    .form-group {
+      color: #f7fdf7;
+      margin-bottom: 20px;
+    }
+
+    .btn-submit {
+      background-color: #00ff00;
+      color: rgb(241, 238, 238);
+      font-size: 1rem;
+      padding: 8px 20px;
+      font-weight: bold;
+      width: 100%;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      border-radius: 4px;
+    }
+
+    .btn-submit:hover {
+      background-color: #00cc00;
+      transform: scale(1.03);
+    }
+
+    .modal.fade.show {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .modal-content {
+      border-radius: 10px;
+      box-shadow: 0 0 10px #0f0;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="form-container">
-  <h2>Submit Your Inquiry</h2>
+  <div class="form-container">
+    <h2>Submit Your Inquiry</h2>
 
-  <form #investmentinquiryForm="ngForm" (ngSubmit)="addInquiry()">
-    
-    <div class="form-group">
-      <label for="investment">Investment:</label>
-      <input type="text" class="form-control" id="investment" name="investmentName" [(ngModel)]="investment.name" readonly="readonly">
+    <form #investmentinquiryForm="ngForm" (ngSubmit)="addInquiry()">
+      <div class="form-group">
+        <label for="investment">Investment:</label>
+        <input type="text" class="form-control" id="investment" name="investmentName" [(ngModel)]="investment.name" readonly>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" class="form-control" [(ngModel)]="inquiry.message"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Priority:</label>
+        <select id="priority" name="priority" class="form-control" [(ngModel)]="inquiry.priority">
+          <option value="">Select Priority</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-submit">Submit Inquiry</button>
+    </form>
+
+    <!-- Success Popup Modal -->
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" *ngIf="showSuccessPopup"
+         style="background-color: rgba(0, 0, 0, 0.5); z-index: 1050;">
+      <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 350px; width: 90%;">
+        <div class="modal-content text-center" style="background-color: #000; color: rgb(245, 248, 245); border: 1px solid #0f0; padding: 15px;">
+          <div class="modal-body">
+            <h5 style="font-weight: bold;">Inquiry submitted successfully!</h5>
+          </div>
+          <div class="modal-footer justify-content-center border-top-0 p-0">
+            <button type="button" class="btn btn-lg w-100 mt-2" (click)="closePopup()"
+                    style="background-color: #28a745; color: white; font-weight: bold; border: none; border-radius: 0 0 5px 5px;">
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="modal-backdrop fade show" *ngIf="showSuccessPopup"></div>
+  </div>
 
-    <div class="form-group">
-      <label for="message">Message:</label>
-      <textarea name="message" id="message" cols="30" rows="5" class="form-control" [(ngModel)]="inquiry.message"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="priority">Priority:</label>
-      <select name="priority" id="priority" class="form-control" [(ngModel)]="inquiry.priority">
-        <option value="">Select Priority</option>
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-      </select>
-    </div>
-
-    <button type="submit" class="btn btn-submit">Submit Inquiry</button>
-
-  </form>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -143,15 +143,17 @@
       <!-- Search and Filter -->
       <div class="row">
         <div class="col-md-6 col-12 mb-3">
-          <label>Search by Name:</label>
+          <label>Search by Name:
           <input type="text" class="form-control" placeholder="Investment Name" [(ngModel)]="searchTerm" (input)="onSearch()" />
-        </div>
+        </label>
+      </div>
         <div class="col-md-6 col-12 mb-3">
-          <label>Filter by Type:</label>
+          <label>Filter by Type:
           <select class="form-control" [(ngModel)]="selectedCategory" (change)="onFilter()">
             <option value="">All Types</option>
             <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
           </select>
+          </label>
         </div>
       </div>
 

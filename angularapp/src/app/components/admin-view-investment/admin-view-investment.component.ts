@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { InvestmentService } from '../../services/investment.service';
 import { Investment } from '../../models/investment.model';
 import { Router } from '@angular/router';
-import { Chart } from 'chart.js';  // Importing Chart.js for bar chart
+//import { Chart } from 'chart.js';  // Importing Chart.js for bar chart
 
 @Component({
   selector: 'app-admin-view-investment',
@@ -110,30 +110,30 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
       const chartData = this.inquiriesData.map(data => data.inquiries);
       const chartLabels = this.inquiriesData.map(data => `Investment ${data.investmentId}`);
 
-      new Chart(this.inquiriesBarChart.nativeElement, {
-        type: 'bar',
-        data: {
-          labels: chartLabels,
-          datasets: [{
-            label: 'Number of Inquiries',
-            data: chartData,
-            backgroundColor: ['#28a745', '#dc3545', '#007bff'],  // Green, Red, Blue
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top',
-            },
-          },
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        },
-      });
+      //new Chart(this.inquiriesBarChart.nativeElement, {
+      //   type: 'bar',
+      //   data: {
+      //     labels: chartLabels,
+      //     datasets: [{
+      //       label: 'Number of Inquiries',
+      //       data: chartData,
+      //       backgroundColor: ['#28a745', '#dc3545', '#007bff'],  // Green, Red, Blue
+      //     }]
+      //   },
+      //   options: {
+      //     responsive: true,
+      //     plugins: {
+      //       legend: {
+      //         position: 'top',
+      //       },
+      //     },
+      //     scales: {
+      //       y: {
+      //         beginAtZero: true
+      //       }
+      //     }
+      //   },
+      // });
     }
   }
 }

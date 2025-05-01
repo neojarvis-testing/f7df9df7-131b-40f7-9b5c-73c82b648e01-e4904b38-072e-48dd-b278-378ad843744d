@@ -72,10 +72,15 @@
       background-color: #2196f3;
       border-color: #2196f3;
     }
+    .table-dark select {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #444444;
+  }
   </style>
 </head>
 <body>
-  <div class="container mt-4">
+  <div>
     <h2>Manage Investment Inquiries</h2>
     <hr>
     <div class="filters mb-3">
@@ -99,27 +104,35 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>USER</th>
-          <th>MESSAGE</th>
-          <th>STATUS</th>
-          <th>PRIORITY</th>
-          <th>ADMIN RESPONSE</th>
-          <th>ACTIONS</th>
+          <th>User</th>
+          <th>Investment</th>
+          <th>Message</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <!-- <th>Inquiry Date</th>
+          <th>Response Date</th> -->
+          <th>Admin Response</th>
+          <!-- <th>Contact Details</th> -->
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let inquiry of filteredInquiries">
           <td>{{ inquiry.inquiryId }}</td>
           <td>{{ inquiry.user.username }}</td>
+          <td>{{inquiry.investment.name}}</td>
           <td>{{ inquiry.message }}</td>
           <td>
-            <select class="form-control" [(ngModel)]="inquiry.status">
+            <select [(ngModel)]="inquiry.status">
               <option value="Pending">Pending</option>
               <option value="Resolved">Resolved</option>
             </select>
           </td>
           <td>{{ inquiry.priority }}</td>
+          <!-- <td></td>
+          <td>N/A</td> -->
           <td>{{ inquiry.adminResponse || 'No response yet' }}</td>
+          <!-- <td>N/A</td> -->
           <td>
             <button class="btn btn-success mb-1" (click)="openResponsePopup(inquiry)">Add Response</button>
             <button class="btn btn-danger" (click)="confirmDeleteInquiry(inquiry.inquiryId)">Delete</button>

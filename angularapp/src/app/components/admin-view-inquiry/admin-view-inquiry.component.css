@@ -3,10 +3,20 @@ body {
     color: #fff;
     font-family: Arial, sans-serif;
   }
+  body {
+    background-color: black !important;
+    color: white; /* Ensuring text is visible */
+    min-height: 100vh; /* This makes sure the background color covers the full viewport */
+    margin: 0;
+    padding: 0;
+  }
+
+  
   
   h2 {
     text-align: center;
     color: #00ff00; /* Green color for heading */
+    font-style: TimesNewRoman;
   }
   .filters {
     display: flex;
@@ -32,8 +42,32 @@ body {
     border: 1px solid green;
     text-align: left;
   }
+  th{
+    color: #00ff00;
+  }
   .no-data {
-    color: #ff0000; /* Red color for no data message */
+    color: white; /* White color for no data message */
     text-align: center;
     margin-top: 20px;
   }
+
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .filters input[type="text"] {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .filters select {
+    flex: 1;
+    margin: 0 10px;
+  }
+
+
+  
+  
+  

@@ -1,41 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Your Inquiry</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Your Inquiry</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body, h2, label, input, textarea, select, button {
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .form-container {
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      margin: 50px auto;
+      color: #00ff00;
+      box-shadow: 0 0 10px #00ff00;
+    }
+
+    .form-control {
+      border: 2px solid #00ff00 !important;
+      background-color: #000;
+      color: #00ff00;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .form-control:focus {
+      border-color: #00ff00;
+      box-shadow: none;
+    }
+
+    .btn-submit {
+      background-color: #00ff00;
+      color: black;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border: none;
+    }
+
+    .btn-submit:hover {
+      background-color: #00cc00;
+    }
+
+    h2 {
+      text-align: center;
+      color: #00ff00;
+    }
+
+    label {
+      color: #00ff00;
+    }
+  </style>
 </head>
 <body>
 
 <div class="form-container">
-    <h2>Submit Your Inquiry</h2>
+  <h2>Submit Your Inquiry</h2>
 
-    <form #investmentinquiryForm="ngForm" (ngSubmit)="addInquiry()">
-        
-        <div class="form-group">
-            <label for="investment">Investment:</label>
-            <input type="text" class="form-control" id="investment" name="investmentName" [(ngModel)]="investment.name" readonly="readonly">
-        </div>
+  <form #investmentinquiryForm="ngForm" (ngSubmit)="addInquiry()">
+    
+    <div class="form-group">
+      <label for="investment">Investment:</label>
+      <input type="text" class="form-control" id="investment" name="investmentName" [(ngModel)]="investment.name" readonly="readonly">
+    </div>
 
-        <div class="form-group">
-            <label for="message">Message:</label>
-            <textarea name="message" id="message" cols="30" rows="10" class="form-control" [(ngModel)]="inquiry.message"></textarea>
-        </div>
+    <div class="form-group">
+      <label for="message">Message:</label>
+      <textarea name="message" id="message" cols="30" rows="5" class="form-control" [(ngModel)]="inquiry.message"></textarea>
+    </div>
 
-        <div class="form-group">
-            <label for="priority">Priority:</label>
-            <select name="priority" id="priority" class="form-control" [(ngModel)]="inquiry.priority">
-                <option value="">Select Priority</option>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-            </select>
-        </div>
+    <div class="form-group">
+      <label for="priority">Priority:</label>
+      <select name="priority" id="priority" class="form-control" [(ngModel)]="inquiry.priority">
+        <option value="">Select Priority</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+    </div>
 
-        <button type="submit" class="btn btn-submit">Submit Inquiry</button>
+    <button type="submit" class="btn btn-submit">Submit Inquiry</button>
 
-    </form>
+  </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -1,79 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Investments</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #fff;
-            margin: 0;
-            padding: 40px 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Investments</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #fff;
+      margin: 0;
+      padding: 40px 0;
+      font-family: "Times New Roman", Times, serif;
+    }
 
-        .container-custom {
-            background-color: #111;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 1000px;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
+    .container-custom {
+      background-color: #111;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 1000px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      animation: fadeInUp 1s ease-out;
+    }
 
-        .card-custom {
-            background-color: #000;
-            border: 1px solid #228B22; /* dull green border */
-            margin-bottom: 20px;
-            color: white;
-        }
+    .card-custom {
+      background-color: #000;
+      border: 1px solid #228B22;
+      margin-bottom: 20px;
+      color: white;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInCard 0.8s ease-in-out;
+    }
 
-        .card-title {
-            color: #0f0; /* green investment name */
-        }
+    .card-custom:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0, 255, 0, 0.3);
+    }
 
-        .card-text {
-            color: white; /* white for all other details */
-        }
+    .card-title {
+      color: #0f0;
+      font-weight: bold;
+    }
 
-        .btn-custom {
-            background-color: #0a0;
-            color: #fff;
-            border: none;
-        }
+    .card-text {
+      color: white;
+    }
 
-        .btn-custom:hover {
-            background-color: #0c0;
-        }
+    .btn-custom {
+      background-color: #0a0;
+      color: #fff;
+      border: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #0f0;
-        }
-    </style>
+    .btn-custom:hover {
+      background-color: #0c0;
+      transform: scale(1.05);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #0f0;
+      font-weight: bold;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInCard {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
 </head>
 <body>
 
 <div class="container-custom">
-    <h2>Explore Investments</h2>
-    <div class="row">
-        <div class="col-md-6" *ngFor="let investment of investments">
-            <div class="card card-custom">
-                <div class="card-body">
-                    <h5 class="card-title">{{ investment.name }}</h5>
-                    <p class="card-text"><strong></strong> {{ investment.description }}</p>
-                    <p class="card-text"><strong>Type:</strong> {{ investment.type }}</p>
-                    <p class="card-text"><strong>Purchase Price:</strong> {{ investment.purchasePrice | currency }}</p>
-                    <p class="card-text"><strong>Current Price:</strong> {{ investment.currentPrice | currency }}</p>
-                    <p class="card-text"><strong>Quantity:</strong> {{ investment.quantity }}</p>
-                    <p class="card-text"><strong>Purchase Date:</strong> {{ investment.purchaseDate | date }}</p>
-                    <p class="card-text"><strong>Status:</strong> {{ investment.status }}</p>
-                    <button class="btn btn-custom" (click)="inquire(investment.investmentId)">Inquire</button>
-                </div>
-            </div>
+  <h2>Explore Investments</h2>
+  <div class="row">
+    <div class="col-md-6" *ngFor="let investment of investments">
+      <div class="card card-custom">
+        <div class="card-body">
+          <h5 class="card-title">{{ investment.name }}</h5>
+          <p class="card-text">{{ investment.description }}</p>
+          <p class="card-text"><strong>Type:</strong> {{ investment.type }}</p>
+          <p class="card-text"><strong>Purchase Price:</strong> {{ investment.purchasePrice | currency }}</p>
+          <p class="card-text"><strong>Current Price:</strong> {{ investment.currentPrice | currency }}</p>
+          <p class="card-text"><strong>Quantity:</strong> {{ investment.quantity }}</p>
+          <p class="card-text"><strong>Purchase Date:</strong> {{ investment.purchaseDate | date }}</p>
+          <p class="card-text"><strong>Status:</strong> {{ investment.status }}</p>
+          <button class="btn btn-custom mt-2" (click)="inquire(investment.investmentId)">Inquire</button>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

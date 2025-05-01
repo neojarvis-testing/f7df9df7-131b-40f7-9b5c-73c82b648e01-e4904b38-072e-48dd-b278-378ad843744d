@@ -3,7 +3,7 @@ body {
     color: #fff;
     font-family: Arial, sans-serif;
   }
-  body {
+  html, body {
     background-color: black !important;
     color: white; /* Ensuring text is visible */
     min-height: 100vh; /* This makes sure the background color covers the full viewport */

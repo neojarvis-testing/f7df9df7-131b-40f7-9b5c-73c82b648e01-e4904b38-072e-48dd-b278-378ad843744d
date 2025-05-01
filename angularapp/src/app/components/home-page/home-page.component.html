@@ -1,68 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InvestTrack</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Times New Roman', Times, serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-image: url('assets/homepage.webp');
-            background-size: cover;
-            background-position: center;
-        }
-        .overlay {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 600px;
-            margin: 20px 0;
-        }
-        .separator {
-            width: 80%;
-            height: 5px;
-            background-color: #4CAF50;
-            margin: 20px 0;
-        }
-        h1 {
-            color: #4CAF50;
-            margin-bottom: 10px;
-        }
-        p {
-            margin-top: 0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InvestTrack</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Times New Roman', Times, serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: url('assets/homepage.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.75);
+      color: white;
+      padding: 30px;
+      text-align: center;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 700px;
+      margin: 30px 0;
+      box-shadow: 0 0 15px #4CAF50;
+      animation: fadeInUp 1.5s ease both;
+      transition: transform 0.3s ease;
+    }
+
+    .overlay:hover {
+      transform: translateY(-5px);
+    }
+
+    .separator {
+      width: 0;
+      height: 5px;
+      background-color: #4CAF50;
+      margin: 20px 0;
+      animation: expandBar 1.5s forwards;
+    }
+
+    h1 {
+      color: #4CAF50;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes expandBar {
+      from {
+        width: 0;
+      }
+      to {
+        width: 80%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="overlay" style="padding-top: 20px;">
-        <h1>InvestTrack</h1> <br>
-        <p>Your gateway to smart investment tracking and management</p>
-    </div>
-    <br><br><br>
-    <div class="separator"></div>
-    <div class="overlay">
-        <h1>Welcome to InvestTrack</h1> <br>
-        <p>Monitor your investments, track market trends, and manage your portfolio with InvestTrack. Our platform provides tools to analyze your stocks, bonds, and other assets, ensuring you make informed financial decisions.</p>
-    </div>
-    <div class="separator"></div>
-    <div class="overlay">
-        <h1>About Us</h1> <br>
-        <p>At InvestTrack, we are dedicated to empowering wealth creation. Our platform simplifies investment tracking, inquiry management, and feedback collection, helping you stay ahead in the financial markets.</p>
-    </div>
-    <div class="separator"></div>
-    <div class="overlay">
-        <h1>Contact Us</h1> <br>
-        <p> ☎️Phone: 123-456-7890 <br>
-            📧Email: support@jinvesttrack.com <br>
-            📍Address: 123 Financial Street, Suite 202, New York, NY</p>
-    </div>
+
+  <div class="overlay mt-5">
+    <h1>InvestTrack</h1>
+    <p>Your gateway to smart investment tracking and management</p>
+  </div>
+
+  <div class="separator"></div>
+
+  <div class="overlay">
+    <h1>Welcome to InvestTrack</h1>
+    <p>
+      Monitor your investments, track market trends, and manage your portfolio with InvestTrack.
+      Our platform provides tools to analyze your stocks, bonds, and other assets,
+      ensuring you make informed financial decisions.
+    </p>
+  </div>
+
+  <div class="separator"></div>
+
+  <div class="overlay">
+    <h1>About Us</h1>
+    <p>
+      At InvestTrack, we are dedicated to empowering wealth creation. Our platform simplifies
+      investment tracking, inquiry management, and feedback collection, helping you stay ahead
+      in the financial markets.
+    </p>
+  </div>
+
+  <div class="separator"></div>
+
+  <div class="overlay mb-5">
+    <h1>Contact Us</h1>
+    <p>
+      ☎️ Phone: 123-456-7890 <br>
+      📧 Email: support@jinvesttrack.com <br>
+      📍 Address: 123 Financial Street, Suite 202, New York, NY
+    </p>
+  </div>
+
 </body>
 </html>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
 import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
 
@@ -15,16 +16,22 @@ export class AdminViewInquiryComponent implements OnInit {
   selectedStatus: string = '';
   selectedPriority: string = '';
 
-  constructor(private inquiryService: InvestmentInquiryService) {}
+  showDeletePopup = false;
+  showResponsePopup = false;
+  inquiryToDelete: number | null = null;
+  inquiryToRespond: InvestmentInquiry | null = null;
+  adminResponse: string = '';
+
+  constructor(private inquiryService: InvestmentInquiryService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadInquiries();
   }
 
   loadInquiries(): void {
-    this.inquiryService.getAllInquries().subscribe(data => {
+    this.inquiryService.getAllInquries().subscribe((data) => {
       this.inquiries = data;
-      this.filteredInquiries = [...this.inquiries]; // Initialize filter results
+      this.filteredInquiries = data;
     });
   }
 
@@ -38,23 +45,52 @@ export class AdminViewInquiryComponent implements OnInit {
     });
   }
 
-  deleteInquiry(inquiryId: number): void {
-    if (confirm("Are you sure you want to delete this inquiry?")) {
-      this.inquiryService.deleteInquiry(inquiryId).subscribe(() => {
+  confirmDeleteInquiry(inquiryId: number): void {
+    this.inquiryToDelete = inquiryId;
+    this.showDeletePopup = true;
+    console.log(inquiryId);
+    this.router.navigate(['/admin/view-inquiries']);
+  }
+
+  onDelete(): void {
+    if (this.inquiryToDelete !== null) {
+      this.inquiryService.deleteInquiry(this.inquiryToDelete).subscribe(() => {
         this.loadInquiries();
+        this.closeDeletePopup();
+        this.router.navigate(['/admin/view-inquiries']);
+      }, error => {
+        console.error('Error deleting inquiry:', error);
+        this.closeDeletePopup(); // Ensure modal closes even if there's an error
       });
     }
   }
 
-  addAdminResponse(inquiry: InvestmentInquiry): void {
-    const response = prompt("Enter admin response:");
-    if (response) {
-      inquiry.adminResponse = response;
-      inquiry.status = "Resolved";
-      this.inquiryService.updateInquiry(inquiry.inquiryId!, inquiry).subscribe(() => {
+  closeDeletePopup(): void {
+    this.showDeletePopup = false;
+    this.inquiryToDelete = null;
+    this.loadInquiries();
+  }
+
+  openResponsePopup(inquiry: InvestmentInquiry): void {
+    this.inquiryToRespond = inquiry;
+    this.adminResponse = inquiry.adminResponse || '';
+    this.showResponsePopup = true;
+  }
+
+  closeResponsePopup(): void {
+    this.showResponsePopup = false;
+    this.inquiryToRespond = null;
+    this.adminResponse = '';
+  }
+
+  submitAdminResponse(): void {
+    if (this.inquiryToRespond) {
+      this.inquiryToRespond.adminResponse = this.adminResponse;
+      this.inquiryToRespond.status = 'Resolved';
+      this.inquiryService.updateInquiry(this.inquiryToRespond.inquiryId!, this.inquiryToRespond).subscribe(() => {
         this.loadInquiries();
+        this.closeResponsePopup();
       });
     }
   }
-
 }

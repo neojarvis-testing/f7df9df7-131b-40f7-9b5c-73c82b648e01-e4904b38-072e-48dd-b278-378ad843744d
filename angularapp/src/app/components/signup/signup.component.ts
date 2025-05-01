@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,34 +10,26 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignupComponent implements OnInit {
   form: FormGroup;
-  elementRef: any;
+  
+  @ViewChild('successModal', { static: false }) successModal: ElementRef;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.initializeForm();
-  }
-
-  private initializeForm(): void {
     this.form = this.fb.group(
       {
         username: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        mobileNumber: [
-          '',
-          [Validators.required, Validators.pattern(/^[0-9]{10}$/)]
-        ],
+        mobileNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', Validators.required],
         userRole: ['', Validators.required]
       },
-      {
-        validators: [this.passwordMismatchValidator]
-      }
+      { validators: this.passwordMismatchValidator }
     );
   }
 
@@ -45,7 +37,7 @@ export class SignupComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-  
+
     this.authService.register(this.form.value).subscribe(
       () => {
         this.form.reset();
@@ -70,14 +62,13 @@ export class SignupComponent implements OnInit {
   }
 
   showSuccessModal(): void {
-    const modal = this.elementRef.nativeElement.querySelector('#successModal');
-    if (modal) {
-      (window as any).$(`#successModal`).modal('show'); // Use jQuery Bootstrap modal trigger
+    if (this.successModal) {
+      (window as any).$('#successModal').modal('show'); // Bootstrap jQuery modal trigger
     }
   }
 
   navigateToLogin(): void {
-    (window as any).$(`#successModal`).modal('hide'); // Hide modal before navigating
+    (window as any).$('#successModal').modal('hide'); // Hide modal before navigating
     this.router.navigate(['/login']);
   }
 }

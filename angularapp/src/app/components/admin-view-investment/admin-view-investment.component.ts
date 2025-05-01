@@ -106,10 +106,9 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
 
   // Create Bar Chart based on inquiries data
   createBarChart(): void {
-    if (this.inquiriesBarChart && this.inquiriesBarChart.nativeElement) {
-      const chartData = this.inquiriesData.map(data => data.inquiries);
-      const chartLabels = this.inquiriesData.map(data => `Investment ${data.investmentId}`);
-
+    // if (this.inquiriesBarChart && this.inquiriesBarChart.nativeElement) {
+    //   const chartData = this.inquiriesData.map(data => data.inquiries);
+    //   const chartLabels = this.inquiriesData.map(data => `Investment ${data.investmentId}`);
       //new Chart(this.inquiriesBarChart.nativeElement, {
       //   type: 'bar',
       //   data: {

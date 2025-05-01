@@ -1,6 +1,6 @@
 body {
     background-color: #000;
-    color: #00FF00;
+    color: #f0f3f0;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
@@ -42,7 +42,7 @@ button[type="submit"] {
     border-radius: 5px;
     border: none;
     background-color: #00FF00; /* Green button */
-    color: #000; /* Black text */
+    color: #f7f6f6; /* Black text */
     cursor: pointer;
 }
 button[type="submit"]:hover {

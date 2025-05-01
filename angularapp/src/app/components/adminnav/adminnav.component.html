@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,28 +10,49 @@
       margin: 0;
       font-family: Arial, sans-serif;
     }
+
     .navbar {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       background-color: #000;
-      padding: 0;
+      padding: 10px;
     }
+
     .navbar .logo {
-      color: #00FF00; /* Green color */
+      color: #00FF00;
+      /* Green color */
       font-size: 24px;
     }
-    .navbar .nav-links {
+
+    .nav-links {
       display: flex;
       gap: 20px;
     }
-    .navbar .nav-links a {
-      color: #FFF; /* White color */
+
+    .nav-links a {
+      color: #FFF;
+      /* White color */
       text-decoration: none;
     }
-    .navbar .logout-button {
-      background-color: #FFF; /* White color */
+
+    .admin-label {
+      color: #00FF00;
+      /* Green font */
+      background-color: #000;
+      /* Black background */
+      border: 2px solid #00FF00;
+      /* Green border */
+      padding: 5px 15px;
+      border-radius: 10px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .logout-button {
+      background-color: #FFF;
+      /* White color */
       border: none;
       border-radius: 5px;
       padding: 5px 10px;
@@ -38,10 +60,14 @@
     }
   </style>
 </head>
+
 <body>
   <div class="navbar navbar-expand-lg navbar-custom" aria-label="InvestTrack Navigation Bar">
     <div class="logo navbar-brand" aria-label="Application Logo">InvestTrack</div>
+
     <div class="nav-links collapse navbar-collapse" aria-label="Navigation Links">
+      <span class="admin-label" aria-label="User Profile">{{ adminName }}/Admin</span>
+
       <a class="nav-link" routerLink="/home" aria-label="Home Page">Home</a>
       <a class="nav-link" routerLink="/admin/console" aria-label="Admin Console">Admin Console</a>
       <a class="nav-link" routerLink="/admin/view-investment" aria-label="View Investments">View Investments</a>
@@ -49,8 +75,9 @@
       <a class="nav-link" routerLink="/admin/view-inquiries" aria-label="Inquiries Section">Inquiry</a>
       <a class="nav-link" routerLink="/admin/view/feedback" aria-label="Feedback Section">Feedback</a>
     </div>
-    <div class="user-role nav-item" aria-label="User Role Indicator">Logged in as Admin</div>
+
     <button class="logout-button btn" (click)="logout()" aria-label="Logout Button">Logout</button>
   </div>
 </body>
+
 </html>

@@ -8,11 +8,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./adminnav.component.css']
 })
 export class AdminnavComponent implements OnInit {
-
+  adminName: string | null = ''
   constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+      this.adminName = localStorage.getItem('username');
   }
+
   logout(){
     if(confirm("Are you sure you want to logout?")){
       this.authService.loggedOut();

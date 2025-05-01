@@ -42,8 +42,8 @@ public class InvestmentInquiryController {
      */
     @Operation(summary = "Get All Investment Inquiries", description = "Retrieves all investment inquiries from the database.")
     @GetMapping
-    public ResponseEntity<List<InvestmentInquiry>> getAllInquries() {
-        List<InvestmentInquiry> list = investmentinquiryService.getAllInquries();
+    public ResponseEntity<List<InvestmentInquiry>> getAllInquiries() {
+        List<InvestmentInquiry> list = investmentinquiryService.getAllInquiries();
         return ResponseEntity.status(200).body(list);
     }
 

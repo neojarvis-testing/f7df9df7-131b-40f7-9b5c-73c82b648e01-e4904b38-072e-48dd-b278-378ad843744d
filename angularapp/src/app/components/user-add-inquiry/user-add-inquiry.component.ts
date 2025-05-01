@@ -13,7 +13,9 @@ import { InvestmentService } from "src/app/services/investment.service";
 })
 
 export class UserAddInquiryComponent implements OnInit {
-  investmentId:any
+  investmentId: any;
+  showSuccessPopup = false;
+
   inquiry: InvestmentInquiry = {
     message: '',
     status: 'Pending',
@@ -33,43 +35,37 @@ export class UserAddInquiryComponent implements OnInit {
     quantity: 0,
     purchaseDate: "",
     status: ""
-  };  // Initialize properly
+  };
 
   constructor(private investmentinquiryService: InvestmentInquiryService, private investmentService: InvestmentService, 
     private router: Router, private activatedRoute: ActivatedRoute) { }
 
-    ngOnInit(): void {
-      this.investmentId = +this.activatedRoute.snapshot.params['investmentId'];
-      this.investmentService.getInvestmentById(this.investmentId).subscribe((data) => {
-        this.investment = data;
-      });
-    }
-  
-
+  ngOnInit(): void {
+    this.investmentId = +this.activatedRoute.snapshot.params['investmentId'];
+    this.investmentService.getInvestmentById(this.investmentId).subscribe((data) => {
+      this.investment = data;
+    });
+  }
 
   addInquiry() {
     let userId = localStorage.getItem('userId');
-    this.inquiry.user={
-        userId: Number(userId)
-      }
-    this.inquiry.investment={
-        investmentId:this.investmentId
-      }
-    console.log(this.investment)
-  
-  
+    this.inquiry.user = {
+      userId: Number(userId)
+    };
+    this.inquiry.investment = {
+      investmentId: this.investmentId
+    };
+    console.log(this.investment);
+
     this.investmentinquiryService.addInquiry(this.inquiry).subscribe((data) => {
       this.resetInquiry();
-      alert("Inquiry submitted successfully!")
-      this.router.navigateByUrl('/user/view-inquiry');
+      this.showSuccessPopup = true; // Show the success popup
     },
     (error) => {
       console.error('Error submitting Inquiry', error);
-    }
-    );
+    });
   }
 
- 
   resetInquiry() {
     this.inquiry = {
       user: null,
@@ -77,7 +73,7 @@ export class UserAddInquiryComponent implements OnInit {
       message: '',
       status: 'Pending',
       inquiryDate: new Date(),
-    responseDate: new Date(),
+      responseDate: new Date(),
       adminResponse: 'No response yet',
       priority: '',
       contactDetails: ''
@@ -91,6 +87,11 @@ export class UserAddInquiryComponent implements OnInit {
       quantity: 0,
       purchaseDate: "",
       status: ""
-    };  // Reset investment properly
+    };
+  }
+
+  closePopup(): void {
+    this.showSuccessPopup = false;
+    this.router.navigate(['/user/view-inquiry']);
   }
 }

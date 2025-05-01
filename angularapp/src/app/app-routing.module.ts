@@ -17,6 +17,8 @@ import { UserAddFeedbackComponent } from './components/user-add-feedback/user-ad
 import { UserViewFeedbackComponent } from './components/user-view-feedback/user-view-feedback.component';
 import { ErrorComponent } from './components/error/error.component';
 import { AdminViewInvestmentComponent } from './components/admin-view-investment/admin-view-investment.component';
+import { AdminGuard } from './admin.guard';
+import { UserGuard } from './user.guard';
 
 const routes: Routes = [
   {path:'signup', component: SignupComponent},
@@ -24,14 +26,14 @@ const routes: Routes = [
   {path:'home', component: HomePageComponent},
   {path:'admin', component: AdminnavComponent},
   {path:'user', component: UsernavComponent},
-  {path:'admin/add-investment', component: AdminAddInvestmentComponent},
-  {path:'admin/view-investment', component: AdminViewInvestmentComponent},
+  {path:'admin/add-investment', component: AdminAddInvestmentComponent,canActivate:[AdminGuard]},
+  {path:'admin/view-investment', component: AdminViewInvestmentComponent, canActivate:[AdminGuard]},
   {path:'admin/edit-investment/:investmentId', component: AdminEditInvestmentComponent},
-  {path:'admin/view-inquiries', component:AdminViewInquiryComponent},
+  {path:'admin/view-inquiries', component:AdminViewInquiryComponent, canActivate:[AdminGuard]},
   {path:'admin/view/feedback', component:AdminViewFeedbackComponent},
   {path:'admin/console', component:AdminConsoleComponent},
-  {path:'user/view-investment', component:UserViewInvestmentComponent},
-  { path: 'user/add-inquiry/:investmentId', component: UserAddInquiryComponent },
+  {path:'user/view-investment', component:UserViewInvestmentComponent, canActivate:[UserGuard]},
+  {path:'user/add-inquiry/:investmentId', component: UserAddInquiryComponent, canActivate:[UserGuard]},
   {path:'user/view-inquiry', component:UserViewInquiryComponent},
   {path:'user/add/feedback', component:UserAddFeedbackComponent},
   {path:'user/view-feedback', component:UserViewFeedbackComponent},

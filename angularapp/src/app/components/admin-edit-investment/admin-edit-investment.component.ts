@@ -218,7 +218,6 @@ export class AdminEditInvestmentComponent implements OnInit {
       this.investmentService.updateInvestment(this.investmentId, this.investmentForm.value).subscribe({
         next: (response) => {
           console.log('Investment updated:', response);
-          this.router.navigate(['/admin/view-investment']);
         },
         error: (err) => {
           console.error('Failed to update investment:', err);
@@ -230,6 +229,7 @@ export class AdminEditInvestmentComponent implements OnInit {
 
   closePopup(): void {
     this.showSuccessPopup = false;
+    this.router.navigate(['/admin/view-investment']);
   }
 }
 

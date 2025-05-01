@@ -1,142 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Investment</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #333;
-            color: #0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .form-container {
-            max-width: 600px;
-            width: 100%;
-            padding: 20px;
-            background-color: #222;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        .form-control,
-        .btn {
-            background-color: #444 !important;
-            color: #0f0 !important;
-        }
-        .btn:hover {
-            background-color: #555 !important;
-        }
-        .popup {
-            background-color: #222;
-            color: #0f0;
-            border: 1px solid #0f0;
-            padding: 10px;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Investment</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <style>
+    body {
+      background-color: #fff;
+      color: #000;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      cursor: pointer;
+    }
+
+    .container-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-color: #fff;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 500px;
+      background-color: #000;
+      border: 1px solid #0f0;
+      border-radius: 10px;
+      padding: 25px;
+      color: #0f0;
+    }
+
+    h2 {
+      color: #0f0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      color: #0f0;
+      font-weight: bold;
+    }
+
+    .form-control {
+      background-color: #000 !important;
+      border: 1px solid #0f0 !important;
+      color: #fff !important;
+    }
+
+    .form-control::placeholder {
+      color: #888 !important;
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #0f0;
+    }
+
+    .btn-success {
+      background-color: #000 !important;
+      border-color: #0f0 !important;
+      color: #0f0 !important;
+    }
+
+    .btn-success:hover {
+      background-color: #0f0 !important;
+      color: #000 !important;
+    }
+
+    .btn:disabled {
+      background-color: rgba(128, 128, 128, 0.5) !important;
+      border-color: rgba(128, 128, 128, 0.5) !important;
+      color: #fff !important;
+    }
+
+    .text-danger {
+      font-size: 0.875rem;
+      color: red !important;
+      margin-top: 5px;
+    }
+
+    @media (max-width: 576px) {
+      .form-container {
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="form-container">
-    <h2 class="text-center">Edit Investment</h2>
-    <form [formGroup]="investmentForm" (ngSubmit)="onSubmit()">
-        
-        <!-- Investment Name -->
+  <div class="container-wrapper">
+    <div class="form-container" [ngClass]="{'transparent': showSuccessPopup}">
+      <h2>Edit Investment</h2>
+      <form [formGroup]="investmentForm" (ngSubmit)="onSubmit()">
+
         <div class="form-group">
-            <label for="name">Investment Name:</label>
-            <input type="text" id="name" class="form-control" formControlName="name" [(ngModel)]="investData.name">
-            <div *ngIf="investmentForm.controls.name?.invalid && (investmentForm.controls.name?.touched || investmentForm.controls.name?.dirty)" class="text-danger"> 
-                Name is required
-            </div>
+          <label for="name">Investment Name:</label>
+          <input type="text" id="name" class="form-control" formControlName="name" [(ngModel)]="investData.name" />
+          <div *ngIf="investmentForm.controls.name?.invalid && (investmentForm.controls.name?.touched || investmentForm.controls.name?.dirty)" class="text-danger">
+            Name is required
+          </div>
         </div>
 
-        <!-- Description -->
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea id="description" class="form-control" formControlName="description" [(ngModel)]="investData.description"></textarea>
-            <div *ngIf="investmentForm.controls.description?.invalid && (investmentForm.controls.description?.touched || investmentForm.controls.description?.dirty)" class="text-danger"> 
-                Description is required
-            </div>
+          <label for="description">Description:</label>
+          <textarea id="description" class="form-control" formControlName="description" [(ngModel)]="investData.description"></textarea>
+          <div *ngIf="investmentForm.controls.description?.invalid && (investmentForm.controls.description?.touched || investmentForm.controls.description?.dirty)" class="text-danger">
+            Description is required
+          </div>
         </div>
 
-        <!-- Type -->
         <div class="form-group">
-            <label for="type">Type:</label>
-            <select id="type" class="form-control" formControlName="type" [(ngModel)]="investData.type">
-                <option value="">Select</option>
-                <option value="Stock">Stock</option>
-                <option value="Bond">Bond</option>
-                <option value="Real Estate">Real Estate</option>
-            </select>
+          <label for="type">Type:</label>
+          <select id="type" class="form-control" formControlName="type" [(ngModel)]="investData.type">
+            <option value="">Select</option>
+            <option value="Stock">Stock</option>
+            <option value="Bond">Bond</option>
+            <option value="Real Estate">Real Estate</option>
+          </select>
         </div>
 
-        <!-- Purchase Price -->
         <div class="form-group">
-            <label for="purchasePrice">Purchase Price:</label>
-            <input type="number" id="purchasePrice" class="form-control" formControlName="purchasePrice" [(ngModel)]="investData.purchasePrice">
-            <div *ngIf="investmentForm.controls.purchasePrice?.invalid && (investmentForm.controls.purchasePrice?.touched || investmentForm.controls.purchasePrice?.dirty)" class="text-danger"> 
-                Purchase Price is required
-            </div>
+          <label for="purchasePrice">Purchase Price:</label>
+          <input type="number" id="purchasePrice" class="form-control" formControlName="purchasePrice" [(ngModel)]="investData.purchasePrice" />
+          <div *ngIf="investmentForm.controls.purchasePrice?.invalid && (investmentForm.controls.purchasePrice?.touched || investmentForm.controls.purchasePrice?.dirty)" class="text-danger">
+            Purchase Price is required
+          </div>
         </div>
 
-        <!-- Current Price -->
         <div class="form-group">
-            <label for="currentPrice">Current Price:</label>
-            <input type="number" id="currentPrice" class="form-control" formControlName="currentPrice" [(ngModel)]="investData.currentPrice">
-            <div *ngIf="investmentForm.controls.currentPrice?.invalid && (investmentForm.controls.currentPrice?.touched || investmentForm.controls.currentPrice?.dirty)" class="text-danger"> 
-                Current Price is required
-            </div>
+          <label for="currentPrice">Current Price:</label>
+          <input type="number" id="currentPrice" class="form-control" formControlName="currentPrice" [(ngModel)]="investData.currentPrice" />
+          <div *ngIf="investmentForm.controls.currentPrice?.invalid && (investmentForm.controls.currentPrice?.touched || investmentForm.controls.currentPrice?.dirty)" class="text-danger">
+            Current Price is required
+          </div>
         </div>
 
-        <!-- Quantity -->
         <div class="form-group">
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" class="form-control" formControlName="quantity" [(ngModel)]="investData.quantity">
-            <div *ngIf="investmentForm.controls.quantity?.invalid && (investmentForm.controls.quantity?.touched || investmentForm.controls.quantity?.dirty)" class="text-danger"> 
-                Quantity is required
-            </div>
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" class="form-control" formControlName="quantity" [(ngModel)]="investData.quantity" />
+          <div *ngIf="investmentForm.controls.quantity?.invalid && (investmentForm.controls.quantity?.touched || investmentForm.controls.quantity?.dirty)" class="text-danger">
+            Quantity is required
+          </div>
         </div>
 
-        <!-- Purchase Date -->
         <div class="form-group">
-            <label for="purchaseDate">Purchase Date:</label>
-            <input type="date" id="purchaseDate" class="form-control" formControlName="purchaseDate" [(ngModel)]="investData.purchaseDate">
-            <div *ngIf="investmentForm.controls.purchaseDate?.invalid && (investmentForm.controls.purchaseDate?.touched || investmentForm.controls.purchaseDate?.dirty)" class="text-danger"> 
-                Purchase Date is required
-            </div>
+          <label for="purchaseDate">Purchase Date:</label>
+          <input type="date" id="purchaseDate" class="form-control" formControlName="purchaseDate" [(ngModel)]="investData.purchaseDate" />
+          <div *ngIf="investmentForm.controls.purchaseDate?.invalid && (investmentForm.controls.purchaseDate?.touched || investmentForm.controls.purchaseDate?.dirty)" class="text-danger">
+            Purchase Date is required
+          </div>
         </div>
 
-        <!-- Status -->
         <div class="form-group">
-            <label for="status">Status:</label>
-            <select id="status" class="form-control" formControlName="status" [(ngModel)]="investData.status">
-                <option value="">Select</option>
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-            </select>
+          <label for="status">Status:</label>
+          <select id="status" class="form-control" formControlName="status" [(ngModel)]="investData.status">
+            <option value="">Select</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
         </div>
 
-        <!-- Submit Button -->
         <button type="submit" class="btn btn-success btn-block" [disabled]="investmentForm.invalid">Update Investment</button>
-    </form>
-
-    <!-- Success Popup -->
-    <div *ngIf="showSuccessPopup" class="popup mt-3">
-        <div class="alert alert-success">
-            <p>Investment updated successfully!</p> 
-            <button class="btn btn-sm btn-outline-success" (click)="closePopup()">Close</button>
-        </div>
+      </form>
     </div>
-</div>
+  </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Success Modal -->
+  <div class="modal fade show d-block" tabindex="-1" role="dialog" *ngIf="showSuccessPopup"
+    style="background-color: rgba(0, 0, 0, 0.5); z-index: 1050;">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 350px; width: 90%;">
+      <div class="modal-content text-center" style="background-color: #000; color: white; border: 1px solid #0f0; padding: 15px;">
+        <div class="modal-body">
+          <h5 style="font-weight: bold;">Investment updated successfully!</h5>
+        </div>
+        <div class="modal-footer justify-content-center border-top-0 p-0">
+          <button type="button" class="btn btn-lg w-100 mt-2" (click)="closePopup()" 
+            style="background-color: #28a745; color: white; font-weight: bold; border: none; border-radius: 0 0 5px 5px;">
+            CLOSE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade show" *ngIf="showSuccessPopup"></div>
 
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -109,31 +109,30 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
     // if (this.inquiriesBarChart && this.inquiriesBarChart.nativeElement) {
     //   const chartData = this.inquiriesData.map(data => data.inquiries);
     //   const chartLabels = this.inquiriesData.map(data => `Investment ${data.investmentId}`);
-
-    //   new Chart(this.inquiriesBarChart.nativeElement, {
-    //     type: 'bar',
-    //     data: {
-    //       labels: chartLabels,
-    //       datasets: [{
-    //         label: 'Number of Inquiries',
-    //         data: chartData,
-    //         backgroundColor: ['#28a745', '#dc3545', '#007bff'],  // Green, Red, Blue
-    //       }]
-    //     },
-    //     options: {
-    //       responsive: true,
-    //       plugins: {
-    //         legend: {
-    //           position: 'top',
-    //         },
-    //       },
-    //       scales: {
-    //         y: {
-    //           beginAtZero: true
-    //         }
-    //       }
-    //     },
-    //   });
-    // }
+      //new Chart(this.inquiriesBarChart.nativeElement, {
+      //   type: 'bar',
+      //   data: {
+      //     labels: chartLabels,
+      //     datasets: [{
+      //       label: 'Number of Inquiries',
+      //       data: chartData,
+      //       backgroundColor: ['#28a745', '#dc3545', '#007bff'],  // Green, Red, Blue
+      //     }]
+      //   },
+      //   options: {
+      //     responsive: true,
+      //     plugins: {
+      //       legend: {
+      //         position: 'top',
+      //       },
+      //     },
+      //     scales: {
+      //       y: {
+      //         beginAtZero: true
+      //       }
+      //     }
+      //   },
+      // });
+    }
   }
 }

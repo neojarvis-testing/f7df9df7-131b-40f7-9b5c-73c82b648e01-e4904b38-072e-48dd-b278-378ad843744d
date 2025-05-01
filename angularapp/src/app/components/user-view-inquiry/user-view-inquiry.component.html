@@ -52,7 +52,7 @@
 
 <div class="container">
   <h2>Your Inquiries</h2>
-  <div *ngIf="inquiries.length > 0; else noInquiries">
+  <div *ngIf="inquiries; else noInquiries">
     <table class="table table-dark table-striped">
       <thead>
         <tr>

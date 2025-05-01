@@ -35,8 +35,8 @@
     .btn-submit {
       background-color: #00ff00;
       color: black;
-      font-size: 0.7rem;
-      padding: 2px 8px;
+      font-size: 1rem;
+      padding: 2px px;
       border: none;
     }
 
@@ -52,6 +52,22 @@
     label {
       color: #00ff00;
     }
+    .popup {
+            background-color: #111;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px;
+            border-radius: 5px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            display: none; /* Hidden by default */
+        }
+        .popup.show {
+            display: block; /* Show popup */
+        }
   </style>
 </head>
 <body>
@@ -84,6 +100,26 @@
     <button type="submit" class="btn btn-submit">Submit Inquiry</button>
 
   </form>
+  <div class="modal fade show d-block" tabindex="-1" role="dialog" *ngIf="showSuccessPopup"
+style="background-color: rgba(0, 0, 0, 0.5); z-index: 1050;">
+<div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 350px; width: 90%;">
+<div class="modal-content text-center" style="background-color: #000; color: green; border: 1px solid #0f0; padding: 15px;">
+ <div class="modal-body">
+   <h5 style="font-weight: bold;">Inquiry submitted successfully!</h5>
+ </div>
+ <div class="modal-footer justify-content-center border-top-0 p-0">
+   <button type="button" class="btn btn-lg w-100 mt-2" (click)="closePopup()"
+           style="background-color: #28a745; color: white; font-weight: bold; border: none; border-radius: 0 0 5px 5px;">
+     OK
+   </button>
+ </div>
+</div>
+</div>
+</div>
+<div class="modal-backdrop fade show" *ngIf="showSuccessPopup"></div>
+
+  
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

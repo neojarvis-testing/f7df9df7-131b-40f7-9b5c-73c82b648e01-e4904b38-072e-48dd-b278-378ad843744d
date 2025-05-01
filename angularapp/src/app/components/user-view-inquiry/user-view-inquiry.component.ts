@@ -9,13 +9,13 @@ import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.se
 })
 export class UserViewInquiryComponent implements OnInit {
 
-
-  inquiries: InvestmentInquiry[] = [];
+  userId: number = +localStorage.getItem('userId');
+  inquiries: InvestmentInquiry;
 
     constructor(private inquiryService: InvestmentInquiryService) {}
   
     ngOnInit(): void {
-     this.inquiryService.getAllInquries().subscribe((data) => {
+     this.inquiryService.getInquriesByUserId(this.userId).subscribe((data) => {
      this.inquiries = data;
      });
    }

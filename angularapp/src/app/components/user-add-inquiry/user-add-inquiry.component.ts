@@ -15,7 +15,6 @@ import { InvestmentService } from "src/app/services/investment.service";
 export class UserAddInquiryComponent implements OnInit {
   investmentId:any
   inquiry: InvestmentInquiry = {
-    
     message: '',
     status: 'Pending',
     inquiryDate: new Date(),

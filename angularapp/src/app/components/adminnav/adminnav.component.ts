@@ -9,10 +9,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AdminnavComponent implements OnInit {
   showLogoutModal: boolean = false; // Controls modal visibility
+  adminName: string | null = ''; // Stores admin name
 
   constructor(public authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.adminName = localStorage.getItem('username'); // Fetch admin name from localStorage
+  }
 
   // Opens the modal and adds blur effect
   logout(): void {

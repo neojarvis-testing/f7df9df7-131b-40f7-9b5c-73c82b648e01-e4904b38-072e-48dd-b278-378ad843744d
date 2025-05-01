@@ -1,0 +1,7 @@
+select#userRole {
+    background-color: #333; /* Dark gray background */
+    color: #fff; /* White text */
+    border: 1px solid #00ff00; /* Green border */
+    padding: 8px;
+    border-radius: 4px;
+}

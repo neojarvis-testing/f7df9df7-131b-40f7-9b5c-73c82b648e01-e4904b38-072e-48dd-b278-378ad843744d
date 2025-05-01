@@ -8,12 +8,15 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./usernav.component.css']
 })
 export class UsernavComponent implements OnInit {
+  username: string | null = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem('username');
   }
-  logout(){
+
+  logout(): void {
     this.authService.loggedOut();
     this.router.navigate(['/login']);
   }

@@ -62,21 +62,47 @@
 </head>
 
 <body>
-  <div class="navbar navbar-expand-lg navbar-custom" aria-label="InvestTrack Navigation Bar">
-    <div class="logo navbar-brand" aria-label="Application Logo">InvestTrack</div>
+  <div id="page-wrapper">
+    <!-- Navigation Bar -->
+    <div class="navbar navbar-expand-lg navbar-custom" aria-label="InvestTrack Navigation Bar">
+      <div class="logo navbar-brand" aria-label="Application Logo">InvestTrack</div>
 
-    <div class="nav-links collapse navbar-collapse" aria-label="Navigation Links">
-      <span class="admin-label" aria-label="User Profile">{{ adminName }}/Admin</span>
+      <div class="nav-links collapse navbar-collapse" aria-label="Navigation Links">
+        <span class="admin-label" aria-label="User Profile">{{ adminName }}/Admin</span>
 
-      <a class="nav-link" routerLink="/home" aria-label="Home Page">Home</a>
-      <a class="nav-link" routerLink="/admin/console" aria-label="Admin Console">Admin Console</a>
-      <a class="nav-link" routerLink="/admin/view-investment" aria-label="View Investments">View Investments</a>
-      <a class="nav-link" routerLink="/admin/add-investment" aria-label="Add Investment">Add Investment</a>
-      <a class="nav-link" routerLink="/admin/view-inquiries" aria-label="Inquiries Section">Inquiry</a>
-      <a class="nav-link" routerLink="/admin/view/feedback" aria-label="Feedback Section">Feedback</a>
+        <a class="nav-link" routerLink="/home" aria-label="Home Page">Home</a>
+        <a class="nav-link" routerLink="/admin/console" aria-label="Admin Console">Admin Console</a>
+        <a class="nav-link" routerLink="/admin/view-investment" aria-label="View Investments">View Investments</a>
+        <a class="nav-link" routerLink="/admin/add-investment" aria-label="Add Investment">Add Investment</a>
+        <a class="nav-link" routerLink="/admin/view-inquiries" aria-label="Inquiries Section">Inquiry</a>
+        <a class="nav-link" routerLink="/admin/view/feedback" aria-label="Feedback Section">Feedback</a>
+      </div>
+
+      <button class="logout-button btn" (click)="logout()" aria-label="Logout Button">Logout</button>
     </div>
 
-    <button class="logout-button btn" (click)="logout()" aria-label="Logout Button">Logout</button>
+    <!-- Logout Modal -->
+    <div id="logoutModal" class="modal fade show d-block" tabindex="-1" role="dialog" *ngIf="showLogoutModal">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+            <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to logout?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="confirmLogout()">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Backdrop -->
+    <div class="modal-backdrop fade show" *ngIf="showLogoutModal"></div>
   </div>
 </body>
 

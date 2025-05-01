@@ -135,4 +135,3 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
       // });
     }
   }
-}

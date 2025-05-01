@@ -1,169 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Investment</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #fff; /* White background for the entire page */
-            color: #0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .form-container {
-            max-width: 600px;
-            width: 100%;
-            padding: 20px;
-            background-color: #000; /* Black background for the form */
-            border-radius: 10px;
-            transition: opacity 0.3s ease; /* Smooth transition for opacity */
-        }
-        .form-container.transparent {
-            opacity: 0.5; /* Make the form semi-transparent */
-        }
-        .form-control,
-        .btn {
-            background-color: #000 !important; /* Black background for input fields */
-            border-color: #0f0 !important;
-            color: #fff !important; /* White text inside the fields */
-        }
-        .form-control::placeholder {
-            color: #fff !important; /* White placeholder text */
-        }
-        label {
-            color: #0f0 !important;
-        }
-        .btn:hover {
-            background-color: #111 !important;
-            border-color: #0f0 !important;
-            color: #0f0 !important;
-        }
-        .btn:disabled {
-            background-color: rgba(128, 128, 128, 0.5) !important; /* Transparent gray when disabled */
-            border-color: rgba(128, 128, 128, 0.5) !important;
-            color: #fff !important;
-        }
-        h2 {
-           color: #0f0;
-        }
-        .popup {
-            background-color: #111;
-            color: #0f0;
-            border: 1px solid #0f0;
-            padding: 10px;
-            border-radius: 5px;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            display: none; /* Hidden by default */
-        }
-        .popup.show {
-            display: block; /* Show popup */
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add New Investment</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #fff;
+      color: #000;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+    .container-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-color: #fff;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 500px;
+      background-color: #000;
+      border: 1px solid #0f0;
+      border-radius: 10px;
+      padding: 25px;
+      color: #0f0;
+    }
+
+    h2 {
+      color: #0f0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      color: #0f0;
+      font-weight: bold;
+    }
+
+    .form-control {
+      background-color: #000 !important;
+      border: 1px solid #0f0 !important;
+      color: #fff !important;
+    }
+
+    .form-control::placeholder {
+      color: #888 !important;
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #0f0;
+    }
+
+    .btn-success {
+      background-color: #000 !important;
+      border-color: #0f0 !important;
+      color: #0f0 !important;
+    }
+
+    .btn-success:hover {
+      background-color: #0f0 !important;
+      color: #000 !important;
+    }
+
+    .btn:disabled {
+      background-color: rgba(128, 128, 128, 0.5) !important;
+      border-color: rgba(128, 128, 128, 0.5) !important;
+      color: #fff !important;
+    }
+
+    .text-danger {
+      font-size: 0.875rem;
+      color: red !important;
+      margin-top: 5px;
+    }
+
+    .popup {
+      background-color: #111;
+      color: #0f0;
+      border: 1px solid #0f0;
+      padding: 10px;
+      border-radius: 5px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      display: none;
+    }
+
+    .popup.show {
+      display: block;
+    }
+
+    @media (max-width: 576px) {
+      .form-container {
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="form-container" [ngClass]="{'transparent': showSuccessPopup}">
-    <h2 class="text-center">Add New Investment</h2>
-    <form [formGroup]="investmentForm" (ngSubmit)="onSubmit()">
-        <!-- Investment Name -->
-        <div class="form-group">
-            <label for="name">Investment Name:</label>
-            <input type="text" id="name" class="form-control" formControlName="name">
-            <div *ngIf="investmentForm.controls.name?.invalid && (investmentForm.controls.name?.touched || investmentForm.controls.name?.dirty)" class="text-danger"> 
+    <div class="container-wrapper">
+        <div class="form-container" [ngClass]="{'transparent': showSuccessPopup}">
+          <h2>Add New Investment</h2>
+          <form [formGroup]="investmentForm" (ngSubmit)="onSubmit()">
+            <!-- Investment Name -->
+            <div class="form-group">
+              <label for="name">Investment Name:</label>
+              <input type="text" id="name" class="form-control" formControlName="name" placeholder="Enter investment name" />
+              <div *ngIf="investmentForm.controls.name?.invalid && (investmentForm.controls.name?.touched || investmentForm.controls.name?.dirty)" class="text-danger">
                 Name is required
+              </div>
             </div>
-        </div>
-
-        <!-- Description -->
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea id="description" class="form-control" formControlName="description"></textarea>
-            <div *ngIf="investmentForm.controls.description?.invalid && (investmentForm.controls.description?.touched || investmentForm.controls.description?.dirty)" class="text-danger"> 
+      
+            <!-- Description -->
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <textarea id="description" class="form-control" formControlName="description" placeholder="Enter description"></textarea>
+              <div *ngIf="investmentForm.controls.description?.invalid && (investmentForm.controls.description?.touched || investmentForm.controls.description?.dirty)" class="text-danger">
                 Description is required
+              </div>
             </div>
-        </div>
-
-        <!-- Type -->
-        <div class="form-group">
-            <label for="type">Type:</label>
-            <select id="type" class="form-control" formControlName="type">
+      
+            <!-- Type -->
+            <div class="form-group">
+              <label for="type">Type:</label>
+              <select id="type" class="form-control" formControlName="type">
                 <option value="">Select</option>
                 <option value="Stock">Stock</option>
                 <option value="Bond">Bond</option>
                 <option value="Real Estate">Real Estate</option>
-            </select>
-        </div>
-
-        <!-- Purchase Price -->
-        <div class="form-group">
-            <label for="purchasePrice">Purchase Price:</label>
-            <input type="number" id="purchasePrice" class="form-control" formControlName="purchasePrice">
-            <div *ngIf="investmentForm.controls.purchasePrice?.invalid && (investmentForm.controls.purchasePrice?.touched || investmentForm.controls.purchasePrice?.dirty)" class="text-danger"> 
+              </select>
+            </div>
+      
+            <!-- Purchase Price -->
+            <div class="form-group">
+              <label for="purchasePrice">Purchase Price (USD):</label>
+              <input type="number" id="purchasePrice" class="form-control" formControlName="purchasePrice" placeholder="Enter purchase price" />
+              <div *ngIf="investmentForm.controls.purchasePrice?.invalid && (investmentForm.controls.purchasePrice?.touched || investmentForm.controls.purchasePrice?.dirty)" class="text-danger">
                 Purchase Price is required
+              </div>
             </div>
-        </div>
-
-        <!-- Current Price -->
-        <div class="form-group">
-            <label for="currentPrice">Current Price:</label>
-            <input type="number" id="currentPrice" class="form-control" formControlName="currentPrice">
-            <div *ngIf="investmentForm.controls.currentPrice?.invalid && (investmentForm.controls.currentPrice?.touched || investmentForm.controls.currentPrice?.dirty)" class="text-danger"> 
+      
+            <!-- Current Price -->
+            <div class="form-group">
+              <label for="currentPrice">Current Price (USD):</label>
+              <input type="number" id="currentPrice" class="form-control" formControlName="currentPrice" placeholder="Enter current price" />
+              <div *ngIf="investmentForm.controls.currentPrice?.invalid && (investmentForm.controls.currentPrice?.touched || investmentForm.controls.currentPrice?.dirty)" class="text-danger">
                 Current Price is required
+              </div>
             </div>
-        </div>
-
-        <!-- Quantity -->
-        <div class="form-group">
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" class="form-control" formControlName="quantity">
-            <div *ngIf="investmentForm.controls.quantity?.invalid && (investmentForm.controls.quantity?.touched || investmentForm.controls.quantity?.dirty)" class="text-danger"> 
+      
+            <!-- Quantity -->
+            <div class="form-group">
+              <label for="quantity">Quantity:</label>
+              <input type="number" id="quantity" class="form-control" formControlName="quantity" placeholder="Enter quantity" />
+              <div *ngIf="investmentForm.controls.quantity?.invalid && (investmentForm.controls.quantity?.touched || investmentForm.controls.quantity?.dirty)" class="text-danger">
                 Quantity is required
+              </div>
             </div>
-        </div>
-
-        <!-- Purchase Date -->
-        <div class="form-group">
-            <label for="purchaseDate">Purchase Date:</label>
-            <input type="date" id="purchaseDate" class="form-control" formControlName="purchaseDate">
-            <div *ngIf="investmentForm.controls.purchaseDate?.invalid && (investmentForm.controls.purchaseDate?.touched || investmentForm.controls.purchaseDate?.dirty)" class="text-danger"> 
+      
+            <!-- Purchase Date -->
+            <div class="form-group">
+              <label for="purchaseDate">Purchase Date:</label>
+              <input type="date" id="purchaseDate" class="form-control" formControlName="purchaseDate" />
+              <div *ngIf="investmentForm.controls.purchaseDate?.invalid && (investmentForm.controls.purchaseDate?.touched || investmentForm.controls.purchaseDate?.dirty)" class="text-danger">
                 Purchase Date is required
+              </div>
             </div>
-        </div>
-
-        <!-- Status -->
-        <div class="form-group">
-            <label for="status">Status:</label>
-            <select id="status" class="form-control" formControlName="status">
+      
+            <!-- Status -->
+            <div class="form-group">
+              <label for="status">Status:</label>
+              <select id="status" class="form-control" formControlName="status">
                 <option value="">Select</option>
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
-            </select>
+              </select>
+            </div>
+      
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success btn-block" [disabled]="investmentForm.invalid">ADD INVESTMENT</button>
+          </form>
         </div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-success btn-block" [disabled]="investmentForm.invalid">ADD INVESTMENT</button>
-    </form> 
-
-    <!-- Success Popup -->
-    <div *ngIf="showSuccessPopup" class="popup show">
-        <div class="alert alert-success">
-            <p>Investment added successfully!</p> 
-            <button class="btn btn-sm btn-outline-success" (click)="closePopup()">Close</button>
-        </div>
-    </div>
+      </div>
+      <!-- Success Modal -->
+<div class="modal fade show d-block" tabindex="-1" role="dialog" *ngIf="showSuccessPopup" 
+style="background-color: rgba(0, 0, 0, 0.5); z-index: 1050;">
+<div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 350px; width: 90%;">
+<div class="modal-content text-center" style="background-color: #000; color: white; border: 1px solid #0f0; padding: 15px;">
+ <div class="modal-body">
+   <h5 style="font-weight: bold;">Investment added successfully!</h5>
+ </div>
+ <div class="modal-footer justify-content-center border-top-0 p-0">
+   <button type="button" class="btn btn-lg w-100 mt-2" (click)="closePopup()" 
+           style="background-color: #28a745; color: white; font-weight: bold; border: none; border-radius: 0 0 5px 5px;">
+     CLOSE
+   </button>
+ </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+</div>
+<div class="modal-backdrop fade show" *ngIf="showSuccessPopup"></div>
+  
+      
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

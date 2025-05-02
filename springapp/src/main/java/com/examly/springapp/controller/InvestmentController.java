@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.examly.springapp.model.Investment;
+import com.examly.springapp.service.InvestmentService;
 import com.examly.springapp.service.InvestmentServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,7 +20,7 @@ import jakarta.validation.Valid;
 @Tag(name = "Investment Management", description = "APIs for managing investment records")
 public class InvestmentController {
     @Autowired
-    InvestmentServiceImpl investmentServiceImpl;
+    InvestmentService investmentService;
 
     /**
      * Creates a new investment entry.
@@ -30,7 +31,7 @@ public class InvestmentController {
     @Operation(summary = "Create Investment", description = "Creates a new investment entry with the provided details.")
     @PostMapping
     public ResponseEntity<?> addInvestment(@Valid @RequestBody Investment investment) {
-        investment = investmentServiceImpl.addInvestment(investment);
+        investment = investmentService.addInvestment(investment);
         if (investment != null) {
             return ResponseEntity.status(201).body(investment);
         } else {
@@ -47,7 +48,7 @@ public class InvestmentController {
     @Operation(summary = "Get Investment by ID", description = "Retrieves investment details by its unique ID.")
     @GetMapping("/{investmentId}")
     public ResponseEntity<?> getInvestmentById(@PathVariable long investmentId) {
-        Investment investment = investmentServiceImpl.getInvestmentById(investmentId);
+        Investment investment = investmentService.getInvestmentById(investmentId);
         if (investment != null) {
             return ResponseEntity.status(200).body(investment);
         } else {
@@ -63,7 +64,7 @@ public class InvestmentController {
     @Operation(summary = "Get All Investments", description = "Retrieves all investment entries from the database.")
     @GetMapping
     public ResponseEntity<?> getAllInvestments() {
-        List<Investment> list = investmentServiceImpl.getAllInvestments();
+        List<Investment> list = investmentService.getAllInvestments();
         if (!list.isEmpty()) {
             return ResponseEntity.status(200).body(list);
         } else {
@@ -81,7 +82,7 @@ public class InvestmentController {
     @Operation(summary = "Update Investment", description = "Updates an existing investment record with the provided details.")
     @PutMapping("/{investmentId}")
     public ResponseEntity<?> updateInvestment(@PathVariable long investmentId, @Valid @RequestBody Investment investment) {
-        investment = investmentServiceImpl.updateInvestment(investmentId, investment);
+        investment = investmentService.updateInvestment(investmentId, investment);
         if (investment != null) {
             return ResponseEntity.status(200).body(investment);
         } else {
@@ -98,7 +99,7 @@ public class InvestmentController {
     @Operation(summary = "Delete Investment", description = "Deletes an investment record by its unique ID.")
     @DeleteMapping("/{investmentId}")
     public ResponseEntity<?> deleteInvestment(@PathVariable long investmentId) {
-        boolean result = investmentServiceImpl.deleteInvestment(investmentId);
+        boolean result = investmentService.deleteInvestment(investmentId);
         if (result) {
             return ResponseEntity.status(200).body(investmentId);
         } else {

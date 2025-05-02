@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:ng="http://angular.io">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manage Investments</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ 
   <style>
     html, body {
       margin: 0;
@@ -13,170 +13,100 @@
       height: 100%;
       background-color: #000 !important;
       color: #0f0;
-      font-family: 'Times New Roman', Times, serif;
+      font-family: Arial, sans-serif;
     }
-
+ 
     body {
       display: flex;
       flex-direction: column;
-      font-family: 'Times New Roman', Times, serif;
     }
-
+ 
     .wrapper {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       background-color: #000;
-      font-family: 'Times New Roman', Times, serif;
     }
-
+ 
     h2 {
       text-align: center;
       color: #0f0;
       border-bottom: 2px solid #0f0;
       padding-bottom: 10px;
       margin-bottom: 30px;
-      font-family: 'Times New Roman', Times, serif;
     }
-
+ 
     .main-container {
       flex: 1;
       max-width: 1200px;
       margin: auto;
       padding: 30px 20px;
       background-color: #000;
-      font-family: 'Times New Roman', Times, serif;
     }
-
+ 
     .form-control, select {
       background-color: #111 !important;
       color: #0f0 !important;
       border: 1px solid #0f0 !important;
     }
-
-    .form-control::placeholder {
-      color: #0f0;
-      opacity: 0.6;
-      font-family: 'Times New Roman', Times, serif;
-    }
-
+ 
     .table-wrapper {
       overflow-x: auto;
       margin-top: 20px;
-      font-family: 'Times New Roman', Times, serif;
     }
-
+ 
     .table {
       color: #0f0;
       background-color: #111;
       border-radius: 15px;
       border: 2px solid #0f0;
-      border-collapse: collapse;
       width: 100%;
       box-shadow: 0 0 15px #0f0, inset 0 0 5px #0f0;
     }
-
-    .table thead {
-      background-color: #111;
-      color: #0f0;
-    }
-
-    .table th {
-      padding: 12px;
-      border-bottom: 1px solid #0f0;
-      text-align: center;
-      font-family: 'Times New Roman', Times, serif;
-    }
-
-    .table td {
-      padding: 10px;
-      border-top: 1px solid #093909;
-      border-left: none !important;
-      border-right: none !important;
-      text-align: center;
-      font-family: 'Times New Roman', Times, serif;
-    }
-
-    .table tr:last-child td {
-      border-bottom: none;
-    }
-
+ 
     .btn-primary {
       background-color: #28a745;
-      border-color: #28a745;
-      color: #fff;
-      font-weight: bold;
-      font-family: 'Times New Roman', Times, serif;
     }
-
+ 
     .btn-danger {
       background-color: #dc3545;
-      border-color: #dc3545;
-      color: #fff;
-      font-weight: bold;
-      font-family: 'Times New Roman', Times, serif;
     }
-
-    .btn-secondary {
-      background-color: #555;
-      border-color: #555;
-      color: #fff;
-    }
-
-    .popup {
-      background-color: #111;
-      color: #f00;
-      border: 1px solid #f00;
-      padding: 15px;
-      margin-top: 20px;
-      border-radius: 5px;
+ 
+    .chart-section {
+      margin-top: 40px;
       text-align: center;
-      font-family: 'Times New Roman', Times, serif;
     }
-    .modal-content{
-      font-family: 'Times New Roman', Times, serif !important;
-    }
-
+ 
     @media (max-width: 768px) {
       .main-container {
         padding: 15px 10px;
       }
-
-      .table {
-        font-size: 0.9rem;
-      }
     }
   </style>
 </head>
-
+ 
 <body>
   <div class="wrapper">
     <div class="main-container">
       <h2>Manage Investments</h2>
-
-      <!-- Bar Chart Section
-      <div class="text-center mb-5">
-        <h4 style="color: #0f0;">Inquiries per Investment</h4>
-        <canvas id="inquiriesBarChart" width="400" height="200"></canvas>
-      </div> -->
-
-      <!-- Search and Filter Section -->
+ 
+      <!-- Search and Filter -->
       <div class="row">
         <div class="col-md-6 col-12 mb-3">
           <label>Search by Name:
-          <input type="text" class="form-control" placeholder="Investment Name" [(ngModel)]="searchTerm" (input)="onSearch()" />
-        </label>
-      </div>
+            <input type="text" class="form-control" placeholder="Investment Name" [(ngModel)]="searchTerm" (input)="onSearch()">
+          </label>
+        </div>
         <div class="col-md-6 col-12 mb-3">
           <label>Filter by Type:
-          <select class="form-control" [(ngModel)]="selectedCategory" (change)="onFilter()">
-            <option value="">All Types</option>
-            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-          </select>
+            <select class="form-control" [(ngModel)]="selectedCategory" (change)="onFilter()">
+              <option value="">All Types</option>
+              <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+            </select>
           </label>
         </div>
       </div>
-
+ 
       <!-- Investment Table -->
       <div class="table-wrapper">
         <table class="table table-dark table-striped table-bordered">
@@ -218,34 +148,16 @@
           </tbody>
         </table>
       </div>
-    </div>
-
-    <!-- Delete Confirmation Modal -->
-    <div class="modal fade show d-block" tabindex="-1" role="dialog" *ngIf="showDeletePopup"
-      style="background-color: rgba(0, 0, 0, 0.5); z-index: 1050;">
-      <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 350px; width: 90%;">
-        <div class="modal-content text-center" style="background-color: #000; color: white; border: 1px solid #f00; padding: 15px;">
-          <div class="modal-body">
-            <h5 style="font-weight: bold;">Are you sure you want to delete this investment?</h5>
-          </div>
-          <div class="modal-footer justify-content-center border-top-0 p-0">
-            <button type="button" class="btn btn-lg w-100 mt-2 mb-2"
-              (click)="onDelete()"
-              style="background-color: #dc3545; color: white; font-weight: bold; border: none;">
-              Yes, Delete
-            </button>
-            <button type="button" class="btn btn-lg w-100 mb-2"
-              (click)="closeDeletePopup()"
-              style="background-color: green; color: white; font-weight: bold; border: none;">
-              Cancel
-            </button>
-          </div>
-        </div>
+ 
+      <!-- Pie Chart Section -->
+      <div class="chart-section">
+        <h3>Investment Distribution</h3>
+        <canvas #investmentPieChart></canvas>
       </div>
+ 
     </div>
-    <div class="modal-backdrop fade show" *ngIf="showDeletePopup"></div>
   </div>
-
+ 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -10,12 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-add-investment.component.css']
 })
 export class AdminAddInvestmentComponent implements OnInit {
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   showSuccessPopup = false;
   investmentForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private investmentService: InvestmentService, private router:Router) {
+  constructor(private readonly fb: FormBuilder, private readonly investmentService: InvestmentService, private readonly router:Router) {
     this.investmentForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],

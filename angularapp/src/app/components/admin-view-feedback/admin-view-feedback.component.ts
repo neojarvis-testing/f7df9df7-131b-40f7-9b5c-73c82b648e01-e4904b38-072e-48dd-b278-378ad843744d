@@ -14,10 +14,10 @@ export class AdminViewFeedbackComponent implements OnInit {
   categories: string[] = ['Portfolio', 'Advice', 'General']; 
   selectedCategory: string = '';
 
-  selectedUser: any = null;
+  selectedUser: any = 0;
   selectedInvestment: any = null;
 
-  constructor(private feedbackService: FeedbackService) {}
+  constructor(private readonly feedbackService: FeedbackService) {}
 
   ngOnInit(): void {
     this.loadFeedbacks();

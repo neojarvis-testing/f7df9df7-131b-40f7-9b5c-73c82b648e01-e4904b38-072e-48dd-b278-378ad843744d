@@ -22,11 +22,9 @@ export class LoginComponent implements OnInit {
   };
   errorMessage:string=''
 
-  constructor(private service:AuthService, private router:Router) { }
+  constructor(private readonly service:AuthService, private readonly router:Router) { }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   loginUser(){
     console.log(this.login)
@@ -36,10 +34,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('username', data.username)
       localStorage.setItem('token', data.token)
       localStorage.setItem('userRole', data.userRole)
-      if(this.user.userRole==='Admin')
-        this.router.navigate(['/home'])
-      else if(this.user.userRole==='User')
-        this.router.navigate(['/home'])
+      this.router.navigate(['/home'])
     },
     (error)=>{
       console.log(error)

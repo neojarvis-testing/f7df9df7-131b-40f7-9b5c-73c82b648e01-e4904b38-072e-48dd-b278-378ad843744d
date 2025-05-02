@@ -13,9 +13,9 @@ export class SignupComponent implements OnInit {
   elementRef: any;
  
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private fb: FormBuilder
+    private readonly authService: AuthService,
+    private readonly router: Router,
+    private readonly fb: FormBuilder
   ) { }
  
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         mobileNumber: [
           '',
-          [Validators.required, Validators.pattern(/^[0-9]{10}$/)]
+          [Validators.required, Validators.pattern(/^\d{10}$/)]
         ],
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', Validators.required],
@@ -49,7 +49,6 @@ export class SignupComponent implements OnInit {
     this.authService.register(this.form.value).subscribe(
       () => {
         this.form.reset();
-        //this.showSuccessModal(); // Show modal instead of direct navigation
         this.router.navigate(['/login']);
       },
       (error) => {
@@ -79,6 +78,5 @@ export class SignupComponent implements OnInit {
  
   navigateToLogin(): void {
     (window as any).$(`#successModal`).modal('show'); // Hide modal before navigating
-    //this.router.navigate(['/login']);
   }
 }

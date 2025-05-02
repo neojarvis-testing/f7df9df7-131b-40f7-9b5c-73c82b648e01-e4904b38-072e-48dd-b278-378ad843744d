@@ -3,7 +3,7 @@ import { InvestmentService } from '../../services/investment.service';
 import { Investment } from '../../models/investment.model';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
-
+ 
 @Component({
   selector: 'app-admin-view-investment',
   templateUrl: './admin-view-investment.component.html',
@@ -17,27 +17,27 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
   selectedCategory: string = '';
   showDeletePopup = false;
   investmentToDelete: number | null = null;
-
+ 
   // Chart Instances
   chartInstanceBar: Chart | null = null;
   chartInstancePie: Chart | null = null;
-
+ 
   // Inquiry Data for Bar Chart
   inquiriesData: { investmentId: number, inquiries: number }[] = [
     { investmentId: 1, inquiries: 10 },
     { investmentId: 2, inquiries: 5 },
     { investmentId: 3, inquiries: 20 },
   ];
-
+ 
   @ViewChild('inquiriesBarChart', { static: false }) inquiriesBarChart!: ElementRef;
   @ViewChild('investmentPieChart', { static: false }) investmentPieChart!: ElementRef;
-
+ 
   constructor(private investmentService: InvestmentService, private router: Router) {}
-
+ 
   ngOnInit(): void {
     this.loadInvestments();
   }
-
+ 
   ngAfterViewInit(): void {
     setTimeout(() => {
       if (this.inquiriesBarChart?.nativeElement) {
@@ -48,7 +48,7 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
       }
     }, 500);
   }
-
+ 
   loadInvestments(): void {
     this.investmentService.getAllInvestments().subscribe((data: Investment[]) => {
       this.investments = data;
@@ -58,18 +58,18 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
       this.createPieChart();
     });
   }
-
+ 
   onSearch(): void {
     this.filteredInvestments = this.investments.filter((investment) =>
       investment.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
     this.applyFilter();
   }
-
+ 
   onFilter(): void {
     this.applyFilter();
   }
-
+ 
   applyFilter(): void {
     this.filteredInvestments = this.investments.filter((investment) => {
       const matchesCategory =
@@ -80,16 +80,16 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
       return matchesCategory && matchesSearch;
     });
   }
-
+ 
   onEdit(investmentId: number): void {
     this.router.navigate(['/admin/edit-investment', investmentId]);
   }
-
+ 
   onDeleteConfirm(investmentId: number): void {
     this.showDeletePopup = true;
     this.investmentToDelete = investmentId;
   }
-
+ 
   onDelete(): void {
     if (this.investmentToDelete) {
       this.investmentService.deleteInvestment(this.investmentToDelete).subscribe({
@@ -104,43 +104,43 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
       });
     }
   }
-
+ 
   closeDeletePopup(): void {
     this.showDeletePopup = false;
     this.investmentToDelete = null;
   }
-
+ 
  hexCharacters = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"]
-
-
+ 
+ 
 getCharacter(index) {
     return this.hexCharacters[index]
 }
-
+ 
 generateJustOneColor(){
-
+ 
     let hexColorRep = "#"
-
+ 
     for (let position = 0; position < 6; position++){
         hexColorRep += this.getCharacter( position )
     }
-
+ 
     return hexColorRep
-
+ 
 }
-
-
+ 
+ 
   // Bar Chart for Investment Inquiries
   createBarChart(): void {
     if (this.chartInstanceBar) {
       this.chartInstanceBar.destroy();
     }
-
+ 
     const chartLabels = this.inquiriesData.map(data => `Investment ${data.investmentId}`);
     const chartData = this.inquiriesData.map(data => data.inquiries);
-
+ 
    
-    
+   
     this.chartInstanceBar = new Chart(this.inquiriesBarChart.nativeElement, {
       type: 'bar',
       data: {
@@ -163,20 +163,20 @@ generateJustOneColor(){
       }
     });
   }
-
+ 
   // Pie Chart for Investment Distribution
   createPieChart(): void {
     const dynamicColors = this.generateRandomColor(this.categories.length);
     console.log(dynamicColors)
-
+ 
     if (this.chartInstancePie) {
       this.chartInstancePie.destroy();
     }
-
-    const categoryData = this.categories.map(category => 
+ 
+    const categoryData = this.categories.map(category =>
       this.investments.filter(investment => investment.name === category).length
     );
-
+ 
     this.chartInstancePie = new Chart(this.investmentPieChart.nativeElement, {
       type: 'pie',
       data: {
@@ -195,11 +195,11 @@ generateJustOneColor(){
       }
     });
   }
-
+ 
   generateRandomColor(count: number): string[] {
     return Array.from({ length: count }, () =>
       `#${Math.floor(Math.random() * 16777215).toString(16)}` // Generates a random HEX color
     );
   }
-
+ 
 }

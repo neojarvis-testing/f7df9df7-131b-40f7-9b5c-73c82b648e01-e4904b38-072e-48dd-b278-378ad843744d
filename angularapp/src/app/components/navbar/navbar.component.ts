@@ -8,8 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  userRole: String = '';
-  constructor(public authService: AuthService, private router: Router) { 
+  userRole: string = '';
+  constructor(public authService: AuthService, private readonly router: Router) { 
     this.userRole = localStorage.getItem('userRole');
   }
 

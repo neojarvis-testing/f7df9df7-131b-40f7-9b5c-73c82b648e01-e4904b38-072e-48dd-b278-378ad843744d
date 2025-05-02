@@ -13,7 +13,7 @@ export class AdminGuard implements CanActivate {
     
       return this.service.isAdmin()
   }
-  constructor(private service:AuthService){
+  constructor(private readonly service:AuthService){
 
   }
 }

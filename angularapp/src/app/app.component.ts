@@ -9,7 +9,6 @@ export class AppComponent implements OnInit{
   title = 'Invest Track';
   userRole = localStorage.getItem('userRole');
   ngOnInit(): void {
-    
   }
 
 }

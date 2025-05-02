@@ -11,7 +11,7 @@ export class AdminnavComponent implements OnInit {
   showLogoutModal: boolean = false; // Controls modal visibility
   adminName: string | null = ''; // Stores admin name
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.adminName = localStorage.getItem('username'); // Fetch admin name from localStorage

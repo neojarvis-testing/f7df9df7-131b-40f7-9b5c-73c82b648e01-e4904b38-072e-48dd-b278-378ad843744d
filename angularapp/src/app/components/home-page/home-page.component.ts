@@ -9,10 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private readonly router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   logout(){
     if(confirm("Are you sure you want to logout?")){
       this.authService.loggedOut();

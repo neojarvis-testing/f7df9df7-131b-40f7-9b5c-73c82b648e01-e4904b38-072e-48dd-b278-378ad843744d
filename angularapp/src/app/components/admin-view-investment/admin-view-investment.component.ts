@@ -2,7 +2,8 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { InvestmentService } from '../../services/investment.service';
 import { Investment } from '../../models/investment.model';
 import { Router } from '@angular/router';
-// import { Chart } from 'chart.js'; 
+
+//import { Chart } from 'chart.js';  // Importing Chart.js for bar chart
 
 @Component({
   selector: 'app-admin-view-investment',
@@ -106,11 +107,11 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
 
   // Create Bar Chart based on inquiries data
   createBarChart(): void {
-    if (this.inquiriesBarChart && this.inquiriesBarChart.nativeElement) {
-      const chartData = this.inquiriesData.map(data => data.inquiries);
-      const chartLabels = this.inquiriesData.map(data => `Investment ${data.investmentId}`);
 
-      // new Chart(this.inquiriesBarChart.nativeElement, {
+    // if (this.inquiriesBarChart && this.inquiriesBarChart.nativeElement) {
+    //   const chartData = this.inquiriesData.map(data => data.inquiries);
+    //   const chartLabels = this.inquiriesData.map(data => `Investment ${data.investmentId}`);
+      //new Chart(this.inquiriesBarChart.nativeElement, {
       //   type: 'bar',
       //   data: {
       //     labels: chartLabels,
@@ -136,4 +137,3 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
       // });
     }
   }
-}

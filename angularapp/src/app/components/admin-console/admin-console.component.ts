@@ -12,7 +12,7 @@ export class AdminConsoleComponent implements OnInit {
   noOfFeeddback: number = 0;
   noOfInquiries: number = 0;
   noOfInvestment: number = 0;
-  constructor(private feedbackService: FeedbackService, private investmentService: InvestmentService, private investmentInquiryService: InvestmentInquiryService) { }
+  constructor(private readonly feedbackService: FeedbackService, private readonly investmentService: InvestmentService, private readonly investmentInquiryService: InvestmentInquiryService) { }
 
   ngOnInit(): void {
     this.feedbackService.getFeedbacks().subscribe((data)=>{

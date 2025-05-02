@@ -22,7 +22,7 @@ export class AdminViewInquiryComponent implements OnInit {
   inquiryToRespond: InvestmentInquiry | null = null;
   adminResponse: string = '';
 
-  constructor(private inquiryService: InvestmentInquiryService, private router: Router) {}
+  constructor(private readonly inquiryService: InvestmentInquiryService, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.loadInquiries();
@@ -87,6 +87,7 @@ export class AdminViewInquiryComponent implements OnInit {
     if (this.inquiryToRespond) {
       this.inquiryToRespond.adminResponse = this.adminResponse;
       this.inquiryToRespond.status = 'Resolved';
+      //this.inquiryToRespond.
       this.inquiryService.updateInquiry(this.inquiryToRespond.inquiryId!, this.inquiryToRespond).subscribe(() => {
         this.loadInquiries();
         this.closeResponsePopup();

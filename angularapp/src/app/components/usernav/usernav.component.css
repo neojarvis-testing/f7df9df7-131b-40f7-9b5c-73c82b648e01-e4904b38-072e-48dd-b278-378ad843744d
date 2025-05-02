@@ -1,0 +1,32 @@
+.modal-content {
+    background-color: #000; /* Black background */
+    color: #FFF; /* White text */
+    border-radius: 10px; /* Rounded corners */
+  }
+  
+  .modal-header, .modal-footer {
+    border: none;
+  }
+  
+  .modal-title {
+    color: #00FF00; /* Green color */
+  }
+  
+  .btn-primary {
+    background-color: #00FF00; /* Green color */
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #00cc00; /* Darker green on hover */
+  }
+  
+  /* Modal background blur effect */
+  body.modal-open #page-wrapper {
+    filter: blur(50px); /* Applies blur effect */
+    pointer-events: none; /* Prevents background interaction */
+  }
+  
+  .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+  }

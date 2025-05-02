@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './admin-add-investment.component.html',
   styleUrls: ['./admin-add-investment.component.css']
 })
-export class AdminAddInvestmentComponent implements OnInit {
-  ngOnInit(): void {}
+export class AdminAddInvestmentComponent {
   showSuccessPopup = false;
   investmentForm: FormGroup;
 

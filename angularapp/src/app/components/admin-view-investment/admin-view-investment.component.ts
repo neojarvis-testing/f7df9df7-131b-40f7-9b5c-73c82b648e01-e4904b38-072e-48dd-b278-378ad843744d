@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { InvestmentService } from '../../services/investment.service';
 import { Investment } from '../../models/investment.model';
 import { Router } from '@angular/router';
-import { Chart } from 'chart.js';
+//import { Chart } from 'chart.js';
  
 @Component({
   selector: 'app-admin-view-investment',
@@ -19,8 +19,8 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
   investmentToDelete: number | null = null;
  
   // Chart Instances
-  chartInstanceBar: Chart | null = null;
-  chartInstancePie: Chart | null = null;
+  // chartInstanceBar: Chart | null = null;
+  // chartInstancePie: Chart | null = null;
  
   // Inquiry Data for Bar Chart
   inquiriesData: { investmentId: number, inquiries: number }[] = [
@@ -53,7 +53,7 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
     this.investmentService.getAllInvestments().subscribe((data: Investment[]) => {
       this.investments = data;
       this.filteredInvestments = data;
-      this.categories = [...new Set(this.investments.map(data => data.name))];
+      // this.categories = [...new Set(this.investments.map(data => data.name))];
      // this.createBarChart();
       this.createPieChart();
     });
@@ -132,68 +132,68 @@ generateJustOneColor(){
  
   // Bar Chart for Investment Inquiries
   createBarChart(): void {
-    if (this.chartInstanceBar) {
-      this.chartInstanceBar.destroy();
-    }
+    // if (this.chartInstanceBar) {
+    //   this.chartInstanceBar.destroy();
+    // }
  
-    const chartLabels = this.inquiriesData.map(data => `Investment ${data.investmentId}`);
-    const chartData = this.inquiriesData.map(data => data.inquiries);
+    // const chartLabels = this.inquiriesData.map(data => `Investment ${data.investmentId}`);
+    // const chartData = this.inquiriesData.map(data => data.inquiries);
  
    
    
-    this.chartInstanceBar = new Chart(this.inquiriesBarChart.nativeElement, {
-      type: 'bar',
-      data: {
-        labels: chartLabels,
-        datasets: [{
-          label: 'Number of Inquiries',
-          data: chartData,
-          //backgroundColor: ['#28a745', '#dc3545', '#007bff'],
-          backgroundColor: [ this.generateJustOneColor()+'',this.generateJustOneColor()+'',this.generateJustOneColor()+'' ]
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: 'top' }
-        },
-        scales: {
-          y: { beginAtZero: true }
-        }
-      }
-    });
+    // this.chartInstanceBar = new Chart(this.inquiriesBarChart.nativeElement, {
+    //   type: 'bar',
+    //   data: {
+    //     labels: chartLabels,
+    //     datasets: [{
+    //       label: 'Number of Inquiries',
+    //       data: chartData,
+    //       //backgroundColor: ['#28a745', '#dc3545', '#007bff'],
+    //       backgroundColor: [ this.generateJustOneColor()+'',this.generateJustOneColor()+'',this.generateJustOneColor()+'' ]
+    //     }]
+    //   },
+    //   options: {
+    //     responsive: true,
+    //     plugins: {
+    //       legend: { position: 'top' }
+    //     },
+    //     scales: {
+    //       y: { beginAtZero: true }
+    //     }
+    //   }
+    // });
   }
  
   // Pie Chart for Investment Distribution
   createPieChart(): void {
-    const dynamicColors = this.generateRandomColor(this.categories.length);
-    console.log(dynamicColors)
+    // const dynamicColors = this.generateRandomColor(this.categories.length);
+    // console.log(dynamicColors)
  
-    if (this.chartInstancePie) {
-      this.chartInstancePie.destroy();
-    }
+    // if (this.chartInstancePie) {
+    //   this.chartInstancePie.destroy();
+    // }
  
-    const categoryData = this.categories.map(category =>
-      this.investments.filter(investment => investment.name === category).length
-    );
+    // const categoryData = this.categories.map(category =>
+    //   this.investments.filter(investment => investment.name === category).length
+    // );
  
-    this.chartInstancePie = new Chart(this.investmentPieChart.nativeElement, {
-      type: 'pie',
-      data: {
-        labels: this.categories,
-        datasets: [{
-          data: categoryData,
-          backgroundColor: dynamicColors
-          //backgroundColor: ['#28a745', '#dc3545', '#007bff'],
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: 'bottom' }
-        }
-      }
-    });
+    // this.chartInstancePie = new Chart(this.investmentPieChart.nativeElement, {
+    //   type: 'pie',
+    //   data: {
+    //     labels: this.categories,
+    //     datasets: [{
+    //       data: categoryData,
+    //       backgroundColor: dynamicColors
+    //       //backgroundColor: ['#28a745', '#dc3545', '#007bff'],
+    //     }]
+    //   },
+    //   options: {
+    //     responsive: true,
+    //     plugins: {
+    //       legend: { position: 'bottom' }
+    //     }
+    //   }
+    // });
   }
  
   generateRandomColor(count: number): string[] {

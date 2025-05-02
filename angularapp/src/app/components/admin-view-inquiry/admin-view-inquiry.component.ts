@@ -22,7 +22,7 @@ export class AdminViewInquiryComponent implements OnInit {
   inquiryToRespond: InvestmentInquiry | null = null;
   adminResponse: string = '';
 
-  constructor(private inquiryService: InvestmentInquiryService, private router: Router) {}
+  constructor(private readonly inquiryService: InvestmentInquiryService, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.loadInquiries();

@@ -24,7 +24,7 @@ export class UserAddFeedbackComponent implements OnInit {
   // todayDate: string = new Date().toISOString().split('T')[0];
  
  
-  constructor(private feedbackService: FeedbackService, private investmentService: InvestmentService, private router:Router) {}
+  constructor(private readonly feedbackService: FeedbackService, private readonly investmentService: InvestmentService, private readonly router:Router) {}
  
   ngOnInit(): void {
     this.loadInvestments();

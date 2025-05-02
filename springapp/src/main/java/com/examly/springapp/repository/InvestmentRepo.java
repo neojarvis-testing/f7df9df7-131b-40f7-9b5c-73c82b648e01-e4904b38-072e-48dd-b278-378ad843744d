@@ -1,7 +1,7 @@
 package com.examly.springapp.repository;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -10,7 +10,7 @@ import com.examly.springapp.model.Investment;
 
 /**
  * Repository interface for managing Investment entity persistence.
- * Extends JpaRepository to provide CRUD operations for Investment.
+ * Extends JpaRepository to provide CRUD operations for Investment with pagination support.
  */
 @Repository
 public interface InvestmentRepo extends JpaRepository<Investment, Long> {
@@ -25,20 +25,22 @@ public interface InvestmentRepo extends JpaRepository<Investment, Long> {
     Investment getInvestmentByName(String name);
 
     /**
-     * Retrieves a list of investments filtered by type.
+     * Retrieves a paginated list of investments filtered by type.
      * 
      * @param type The type of investment (e.g., Real Estate, Stock, Bond).
-     * @return A list of investments matching the specified type.
+     * @param pageable Pageable object to manage pagination.
+     * @return A paginated list of investments matching the specified type.
      */
     @Query("select investment from Investment investment where investment.type = ?1")
-    List<Investment> getInvestmentsByType(String type);
+    Page<Investment> getInvestmentsByType(String type, Pageable pageable);
 
     /**
-     * Retrieves a list of investments filtered by status.
+     * Retrieves a paginated list of investments filtered by status.
      * 
      * @param status The status of the investment (e.g., Active, Sold, Pending).
-     * @return A list of investments matching the specified status.
+     * @param pageable Pageable object to manage pagination.
+     * @return A paginated list of investments matching the specified status.
      */
     @Query("select investment from Investment investment where investment.status = ?1")
-    List<Investment> getInvestmentsByStatus(String status);
+    Page<Investment> getInvestmentsByStatus(String status, Pageable pageable);
 }

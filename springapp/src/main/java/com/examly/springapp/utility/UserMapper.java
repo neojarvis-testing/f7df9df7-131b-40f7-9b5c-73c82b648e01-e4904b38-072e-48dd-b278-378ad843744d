@@ -10,7 +10,7 @@ public class UserMapper {
      * The User object containing user details.
      * return A LoginDTO object with selected user information.
      */
-
+    private UserMapper(){}
     public static LoginDTO mappedToLoginDTO(User user){
         String token="token"; // coming from jwtUtils
         LoginDTO loginDTO= new LoginDTO();

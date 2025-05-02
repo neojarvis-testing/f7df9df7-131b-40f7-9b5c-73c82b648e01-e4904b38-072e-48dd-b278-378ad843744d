@@ -9,9 +9,9 @@ import { APIURL } from '../constant/api_url';
 })
 export class InvestmentInquiryService {
 
-  private APIurl:string = APIURL.APIurl;
+  private readonly APIurl:string = APIURL.APIurl;
 
-  constructor(private http: HttpClient) { 
+  constructor(private readonly http: HttpClient) { 
   }
 
   addInquiry(inquiry: InvestmentInquiry):Observable<InvestmentInquiry>{

@@ -13,7 +13,7 @@ export class UserGuard implements CanActivate {
     
       return this.service.isUser()
   }
-  constructor(private service:AuthService){
+  constructor(private readonly service:AuthService){
 
   }
 }

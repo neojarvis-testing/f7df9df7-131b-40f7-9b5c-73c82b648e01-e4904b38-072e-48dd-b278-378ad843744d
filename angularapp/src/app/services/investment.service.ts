@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InvestmentService {
-  private APIurl:string = APIURL.APIurl;
-  constructor(private http:HttpClient) { 
+  private readonly APIurl:string = APIURL.APIurl;
+  constructor(private readonly http:HttpClient) { 
   }
 
   getAllInvestments():Observable<Investment[]>{

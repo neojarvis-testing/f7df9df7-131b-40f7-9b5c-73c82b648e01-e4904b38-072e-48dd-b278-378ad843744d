@@ -12,7 +12,7 @@ export class UserViewInquiryComponent implements OnInit {
   userId: number = +localStorage.getItem('userId');
   inquiries: InvestmentInquiry;
 
-    constructor(private inquiryService: InvestmentInquiryService) {}
+    constructor(private readonly inquiryService: InvestmentInquiryService) {}
   
     ngOnInit(): void {
      this.inquiryService.getInquriesByUserId(this.userId).subscribe((data) => {

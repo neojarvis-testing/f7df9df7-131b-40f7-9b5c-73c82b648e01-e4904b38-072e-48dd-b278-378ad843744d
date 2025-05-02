@@ -11,7 +11,7 @@ export class UsernavComponent implements OnInit {
   username: string | null = '';
   showLogoutModal: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private readonly authService: AuthService, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.username = localStorage.getItem('username');

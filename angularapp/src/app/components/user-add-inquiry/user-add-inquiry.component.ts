@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { InvestmentInquiry } from "src/app/models/investment-inquiry.model";
 import { Investment } from "src/app/models/investment.model";
-import { User } from "src/app/models/user.model";
 import { InvestmentInquiryService } from "src/app/services/investment-inquiry.service";
 import { InvestmentService } from "src/app/services/investment.service";
 
@@ -37,8 +36,8 @@ export class UserAddInquiryComponent implements OnInit {
     status: ""
   };
 
-  constructor(private investmentinquiryService: InvestmentInquiryService, private investmentService: InvestmentService, 
-    private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private readonly investmentinquiryService: InvestmentInquiryService, private readonly investmentService: InvestmentService, 
+    private readonly router: Router, private readonly activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.investmentId = +this.activatedRoute.snapshot.params['investmentId'];

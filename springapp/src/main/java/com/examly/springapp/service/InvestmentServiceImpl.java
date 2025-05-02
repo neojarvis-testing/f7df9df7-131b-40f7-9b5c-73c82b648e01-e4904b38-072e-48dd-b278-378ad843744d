@@ -1,13 +1,13 @@
 package com.examly.springapp.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.exceptions.DuplicateInvestmentException;
 import com.examly.springapp.model.Investment;
 import com.examly.springapp.repository.InvestmentRepo;
+
 
 /**
  * Implementation of InvestmentService interface.
@@ -27,14 +27,6 @@ public class InvestmentServiceImpl implements InvestmentService {
         this.investmentRepo = investmentRepo;
     }
 
-    /**
-     * Creates a new investment entry.
-     * Ensures the investment does not already exist before saving.
-     *
-     * @param investment The Investment entity to be saved.
-     * @return The saved Investment entity.
-     * @throws DuplicateInvestmentException If an investment with the same ID already exists.
-     */
     @Override
     public Investment addInvestment(Investment investment) {
         if (investmentRepo.existsById(investment.getInvestmentId())) {
@@ -43,14 +35,6 @@ public class InvestmentServiceImpl implements InvestmentService {
         return investmentRepo.save(investment);
     }
 
-    /**
-     * Updates an existing investment record.
-     * If investment does not exist, returns null.
-     *
-     * @param investmentId The ID of the investment to update.
-     * @param updateInvestment The updated Investment details.
-     * @return The updated Investment entity or null if the investment does not exist.
-     */
     @Override
     public Investment updateInvestment(long investmentId, Investment updateInvestment) {
         Investment existingInvestment = investmentRepo.findById(investmentId).orElse(null);
@@ -61,80 +45,32 @@ public class InvestmentServiceImpl implements InvestmentService {
         return investmentRepo.save(updateInvestment);
     }
 
-    /**
-     * Retrieves an investment by its unique ID.
-     *
-     * @param investmentId The ID of the investment.
-     * @return The Investment entity if found, otherwise null.
-     */
     @Override
     public Investment getInvestmentById(long investmentId) {
         return investmentRepo.findById(investmentId).orElse(null);
     }
 
     /**
-     * Retrieves all investments from the database.
+     * Retrieves all investments with pagination support.
      *
-     * @return A list of all Investment entities.
+     * @param pageable Pageable object for pagination.
+     * @return A paginated list of investments.
      */
     @Override
-    public List<Investment> getAllInvestments() {
-        return investmentRepo.findAll();
+    public Page<Investment> getAllInvestments(Pageable pageable) {
+        return investmentRepo.findAll(pageable);
     }
 
-    /**
-     * Retrieves a list of investments by their type.
-     *
-     * @param type The type of investments to fetch.
-     * @return A list of investments matching the given type.
-     */
     @Override
-    public List<Investment> getInvestmentsByType(String type) {
-        return investmentRepo.getInvestmentsByType(type);
+    public Page<Investment> getInvestmentsByType(String type, Pageable pageable) {
+        return investmentRepo.getInvestmentsByType(type, pageable);
     }
 
-    /**
-     * Retrieves a list of investments by their status.
-     *
-     * @param status The status of investments to fetch.
-     * @return A list of investments matching the given status.
-     */
     @Override
-    public List<Investment> getInvestmentsByStatus(String status) {
-        return investmentRepo.getInvestmentsByStatus(status);
+    public Page<Investment> getInvestmentsByStatus(String status, Pageable pageable) {
+        return investmentRepo.getInvestmentsByStatus(status, pageable);
     }
 
-    /**
-     * Searches for investments based on a given keyword.
-     * Matches investments whose attributes contain the keyword.
-     *
-     * @param keyword The search term.
-     * @return A list of investments matching the keyword.
-     */
-    @Override
-    public List<Investment> searchInvestments(String keyword) {
-        List<Investment> list = getAllInvestments();
-        List<Investment> listWithKeyword = new ArrayList<>();
-        
-        if (keyword == null) {
-            return listWithKeyword;
-        }
-
-        for (Investment investment : list) {
-            String value = investment.toString();
-            if (value.toLowerCase().contains(keyword.toLowerCase())) {
-                listWithKeyword.add(investment);
-            }
-        }
-        return listWithKeyword;
-    }
-
-    /**
-     * Deletes an investment record by its unique ID.
-     *
-     * @param investmentId The ID of the investment to delete.
-     * @return true if deletion was successful, false otherwise.
-     */
     @Override
     public boolean deleteInvestment(long investmentId) {
         Investment investment = investmentRepo.findById(investmentId).orElse(null);

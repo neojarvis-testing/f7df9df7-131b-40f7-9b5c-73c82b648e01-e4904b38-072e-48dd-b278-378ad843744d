@@ -1,16 +1,18 @@
 package com.examly.springapp.service;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.examly.springapp.model.Investment;
 
 public interface InvestmentService {
     Investment addInvestment(Investment investment);
     Investment updateInvestment(long investmentId, Investment updateInvestment);
     Investment getInvestmentById(long investmentId);
-    List<Investment> getAllInvestments();
-    List<Investment> getInvestmentsByType(String type);
-    List<Investment> getInvestmentsByStatus(String status);
-    List<Investment> searchInvestments(String keyword);
+    
+    // Updated methods to support pagination
+    Page<Investment> getAllInvestments(Pageable pageable);
+    Page<Investment> getInvestmentsByType(String type, Pageable pageable);
+    Page<Investment> getInvestmentsByStatus(String status, Pageable pageable);
+    
     boolean deleteInvestment(long investmentId);
 }

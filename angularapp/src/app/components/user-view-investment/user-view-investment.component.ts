@@ -11,7 +11,7 @@ import { Investment } from '../../models/investment.model';
 export class UserViewInvestmentComponent implements OnInit {
   investments: Investment[] = [];
  
-  constructor(private investmentService: InvestmentService,private activatedRoute:ActivatedRoute,private router: Router) {}
+  constructor(private readonly investmentService: InvestmentService,private readonly activatedRoute:ActivatedRoute,private readonly router: Router) {}
  
   ngOnInit(): void {
     this.loadInvestments();

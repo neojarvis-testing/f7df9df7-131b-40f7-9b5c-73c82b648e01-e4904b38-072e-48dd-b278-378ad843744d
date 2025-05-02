@@ -13,7 +13,7 @@ export class UserViewFeedbackComponent implements OnInit {
   feedbacks: Feedback[] = [];
   investment: Investment[]=[];
 
-  constructor(private feedbackService: FeedbackService) { }
+  constructor(private readonly feedbackService: FeedbackService) { }
 
   ngOnInit(): void {
     this.loadFeedbacks();

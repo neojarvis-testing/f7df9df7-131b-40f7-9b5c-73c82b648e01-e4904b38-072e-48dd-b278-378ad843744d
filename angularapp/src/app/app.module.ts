@@ -23,14 +23,12 @@ import { UsernavComponent } from './components/usernav/usernav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
-import { AdminAddInvestmentComponent } from './components/admin-add-investment/admin-add-investment.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminAddInvestmentComponent,
     AdminConsoleComponent,
     AdminEditInvestmentComponent,
     AdminViewFeedbackComponent,

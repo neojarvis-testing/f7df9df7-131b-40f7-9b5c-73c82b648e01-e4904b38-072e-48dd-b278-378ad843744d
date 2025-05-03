@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login.model';
 import { User } from 'src/app/models/user.model';
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   login: Login = {email: '', password: ''};
   
@@ -23,8 +23,6 @@ export class LoginComponent implements OnInit {
   errorMessage:string=''
 
   constructor(private readonly service:AuthService, private readonly router:Router) { }
-
-  ngOnInit(): void {}
 
   loginUser(){
     console.log(this.login)

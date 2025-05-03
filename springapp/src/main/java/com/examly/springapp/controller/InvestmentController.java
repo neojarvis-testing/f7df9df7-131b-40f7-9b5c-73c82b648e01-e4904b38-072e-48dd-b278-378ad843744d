@@ -1,5 +1,7 @@
 package com.examly.springapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -62,11 +64,11 @@ public class InvestmentController {
      */
     @Operation(summary = "Get All Investments with Pagination", description = "Retrieves all investment entries with pagination.")
     @GetMapping
-    public ResponseEntity<Page<Investment>> getAllInvestments(
+    public ResponseEntity<?> getAllInvestments(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Investment> investments = investmentService.getAllInvestments(pageable);
+        List<Investment> investments = investmentService.getAllInvestments();
         return ResponseEntity.ok(investments);
     }
 

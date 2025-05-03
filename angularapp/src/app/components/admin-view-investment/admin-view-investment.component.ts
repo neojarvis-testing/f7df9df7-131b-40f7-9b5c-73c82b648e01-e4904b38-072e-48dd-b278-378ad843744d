@@ -50,14 +50,15 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
   }
  
   loadInvestments(): void {
-    this.investmentService.getAllInvestments().subscribe((data: Investment[]) => {
-      this.investments = data;
-      this.filteredInvestments = data;
-      this.categories = [...new Set(this.investments.map(data => data.name))];
-     // this.createBarChart();
+    this.investmentService.getAllInvestments().subscribe((data: any) => {
+      console.log("Raw API Response:", data); // Debugging line
+      this.investments = Array.isArray(data) ? data : data.investments || [];
+      this.filteredInvestments = [...this.investments];
+      this.categories = [...new Set(this.filteredInvestments.map(data => data.name))];
       this.createPieChart();
     });
   }
+
  
   onSearch(): void {
     this.filteredInvestments = this.investments.filter((investment) =>

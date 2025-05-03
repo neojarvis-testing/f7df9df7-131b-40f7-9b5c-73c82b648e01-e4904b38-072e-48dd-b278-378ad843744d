@@ -130,9 +130,6 @@
     </form>
 
     <!-- Success Popup Modal -->
-    <div class="modal fade show d-block" tabindex="-1" role="dialog" *ngIf="showSuccessPopup"
-         style="background-color: rgba(0, 0, 0, 0.5); z-index: 1050;">
-      <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 350px; width: 90%;">
         <div class="modal-content text-center" style="background-color: #000; color: rgb(245, 248, 245); border: 1px solid #0f0; padding: 15px;">
           <div class="modal-body">
             <h5 style="font-weight: bold;">Inquiry submitted successfully!</h5>
@@ -145,12 +142,6 @@
           </div>
         </div>
       </div>
-    </div>
     <div class="modal-backdrop fade show" *ngIf="showSuccessPopup"></div>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

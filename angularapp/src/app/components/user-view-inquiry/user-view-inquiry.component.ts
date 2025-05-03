@@ -5,7 +5,6 @@ import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.se
 @Component({
   selector: 'app-user-view-inquiry',
   templateUrl: './user-view-inquiry.component.html',
-  styleUrls: ['./user-view-inquiry.component.css']
 })
 export class UserViewInquiryComponent implements OnInit {
 

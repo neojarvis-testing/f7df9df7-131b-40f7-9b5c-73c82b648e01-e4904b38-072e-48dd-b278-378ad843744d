@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { InvestmentService } from '../../services/investment.service';
-import { Investment } from '../../models/investment.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -24,26 +23,5 @@ export class AdminAddInvestmentComponent {
       purchaseDate: ['', Validators.required],
       status: ['', Validators.required],
     });
-  }
-
-  onSubmit(): void {
-    if (this.investmentForm.valid) {
-      const newInvestment: Investment = this.investmentForm.value;
-      this.investmentService.addInvestment(newInvestment).subscribe({
-        next: (response) => {
-          console.log('Investment added:', response);
-          this.showSuccessPopup = true;
-        },
-        error: (err) => {
-          console.error('Failed to add investment:', err);
-          alert('An error occurred while adding the investment. Please try again.');
-        },
-      });
-    }
-  }
-  closePopup(): void {
-    this.showSuccessPopup = false;
-    this.investmentForm.reset();
-    this.router.navigate(['/admin/view-investment'])
   }
 }

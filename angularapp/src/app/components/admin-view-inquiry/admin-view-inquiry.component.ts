@@ -87,6 +87,11 @@ export class AdminViewInquiryComponent implements OnInit {
     if (this.inquiryToRespond) {
       this.inquiryToRespond.adminResponse = this.adminResponse;
       this.inquiryToRespond.status = 'Resolved';
+      //this.inquiryToRespond.
+      this.inquiryService.updateInquiry(this.inquiryToRespond.inquiryId!, this.inquiryToRespond).subscribe(() => {
+        this.loadInquiries();
+        this.closeResponsePopup();
+      });
     }
   }
 }

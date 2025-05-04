@@ -1,53 +1,124 @@
 <!-- Bootstrap CSS & JS from CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Inline styling for transparent modal background -->
+<!-- Inline styling for transparent modal background and dark theme -->
 <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #000 !important;
+    color: #0f0;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #000;
+  }
+
+  .container, .main-container {
+    background-color: #000 !important;
+    color: #0f0;
+  }
+
+  h2 {
+    text-align: center;
+    color: #0f0 !important;
+    border-bottom: 2px solid #0f0;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+  }
+
+  .form-control, select {
+    background-color: #111 !important;
+    color: #0f0 !important;
+    border: 1px solid #0f0 !important;
+  }
+
+  .table {
+    color: #0f0;
+    background-color: #111;
+    border-radius: 15px;
+    border: 2px solid #0f0;
+    width: 100%;
+    box-shadow: 0 0 15px #0f0, inset 0 0 5px #0f0;
+  }
+
+  .btn-success,
+  .btn-info {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: #fff !important;
+  }
+
+  .btn-danger {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+  }
+
   .modal-content {
     background-color: rgba(0, 0, 0, 0.95);
     color: white;
   }
+
+  @media (max-width: 768px) {
+    .main-container {
+      padding: 15px 10px;
+    }
+  }
 </style>
 
-<div class="container mt-4">
-  <h2 class="mb-3 text-white">Feedback Received</h2>
+<div class="wrapper">
+  <div class="container mt-4 main-container">
+    <h2 class="mb-3">Feedback Received</h2>
 
-  <div class="form-group mb-3">
-    <label for="categoryFilter" class="form-label text-white">Filter by Category:</label>
-    <select id="categoryFilter" class="form-control" [(ngModel)]="selectedCategory" (change)="filterFeedbacks()">
-      <option value="">All</option>
-      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-    </select>
+    <div class="form-group mb-3">
+      <label for="categoryFilter" class="form-label">Filter by Category:</label>
+      <select id="categoryFilter" class="form-control" [(ngModel)]="selectedCategory" (change)="filterFeedbacks()">
+        <option value="">All</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+
+    <table class="table table-dark table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Investment</th>
+          <th>Category</th>
+          <th>Feedback Message</th>
+          <th>Posted Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="filteredFeedbacks.length === 0">
+          <td colspan="6" class="text-center">No data found</td>
+        </tr>
+        <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ feedback.investment.name }}</td>
+          <td>{{ feedback.category }}</td>
+          <td>{{ feedback.feedbackText }}</td>
+          <td>{{ feedback.date | date }}</td>
+          <td>
+            <button class="btn btn-success btn-sm me-2" (click)="showProfile(feedback.user)">Show User Details</button>
+            <button class="btn btn-success btn-sm" (click)="viewInvestmentDetails(feedback.investment)">View Investment Info</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
-  <table class="table table-dark table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>S.No</th>
-        <th>Investment</th>
-        <th>Category</th>
-        <th>Feedback Message</th>
-        <th>Posted Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngIf="filteredFeedbacks.length === 0">
-        <td colspan="6" class="text-center">No data found</td>
-      </tr>
-      <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ feedback.investment.name }}</td>
-        <td>{{ feedback.category }}</td>
-        <td>{{ feedback.feedbackText }}</td>
-        <td>{{ feedback.date }}</td>
-        <td>
-          <button class="btn btn-info btn-sm me-2" (click)="showProfile(feedback.user)">Show Profile</button>
-          <button class="btn btn-success btn-sm" (click)="viewInvestmentDetails(feedback.investment)">View Investment Info</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>
 
 <!-- User Modal -->
@@ -90,5 +161,3 @@
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-</div>

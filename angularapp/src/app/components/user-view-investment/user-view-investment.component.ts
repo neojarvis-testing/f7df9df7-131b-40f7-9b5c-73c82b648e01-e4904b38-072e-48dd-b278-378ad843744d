@@ -6,6 +6,7 @@ import { Investment } from '../../models/investment.model';
 @Component({
   selector: 'app-user-view-investment',
   templateUrl: './user-view-investment.component.html',
+  styleUrls: ['./user-view-investment.component.css']
 })
 export class UserViewInvestmentComponent implements OnInit {
   investments: Investment[] = [];

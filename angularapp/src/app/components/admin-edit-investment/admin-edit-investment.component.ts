@@ -60,6 +60,21 @@ export class AdminEditInvestmentComponent implements OnInit {
     });
   }
 
+  onSubmit(): void {
+    if (this.investmentForm.valid) {
+      this.showSuccessPopup = true;
+      this.investmentService.updateInvestment(this.investmentId, this.investmentForm.value).subscribe({
+        next: (response) => {
+          console.log('Investment updated:', response);
+        },
+        error: (err) => {
+          console.error('Failed to update investment:', err);
+          alert('An error occurred while updating the investment. Please try again.');
+        },
+      });
+    }
+  }
+
   closePopup(): void {
     this.showSuccessPopup = false;
     this.router.navigate(['/admin/view-investment']);

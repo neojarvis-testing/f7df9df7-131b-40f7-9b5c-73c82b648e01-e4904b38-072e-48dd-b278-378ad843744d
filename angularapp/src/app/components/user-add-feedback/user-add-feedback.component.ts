@@ -9,6 +9,7 @@ import { InvestmentService } from 'src/app/services/investment.service';
 @Component({
   selector: 'app-user-add-feedback',
   templateUrl: './user-add-feedback.component.html',
+  styleUrls: ['./user-add-feedback.component.css']
 })
 export class UserAddFeedbackComponent implements OnInit {
   feedback: Feedback = {
@@ -20,6 +21,7 @@ export class UserAddFeedbackComponent implements OnInit {
   investments: Investment[] = [];
   categories: string[] = ['Portfolio', 'Advice', 'General'];
  
+  // todayDate: string = new Date().toISOString().split('T')[0];
  
  
   constructor(private readonly feedbackService: FeedbackService, private readonly investmentService: InvestmentService, private readonly router:Router) {}
@@ -45,6 +47,9 @@ export class UserAddFeedbackComponent implements OnInit {
       }
     console.log(this.feedback)
     if (this.feedback.feedbackText && this.feedback.date && this.feedback.category && this.feedback.investment) {
+      // Ensure investment is sent as an object, not a string
+      //this.feedback.investment = this.investments.find(inv => inv.investmentId === this.feedback.investment.investmentId) || {} as Investment;
+     
       this.feedbackService.sendFeedback(this.feedback).subscribe(
         (response) => {
           console.log('Feedback submitted successfully', response);

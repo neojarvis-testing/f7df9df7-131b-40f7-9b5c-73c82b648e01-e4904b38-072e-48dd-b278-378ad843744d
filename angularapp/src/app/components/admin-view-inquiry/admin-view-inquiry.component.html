@@ -1,18 +1,17 @@
-
 <div class="admin-wrapper">
   <div>
     <h2>Manage Investment Inquiries</h2>
     <hr>
-  
+ 
     <div class="filters mb-3">
       <input type="text" class="form-control mb-2" placeholder="Search" [(ngModel)]="searchQuery" (input)="filterInquiries()">
-  
+ 
       <select class="form-control mb-2" [(ngModel)]="selectedStatus" (change)="filterInquiries()">
         <option value="">All Status</option>
         <option value="Pending">Pending</option>
         <option value="Resolved">Resolved</option>
       </select>
-  
+ 
       <select class="form-control mb-2" [(ngModel)]="selectedPriority" (change)="filterInquiries()">
         <option value="">All Priorities</option>
         <option value="High">High</option>
@@ -20,7 +19,7 @@
         <option value="Low">Low</option>
       </select>
     </div>
-  
+ 
     <table class="table table-dark table-striped" *ngIf="filteredInquiries.length > 0; else noData">
       <thead>
         <tr>
@@ -55,7 +54,7 @@
         </tr>
       </tbody>
     </table>
-  
+ 
     <!-- Delete Confirmation Modal -->
     <div *ngIf="showDeletePopup" class="modal-backdrop-custom">
       <div class="modal-dialog-centered-custom">
@@ -70,7 +69,7 @@
         </div>
       </div>
     </div>
-  
+ 
     <!-- Add Response Modal -->
     <div *ngIf="showResponsePopup" class="modal-backdrop-custom">
       <div class="modal-dialog-centered-custom">
@@ -86,7 +85,7 @@
         </div>
       </div>
     </div>
-  
+ 
     <ng-template #noData>
       <p class="text-center mt-4">No inquiries found</p>
     </ng-template>

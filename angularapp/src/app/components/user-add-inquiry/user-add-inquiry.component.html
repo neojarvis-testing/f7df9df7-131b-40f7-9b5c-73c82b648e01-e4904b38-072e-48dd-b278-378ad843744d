@@ -1,17 +1,17 @@
 <div class="form-container">
   <h2>Submit Your Inquiry</h2>
-
+ 
   <form #investmentinquiryForm="ngForm" (ngSubmit)="addInquiry()">
     <div class="form-group">
       <label for="investment">Investment:</label>
       <input type="text" class="form-control" id="investment" name="investmentName" [(ngModel)]="investment.name" readonly>
     </div>
-
+ 
     <div class="form-group">
       <label for="message">Message:</label>
       <textarea id="message" name="message" rows="5" class="form-control" [(ngModel)]="inquiry.message"></textarea>
     </div>
-
+ 
     <div class="form-group">
       <label for="priority">Priority:</label>
       <select id="priority" name="priority" class="form-control" [(ngModel)]="inquiry.priority">
@@ -21,10 +21,10 @@
         <option value="Low">Low</option>
       </select>
     </div>
-
+ 
     <button type="submit" class="btn btn-submit">Submit Inquiry</button>
   </form>
-
+ 
   <!-- Success Popup Modal -->
   <div class="modal fade show d-block" tabindex="-1" role="dialog" *ngIf="showSuccessPopup"
        style="background-color: rgba(0, 0, 0, 0.5); z-index: 1050;">

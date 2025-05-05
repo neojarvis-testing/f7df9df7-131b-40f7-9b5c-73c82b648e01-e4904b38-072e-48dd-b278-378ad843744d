@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { InvestmentService } from '../../services/investment.service';
 import { Investment } from '../../models/investment.model';
 import { Router } from '@angular/router';
-import { Chart } from 'chart.js';
+import * as Chart from 'chart.js';
  
 @Component({
   selector: 'app-admin-view-investment',
@@ -54,8 +54,6 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
       console.log("Raw API Response:", data); // Debugging line
       this.investments = Array.isArray(data) ? data : data.investments || [];
       this.filteredInvestments = [...this.investments];
-      // this.investments = data
-      // this.filteredInvestments=data
       this.categories = [...new Set(this.filteredInvestments.map(data => data.name))];
       this.createPieChart();
     });
@@ -142,7 +140,6 @@ generateJustOneColor(){
     const chartLabels = this.inquiriesData.map(data => `Investment ${data.investmentId}`);
     const chartData = this.inquiriesData.map(data => data.inquiries);
  
-   
    
     this.chartInstanceBar = new Chart(this.inquiriesBarChart.nativeElement, {
       type: 'bar',

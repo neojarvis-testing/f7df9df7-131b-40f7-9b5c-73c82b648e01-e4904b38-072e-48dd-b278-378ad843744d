@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Feedback } from 'src/app/models/feedback.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
 
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-admin-view-feedback',
@@ -39,9 +40,13 @@ export class AdminViewFeedbackComponent implements OnInit {
 
   showProfile(user: any): void {
     this.selectedUser = user;
+    const modal = new bootstrap.Modal(document.getElementById('userModal')!);
+    modal.show();
   }
 
   viewInvestmentDetails(investment: any): void {
     this.selectedInvestment = investment;
+    const modal = new bootstrap.Modal(document.getElementById('investmentModal')!);
+    modal.show();
   }
 }

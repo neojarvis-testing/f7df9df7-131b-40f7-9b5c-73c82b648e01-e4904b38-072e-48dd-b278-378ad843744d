@@ -92,16 +92,16 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
   }
  
   onDelete(): void {
-    if (this.investmentToDelete) {
+    if (this.investmentToDelete!==null) {
       this.investmentService.deleteInvestment(this.investmentToDelete).subscribe({
         next: () => {
           this.loadInvestments();
           this.closeDeletePopup();
         },
-        error: (err) => {
-          console.error('Error deleting investment:', err);
-          alert('An error occurred while deleting the investment. Please try again.');
-        },
+        // error: (err) => {
+        //   console.error('Error deleting investment:', err);
+        //   alert('An error occurred while deleting the investment. Please try again.');
+        // },
       });
     }
   }

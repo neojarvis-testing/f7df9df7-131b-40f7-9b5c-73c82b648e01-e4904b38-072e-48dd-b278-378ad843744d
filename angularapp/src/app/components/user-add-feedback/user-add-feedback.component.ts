@@ -41,7 +41,9 @@ export class UserAddFeedbackComponent implements OnInit {
     this.feedback.investment={
       investmentId:this.investmentId
     }
-    let userId = localStorage.getItem('userId');
+    let decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
+    let userId = decryptedLogin.userId; // Access property
+    //let userId = localStorage.getItem('userId');
       this.feedback.user={
         userId: Number(userId)
       }

@@ -20,23 +20,40 @@ export class AuthService {
     return this.http.post<any>(`${this.APIurl}/api/login`, login);
   }
   isAdmin():boolean{
-    let role=localStorage.getItem('userRole')
+    let data = localStorage.getItem('encryptedLogin')
+    if(data==null)
+       return false;
+    let decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
+    //console.log(decryptedLogin);
+    let role = decryptedLogin.userRole; // Access property
+    //let role=localStorage.getItem('userRole')
     return role=='Admin'
   }
  
   isUser():boolean{
-    let role=localStorage.getItem('userRole')
+    let data = localStorage.getItem('encryptedLogin')
+    if(data==null)
+       return false;
+    let decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
+    let role = decryptedLogin.userRole; // Access property
+    // let role=localStorage.getItem('userRole')
     return role=='User'
   }
  
   isLoggedUser():boolean{
-    let role=localStorage.getItem('userRole')
+    let decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
+    let role = decryptedLogin.userRole; // Access property
+    //let role=localStorage.getItem('userRole')
     return role!=null
   }
  
   loggedOut():void{
-    localStorage.removeItem('userId')
-    localStorage.removeItem('userRole')
-    localStorage.clear()
+    // //localStorage.removeItem('encryptedLogin')
+    // localStorage.removeItem('userId')
+    // localStorage.removeItem('userRole')
+    // localStorage.clear()
+   // localStorage.removeItem('userId');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('encryptedLogin'); // Ensure login data is removed correctly
   }
 }

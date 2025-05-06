@@ -15,8 +15,10 @@ export class AuthInterceptor implements HttpInterceptor {
     if(request.url.includes("/login") || request.url.includes("/register")){
       return next.handle(request);
     }
- 
-    let token = localStorage.getItem('token');
+    let decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
+    let token = decryptedLogin.token; // Access property
+
+    //let token = localStorage.getItem('token');
     console.log(token)
     if (token) {
       request = request.clone({

@@ -14,7 +14,10 @@ export class AdminnavComponent implements OnInit {
   constructor(public authService: AuthService, private readonly router: Router) {}
 
   ngOnInit(): void {
-    this.adminName = localStorage.getItem('username'); // Fetch admin name from localStorage
+    let decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
+    this.adminName = decryptedLogin.username; // Access property
+
+    //this.adminName = localStorage.getItem('username'); // Fetch admin name from localStorage
   }
 
   // Opens the modal and adds blur effect
@@ -32,7 +35,7 @@ export class AdminnavComponent implements OnInit {
   // Confirms logout and navigates to login
   confirmLogout(): void {
     this.authService.loggedOut();
-    this.router.navigate(['/login']);
     this.closeModal(); // Close modal after logout
+    this.router.navigate(['/login']);
   }
 }

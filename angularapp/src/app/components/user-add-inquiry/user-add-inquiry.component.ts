@@ -47,7 +47,9 @@ export class UserAddInquiryComponent implements OnInit {
   }
 
   addInquiry() {
-    let userId = localStorage.getItem('userId');
+    let decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
+    let userId = decryptedLogin.userId; // Access property
+    //let userId = localStorage.getItem('userId');
     this.inquiry.user = {
       userId: Number(userId)
     };

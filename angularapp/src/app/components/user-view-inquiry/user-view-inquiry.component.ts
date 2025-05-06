@@ -8,8 +8,9 @@ import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.se
   styleUrls: ['./user-view-inquiry.component.css']
 })
 export class UserViewInquiryComponent implements OnInit {
-
-  userId: number = +localStorage.getItem('userId');
+  decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
+  userId = this.decryptedLogin.userId; // Access property
+  //userId: number = +localStorage.getItem('userId');
   inquiries: InvestmentInquiry;
 
     constructor(private readonly inquiryService: InvestmentInquiryService) {}

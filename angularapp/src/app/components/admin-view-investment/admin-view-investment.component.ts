@@ -3,6 +3,8 @@ import { InvestmentService } from '../../services/investment.service';
 import { Investment } from '../../models/investment.model';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
+import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
+import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
  
 @Component({
   selector: 'app-admin-view-investment',
@@ -32,7 +34,7 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
   @ViewChild('inquiriesBarChart', { static: false }) inquiriesBarChart!: ElementRef;
   @ViewChild('investmentPieChart', { static: false }) investmentPieChart!: ElementRef;
  
-  constructor(private investmentService: InvestmentService, private router: Router) {}
+  constructor(private investmentService: InvestmentService, private router: Router, private investmentInquiryService: InvestmentInquiryService) {}
  
   ngOnInit(): void {
     this.loadInvestments();
@@ -173,7 +175,6 @@ generateJustOneColor(){
     if (this.chartInstancePie) {
       this.chartInstancePie.destroy();
     }
- 
     const categoryData = this.categories.map(category =>
       this.investments.filter(investment => investment.name === category).length
     );

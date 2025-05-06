@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.examly.springapp.config.JwtUtils;
 import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
+import com.examly.springapp.service.UserService;
 import com.examly.springapp.service.UserServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +25,7 @@ import jakarta.validation.Valid;
 public class AuthController {
 
     @Autowired
-    private UserServiceImpl service; // Service layer for user operations
+    private UserService service; // Service layer for user operations
     @Autowired
     private AuthenticationManager authenticationManager; // Manages authentication process
     @Autowired

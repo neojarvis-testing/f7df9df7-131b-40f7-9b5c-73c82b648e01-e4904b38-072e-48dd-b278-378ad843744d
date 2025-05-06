@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { InvestmentService } from '../../services/investment.service';
 import { Investment } from '../../models/investment.model';
 import { Router } from '@angular/router';
-import { Chart } from 'chart.js';
+import * as Chart from 'chart.js';
  
 @Component({
   selector: 'app-admin-view-investment',
@@ -91,16 +91,26 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
     this.investmentToDelete = investmentId;
   }
  
+  // onDelete(): void {
+  //   if (this.investmentToDelete!==null) {
+  //     this.investmentService.deleteInvestment(this.investmentToDelete).subscribe({
+  //       next: () => {
+  //         this.loadInvestments();
+  //         this.closeDeletePopup();
+  //       },
+  //     });
+  //   }
+  // }
+
   onDelete(): void {
-    if (this.investmentToDelete) {
+    if (this.investmentToDelete !== null) {
       this.investmentService.deleteInvestment(this.investmentToDelete).subscribe({
         next: () => {
-          this.loadInvestments();
+          this.investments = this.investments.filter(
+            (investment) => investment.investmentId !== this.investmentToDelete
+          );
+          this.filteredInvestments = [...this.investments]; // Ensuring data is refreshed
           this.closeDeletePopup();
-        },
-        error: (err) => {
-          console.error('Error deleting investment:', err);
-          alert('An error occurred while deleting the investment. Please try again.');
         },
       });
     }
@@ -140,7 +150,6 @@ generateJustOneColor(){
     const chartLabels = this.inquiriesData.map(data => `Investment ${data.investmentId}`);
     const chartData = this.inquiriesData.map(data => data.inquiries);
  
-   
    
     this.chartInstanceBar = new Chart(this.inquiriesBarChart.nativeElement, {
       type: 'bar',

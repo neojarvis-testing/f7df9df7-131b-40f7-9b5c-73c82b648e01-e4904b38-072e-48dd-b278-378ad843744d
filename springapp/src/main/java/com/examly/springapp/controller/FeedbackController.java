@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.examly.springapp.model.Feedback;
-import com.examly.springapp.service.FeedbackServiceImpl;
+import com.examly.springapp.service.FeedbackService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +20,7 @@ import jakarta.validation.Valid;
 public class FeedbackController {
 
     @Autowired
-    private FeedbackServiceImpl feedbackServiceImpl; // Injecting service layer for feedback operations
+    private FeedbackService feedbackService; // Injecting service layer for feedback operations
 
     /**
      * Create a new feedback entry.
@@ -31,7 +31,7 @@ public class FeedbackController {
     @Operation(summary = "Create Feedback", description = "Creates a new feedback entry with the provided details.")
     @PostMapping
     public ResponseEntity<Feedback> createFeedback(@Valid @RequestBody Feedback feedback) {
-        feedback = feedbackServiceImpl.createFeedback(feedback);
+        feedback = feedbackService.createFeedback(feedback);
         return ResponseEntity.status(201).body(feedback);
     }
 
@@ -44,7 +44,7 @@ public class FeedbackController {
     @Operation(summary = "Get Feedback by ID", description = "Retrieves feedback details by its unique ID.")
     @GetMapping("/{feedbackId}")
     public ResponseEntity<?> getFeedbackById(@PathVariable long feedbackId) {
-        Feedback feedback = feedbackServiceImpl.getFeedbackById(feedbackId);
+        Feedback feedback = feedbackService.getFeedbackById(feedbackId);
         if (feedback != null) {
             return ResponseEntity.status(200).body(feedback);
         }
@@ -59,7 +59,7 @@ public class FeedbackController {
     @Operation(summary = "Get All Feedbacks", description = "Retrieves all feedback entries available.")
     @GetMapping
     public ResponseEntity<?> getAllFeedbacks() {
-        List<Feedback> list = feedbackServiceImpl.getAllFeedbacks();
+        List<Feedback> list = feedbackService.getAllFeedbacks();
         return ResponseEntity.status(200).body(list);
     }
 
@@ -72,7 +72,7 @@ public class FeedbackController {
     @Operation(summary = "Get Feedbacks by User ID", description = "Retrieves all feedback entries submitted by a specific user.")
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getFeedbacksByUserId(@PathVariable Long userId) {
-        List<Feedback> list = feedbackServiceImpl.getFeedbacksByUserId(userId);
+        List<Feedback> list = feedbackService.getFeedbacksByUserId(userId);
         return ResponseEntity.status(200).body(list);
     }
 
@@ -85,10 +85,10 @@ public class FeedbackController {
     @Operation(summary = "Delete Feedback by ID", description = "Deletes a feedback entry by its unique ID.")
     @DeleteMapping("/{feedbackId}")
     public ResponseEntity<?> deleteFeedbackById(@PathVariable long feedbackId) {
-        boolean result = feedbackServiceImpl.deleteFeedbackById(feedbackId);
+        boolean result = feedbackService.deleteFeedbackById(feedbackId);
         if (result) {
-            return ResponseEntity.status(200).body("Feedback with ID " + feedbackId + " deleted successfully.");
+            return ResponseEntity.status(200).body(null);
         }
-        return ResponseEntity.status(404).body("Feedback with ID " + feedbackId + " not found!");
+        return ResponseEntity.status(404).body(null);
     }
 }

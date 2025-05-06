@@ -9,11 +9,16 @@ import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.se
 })
 export class UserViewInquiryComponent implements OnInit {
 
+  // Retrieves user ID from local storage and converts it to a number
   userId: number = +localStorage.getItem('userId');
+
+  // Stores the list of investment inquiries related to the user
   inquiries: InvestmentInquiry;
 
-    constructor(private readonly inquiryService: InvestmentInquiryService) {}
+  // Injecting the InvestmentInquiryService to fetch inquiries from the backend
+  constructor(private readonly inquiryService: InvestmentInquiryService) {}
   
+    // Lifecycle hook executed when the component initializes
     ngOnInit(): void {
      this.inquiryService.getInquriesByUserId(this.userId).subscribe((data) => {
      this.inquiries = data;

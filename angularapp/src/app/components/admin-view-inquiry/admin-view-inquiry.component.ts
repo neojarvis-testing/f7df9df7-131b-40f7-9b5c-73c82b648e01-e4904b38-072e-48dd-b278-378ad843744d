@@ -22,12 +22,14 @@ export class AdminViewInquiryComponent implements OnInit {
   inquiryToRespond: InvestmentInquiry | null = null;
   adminResponse: string = '';
 
+  // Injecting services for handling inquiries and navigation
   constructor(private readonly inquiryService: InvestmentInquiryService, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.loadInquiries();
   }
 
+  // Fetch all inquiries from the backend service
   loadInquiries(): void {
     this.inquiryService.getAllInquries().subscribe((data) => {
       this.inquiries = data;
@@ -35,6 +37,7 @@ export class AdminViewInquiryComponent implements OnInit {
     });
   }
 
+   // Apply filtering based on search query, selected status, and priority
   filterInquiries(): void {
     this.filteredInquiries = this.inquiries.filter(inquiry => {
       return (
@@ -45,6 +48,7 @@ export class AdminViewInquiryComponent implements OnInit {
     });
   }
 
+  // Prepare for deleting an inquiry and show the delete confirmation popup
   confirmDeleteInquiry(inquiryId: number): void {
     this.inquiryToDelete = inquiryId;
     this.showDeletePopup = true;
@@ -52,6 +56,7 @@ export class AdminViewInquiryComponent implements OnInit {
     this.router.navigate(['/admin/view-inquiries']);
   }
 
+  // Proceed with inquiry deletion after confirmation
   onDelete(): void {
     if (this.inquiryToDelete !== null) {
       this.inquiryService.deleteInquiry(this.inquiryToDelete).subscribe(() => {
@@ -65,29 +70,32 @@ export class AdminViewInquiryComponent implements OnInit {
     }
   }
 
+   // Close the delete confirmation popup
   closeDeletePopup(): void {
     this.showDeletePopup = false;
     this.inquiryToDelete = null;
     this.loadInquiries();
   }
 
+  // Open response submission popup for a specific inquiry
   openResponsePopup(inquiry: InvestmentInquiry): void {
     this.inquiryToRespond = inquiry;
     this.adminResponse = inquiry.adminResponse || '';
-    this.showResponsePopup = true;
+    this.showResponsePopup = true; // Show response popup
   }
 
+   // Close the response submission popup without saving changes
   closeResponsePopup(): void {
     this.showResponsePopup = false;
     this.inquiryToRespond = null;
     this.adminResponse = '';
   }
 
+  // Submit admin response and update inquiry status
   submitAdminResponse(): void {
     if (this.inquiryToRespond) {
       this.inquiryToRespond.adminResponse = this.adminResponse;
       this.inquiryToRespond.status = 'Resolved';
-      //this.inquiryToRespond.
       this.inquiryService.updateInquiry(this.inquiryToRespond.inquiryId!, this.inquiryToRespond).subscribe(() => {
         this.loadInquiries();
         this.closeResponsePopup();

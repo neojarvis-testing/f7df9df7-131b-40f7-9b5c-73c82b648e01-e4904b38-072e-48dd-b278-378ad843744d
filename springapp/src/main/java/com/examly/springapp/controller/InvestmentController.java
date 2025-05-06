@@ -139,7 +139,7 @@ public class InvestmentController {
     @DeleteMapping("/{investmentId}")
     public ResponseEntity<?> deleteInvestment(@PathVariable long investmentId) {
         boolean result = investmentService.deleteInvestment(investmentId);
-        return result ? ResponseEntity.ok("Investment deleted successfully")
-                : ResponseEntity.status(404).body("Investment not found");
+        return result ? ResponseEntity.ok(null)
+                : ResponseEntity.status(404).body(null);
     }
 }

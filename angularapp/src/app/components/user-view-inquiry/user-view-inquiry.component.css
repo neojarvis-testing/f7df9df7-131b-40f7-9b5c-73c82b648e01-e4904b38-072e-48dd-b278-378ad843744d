@@ -1,0 +1,89 @@
+body {
+    background-color: white;
+    font-family: "Times New Roman", Times, serif;
+  }
+  
+  .container {
+    background-color: black;
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 50px;
+    box-shadow: 0 0 10px rgba(0, 100, 0, 0.7);
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  h2 {
+    color: limegreen;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  
+  table {
+    border: 2px solid #006400;
+    font-family: "Times New Roman", Times, serif;
+    animation: fadeIn 1.2s ease-in-out;
+  }
+  
+  th, td {
+    border: 1px solid #006400 !important;
+    font-family: "Times New Roman", Times, serif;
+    vertical-align: middle;
+  }
+  
+  th {
+    color: limegreen;
+    font-weight: 600;
+  }
+  
+  td {
+    color: white;
+  }
+  
+  .table-dark {
+    background-color: black;
+  }
+  
+  .no-data {
+    color: limegreen;
+    text-align: center;
+    font-weight: bold;
+    padding: 20px;
+    font-size: 1.2em;
+  }
+  
+  /* Hover animation */
+  tbody tr {
+    transition: all 0.3s ease;
+  }
+  
+  tbody tr:hover {
+    background-color: #003300 !important;
+    transform: scale(1.02);
+    z-index: 1;
+    position: relative;
+    box-shadow: 5px 7px 13px rgba(78, 244, 78, 0.4);
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

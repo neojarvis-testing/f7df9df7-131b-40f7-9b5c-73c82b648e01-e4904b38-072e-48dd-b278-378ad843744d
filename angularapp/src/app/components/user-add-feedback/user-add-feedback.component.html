@@ -33,6 +33,7 @@
         <label for="investmentId" style="color: white;">Select Investment:</label>
         <select id="investmentId" class="form-control" [(ngModel)]="investmentId" name="investmentId" required>
           <option value="" disabled selected>Select Investment</option>
+          <option value="">select investment</option>
           <option *ngFor="let investment of investments" [value]="investment.investmentId">{{ investment.name }}</option>
         </select>
       </div>
@@ -46,6 +47,7 @@
       <div class="form-group">
         <label for="date" style="color: white;">Date:</label>
         <input type="text" id="date" class="form-control" [(ngModel)]="feedback.date" name="date" required>
+        <input type="text" id="date" class="form-control" [(ngModel)]="feedback.date" name="date" required readonly>
       </div>
       <div class="form-group">
         <label for="feedbackText" style="color: white;">Feedback Message:</label>

@@ -6,6 +6,8 @@ import { User } from 'src/app/models/user.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { InvestmentService } from 'src/app/services/investment.service';
  
+declare var bootstrap: any;
+ 
 @Component({
   selector: 'app-user-add-feedback',
   templateUrl: './user-add-feedback.component.html',
@@ -17,14 +19,15 @@ export class UserAddFeedbackComponent implements OnInit {
     date: new Date(),
     category: ''
   };
-  investmentId:any
+  investmentId: any;
   investments: Investment[] = [];
   categories: string[] = ['Portfolio', 'Advice', 'General'];
  
-  // todayDate: string = new Date().toISOString().split('T')[0];
- 
- 
-  constructor(private readonly feedbackService: FeedbackService, private readonly investmentService: InvestmentService, private readonly router:Router) {}
+  constructor(
+    private readonly feedbackService: FeedbackService,
+    private readonly investmentService: InvestmentService,
+    private readonly router: Router
+  ) {}
  
   ngOnInit(): void {
     this.loadInvestments();
@@ -37,27 +40,24 @@ export class UserAddFeedbackComponent implements OnInit {
   }
  
   onSubmit(): void {
-    console.log(this.investmentId)
-    this.feedback.investment={
-      investmentId:this.investmentId
-    }
-    let decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
-    let userId = decryptedLogin.userId; // Access property
-    //let userId = localStorage.getItem('userId');
-      this.feedback.user={
-        userId: Number(userId)
-      }
-    console.log(this.feedback)
+    this.feedback.investment = {
+      investmentId: this.investmentId
+    };
+    let userId = localStorage.getItem('userId');
+    this.feedback.user = {
+      userId: Number(userId)
+    };
+ 
     if (this.feedback.feedbackText && this.feedback.date && this.feedback.category && this.feedback.investment) {
-      // Ensure investment is sent as an object, not a string
-      //this.feedback.investment = this.investments.find(inv => inv.investmentId === this.feedback.investment.investmentId) || {} as Investment;
-     
       this.feedbackService.sendFeedback(this.feedback).subscribe(
         (response) => {
           console.log('Feedback submitted successfully', response);
-          alert('Feedback submitted successfully');
           this.resetForm();
-          this.router.navigate(['user/view-feedback']);
+ 
+          // Show Bootstrap modal
+          const modalElement = document.getElementById('successModal');
+          const modal = new bootstrap.Modal(modalElement);
+          modal.show();
         },
         (error) => {
           console.error('Error submitting feedback', error);
@@ -75,8 +75,18 @@ export class UserAddFeedbackComponent implements OnInit {
       category: ''
     };
   }
+  
+  formatDate() {
+    const inputElement = document.getElementById("date") as HTMLInputElement;
+    const rawDate = inputElement.value;
+  
+    // Extract just the date portion using regex
+    const match = rawDate.match(/(\d{4}-\d{2}-\d{2})/); // Matches YYYY-MM-DD format
+    if (match) {
+      inputElement.value = match[0]; // Set only the date
+    }
+  }
   navigateToFeedback(): void {
     this.router.navigate(['user/view-feedback']);
   }
 }
- 

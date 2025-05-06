@@ -117,7 +117,7 @@
         <tr *ngFor="let feedback of feedbacks; let i = index">
           <td>{{ i + 1 }}</td>
           <td>{{ feedback.feedbackText }}</td>
-          <td>{{ feedback.date | date:'MMM d, y, h:mm a' }}</td>
+          <td>{{ feedback.date | date:'MMM d, y' }}</td>
           <td>{{ feedback.category }}</td>
           <td>{{ feedback.investment.name }}</td>
         </tr>

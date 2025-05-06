@@ -7,8 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.examly.springapp.model.InvestmentInquiry;
-import com.examly.springapp.service.InvestmentInquiryServiceImpl;
-
+import com.examly.springapp.service.InvestmentInquiryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -20,7 +19,7 @@ import jakarta.validation.Valid;
 public class InvestmentInquiryController {
 
     @Autowired
-    InvestmentInquiryServiceImpl investmentinquiryService;
+    InvestmentInquiryService investmentinquiryService;
 
     /**
      * Creates a new investment inquiry.
@@ -98,9 +97,9 @@ public class InvestmentInquiryController {
     public ResponseEntity<?> deleteInquiry(@PathVariable long inquiryId) {
         boolean result = investmentinquiryService.deleteInquiry(inquiryId);
         if (result) {
-            return ResponseEntity.status(200).body("Inquiry deleted successfully...");
+            return ResponseEntity.status(200).body(null);
         } else {
-            return ResponseEntity.status(403).body("Inquiry ID does not exist!...");
+            return ResponseEntity.status(403).body(null);
         }
     }
 }

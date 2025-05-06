@@ -15,6 +15,7 @@ export class UserAddInquiryComponent implements OnInit {
   investmentId: any;
   showSuccessPopup = false;
 
+  // Object to hold inquiry details
   inquiry: InvestmentInquiry = {
     message: '',
     status: 'Pending',
@@ -25,6 +26,7 @@ export class UserAddInquiryComponent implements OnInit {
     contactDetails: ''
   };
 
+  // Object to store details of the selected investment
   investment: Investment = {
     name: '',
     description: "",
@@ -36,9 +38,11 @@ export class UserAddInquiryComponent implements OnInit {
     status: ""
   };
 
+  // Injecting required services for investment inquiry and navigation
   constructor(private readonly investmentinquiryService: InvestmentInquiryService, private readonly investmentService: InvestmentService, 
     private readonly router: Router, private readonly activatedRoute: ActivatedRoute) { }
 
+  // Lifecycle hook that runs when the component initializes
   ngOnInit(): void {
     this.investmentId = +this.activatedRoute.snapshot.params['investmentId'];
     this.investmentService.getInvestmentById(this.investmentId).subscribe((data) => {
@@ -46,6 +50,7 @@ export class UserAddInquiryComponent implements OnInit {
     });
   }
 
+  // Function to add a new inquiry for the selected investment
   addInquiry() {
     let decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
     let userId = decryptedLogin.userId; // Access property
@@ -57,7 +62,6 @@ export class UserAddInquiryComponent implements OnInit {
       investmentId: this.investmentId
     };
     console.log(this.investment);
-
     this.investmentinquiryService.addInquiry(this.inquiry).subscribe((data) => {
       this.resetInquiry();
       this.showSuccessPopup = true; // Show the success popup
@@ -67,6 +71,7 @@ export class UserAddInquiryComponent implements OnInit {
     });
   }
 
+  // Function to reset the inquiry form fields
   resetInquiry() {
     this.inquiry = {
       user: null,
@@ -91,6 +96,7 @@ export class UserAddInquiryComponent implements OnInit {
     };
   }
 
+  // Function to close the success popup and navigate back to inquiries page
   closePopup(): void {
     this.showSuccessPopup = false;
     this.router.navigate(['/user/view-inquiry']);

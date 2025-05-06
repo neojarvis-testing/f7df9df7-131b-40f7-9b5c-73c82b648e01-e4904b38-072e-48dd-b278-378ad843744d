@@ -60,7 +60,7 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
       this.createPieChart();
     });
   }
-
+ 
  
   onSearch(): void {
     this.filteredInvestments = this.investments.filter((investment) =>
@@ -203,5 +203,4 @@ generateJustOneColor(){
       `#${Math.floor(Math.random() * 16777215).toString(16)}` // Generates a random HEX color
     );
   }
- 
 }

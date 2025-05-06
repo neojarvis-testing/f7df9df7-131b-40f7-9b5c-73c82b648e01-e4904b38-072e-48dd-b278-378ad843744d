@@ -98,9 +98,9 @@ public class InvestmentInquiryController {
     public ResponseEntity<?> deleteInquiry(@PathVariable long inquiryId) {
         boolean result = investmentinquiryService.deleteInquiry(inquiryId);
         if (result) {
-            return ResponseEntity.status(200).body("Inquiry deleted successfully...");
+            return ResponseEntity.status(200).body(null);
         } else {
-            return ResponseEntity.status(403).body("Inquiry ID does not exist!...");
+            return ResponseEntity.status(403).body(null);
         }
     }
 }

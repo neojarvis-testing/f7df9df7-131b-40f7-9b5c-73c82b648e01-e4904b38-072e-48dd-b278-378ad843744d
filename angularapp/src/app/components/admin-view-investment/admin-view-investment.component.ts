@@ -91,17 +91,27 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
     this.investmentToDelete = investmentId;
   }
  
+  // onDelete(): void {
+  //   if (this.investmentToDelete!==null) {
+  //     this.investmentService.deleteInvestment(this.investmentToDelete).subscribe({
+  //       next: () => {
+  //         this.loadInvestments();
+  //         this.closeDeletePopup();
+  //       },
+  //     });
+  //   }
+  // }
+
   onDelete(): void {
-    if (this.investmentToDelete!==null) {
+    if (this.investmentToDelete !== null) {
       this.investmentService.deleteInvestment(this.investmentToDelete).subscribe({
         next: () => {
-          this.loadInvestments();
+          this.investments = this.investments.filter(
+            (investment) => investment.investmentId !== this.investmentToDelete
+          );
+          this.filteredInvestments = [...this.investments]; // Ensuring data is refreshed
           this.closeDeletePopup();
         },
-        // error: (err) => {
-        //   console.error('Error deleting investment:', err);
-        //   alert('An error occurred while deleting the investment. Please try again.');
-        // },
       });
     }
   }

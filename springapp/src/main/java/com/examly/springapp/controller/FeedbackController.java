@@ -87,8 +87,8 @@ public class FeedbackController {
     public ResponseEntity<?> deleteFeedbackById(@PathVariable long feedbackId) {
         boolean result = feedbackServiceImpl.deleteFeedbackById(feedbackId);
         if (result) {
-            return ResponseEntity.status(200).body("Feedback with ID " + feedbackId + " deleted successfully.");
+            return ResponseEntity.status(200).body(null);
         }
-        return ResponseEntity.status(404).body("Feedback with ID " + feedbackId + " not found!");
+        return ResponseEntity.status(404).body(null);
     }
 }

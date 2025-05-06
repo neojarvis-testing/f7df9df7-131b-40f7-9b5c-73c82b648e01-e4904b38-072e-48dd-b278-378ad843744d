@@ -7,8 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.examly.springapp.model.InvestmentInquiry;
-import com.examly.springapp.service.InvestmentInquiryServiceImpl;
-
+import com.examly.springapp.service.InvestmentInquiryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -20,7 +19,7 @@ import jakarta.validation.Valid;
 public class InvestmentInquiryController {
 
     @Autowired
-    InvestmentInquiryServiceImpl investmentinquiryService;
+    InvestmentInquiryService investmentinquiryService;
 
     /**
      * Creates a new investment inquiry.

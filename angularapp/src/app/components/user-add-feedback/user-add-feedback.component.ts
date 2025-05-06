@@ -75,5 +75,8 @@ export class UserAddFeedbackComponent implements OnInit {
       category: ''
     };
   }
+  navigateToFeedback(): void {
+    this.router.navigate(['user/view-feedback']);
+  }
 }
  

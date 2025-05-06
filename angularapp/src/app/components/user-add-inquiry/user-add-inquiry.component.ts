@@ -52,7 +52,9 @@ export class UserAddInquiryComponent implements OnInit {
 
   // Function to add a new inquiry for the selected investment
   addInquiry() {
-    let userId = localStorage.getItem('userId');
+    let decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
+    let userId = decryptedLogin.userId; // Access property
+    //let userId = localStorage.getItem('userId');
     this.inquiry.user = {
       userId: Number(userId)
     };

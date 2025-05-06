@@ -2,7 +2,9 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { InvestmentService } from '../../services/investment.service';
 import { Investment } from '../../models/investment.model';
 import { Router } from '@angular/router';
-import * as Chart from 'chart.js';
+import { Chart } from 'chart.js';
+import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
+import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
  
 @Component({
   selector: 'app-admin-view-investment',
@@ -32,7 +34,7 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
   @ViewChild('inquiriesBarChart', { static: false }) inquiriesBarChart!: ElementRef;
   @ViewChild('investmentPieChart', { static: false }) investmentPieChart!: ElementRef;
  
-  constructor(private investmentService: InvestmentService, private router: Router) {}
+  constructor(private investmentService: InvestmentService, private router: Router, private investmentInquiryService: InvestmentInquiryService) {}
  
   ngOnInit(): void {
     this.loadInvestments();
@@ -58,7 +60,7 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
       this.createPieChart();
     });
   }
-
+ 
  
   onSearch(): void {
     this.filteredInvestments = this.investments.filter((investment) =>
@@ -91,26 +93,16 @@ export class AdminViewInvestmentComponent implements OnInit, AfterViewInit {
     this.investmentToDelete = investmentId;
   }
  
-  // onDelete(): void {
-  //   if (this.investmentToDelete!==null) {
-  //     this.investmentService.deleteInvestment(this.investmentToDelete).subscribe({
-  //       next: () => {
-  //         this.loadInvestments();
-  //         this.closeDeletePopup();
-  //       },
-  //     });
-  //   }
-  // }
-
   onDelete(): void {
-    if (this.investmentToDelete !== null) {
+    if (this.investmentToDelete) {
       this.investmentService.deleteInvestment(this.investmentToDelete).subscribe({
         next: () => {
-          this.investments = this.investments.filter(
-            (investment) => investment.investmentId !== this.investmentToDelete
-          );
-          this.filteredInvestments = [...this.investments]; // Ensuring data is refreshed
+          this.loadInvestments();
           this.closeDeletePopup();
+        },
+        error: (err) => {
+          console.error('Error deleting investment:', err);
+          alert('An error occurred while deleting the investment. Please try again.');
         },
       });
     }
@@ -151,6 +143,7 @@ generateJustOneColor(){
     const chartData = this.inquiriesData.map(data => data.inquiries);
  
    
+   
     this.chartInstanceBar = new Chart(this.inquiriesBarChart.nativeElement, {
       type: 'bar',
       data: {
@@ -182,7 +175,6 @@ generateJustOneColor(){
     if (this.chartInstancePie) {
       this.chartInstancePie.destroy();
     }
- 
     const categoryData = this.categories.map(category =>
       this.investments.filter(investment => investment.name === category).length
     );
@@ -211,5 +203,4 @@ generateJustOneColor(){
       `#${Math.floor(Math.random() * 16777215).toString(16)}` // Generates a random HEX color
     );
   }
- 
 }

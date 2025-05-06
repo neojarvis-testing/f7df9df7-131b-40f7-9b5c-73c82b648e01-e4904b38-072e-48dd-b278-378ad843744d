@@ -14,7 +14,9 @@ export class UsernavComponent implements OnInit {
   constructor(private readonly authService: AuthService, private readonly router: Router) {}
 
   ngOnInit(): void {
-    this.username = localStorage.getItem('username');
+    let decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
+    this.username = decryptedLogin.username; // Access property
+    //this.username = localStorage.getItem('username');
   }
 
   logout(): void {

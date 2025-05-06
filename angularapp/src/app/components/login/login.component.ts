@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   login: Login = {email: '', password: ''};
+  encryptedLogin: any;
   
   user:User={
     email: '',
@@ -30,9 +31,12 @@ export class LoginComponent implements OnInit {
     console.log(this.login)
      this.service.login(this.login).subscribe((data)=>{
       this.user = data;
-      localStorage.setItem('userId', data.userId+"")
-      localStorage.setItem('username', data.username)
-      localStorage.setItem('token', data.token)
+      //this.encryptedLogin = btoa(JSON.stringify(data));
+      localStorage.setItem('encryptedLogin', btoa(JSON.stringify(data)));      //console.log(atob(localStorage.getItem('encryptedLogin')));
+
+      // localStorage.setItem('userId', data.userId+"")
+      // localStorage.setItem('username', data.username)
+      // localStorage.setItem('token', data.token)
       localStorage.setItem('userRole', data.userRole)
       this.router.navigate(['/home'])
     },
@@ -40,5 +44,9 @@ export class LoginComponent implements OnInit {
       console.log(error)
       this.errorMessage='Incorrect Email or password. Try Again!!'
     });
+      const decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin')))
+      console.log(decryptedLogin);
+      let userRole1 = decryptedLogin.userRole;
+      console.log(userRole1);
   }
 }

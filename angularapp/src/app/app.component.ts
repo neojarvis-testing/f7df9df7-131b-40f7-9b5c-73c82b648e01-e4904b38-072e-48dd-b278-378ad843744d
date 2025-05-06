@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit{
   title = 'Invest Track';
+  // decryptedLogin = JSON.parse(atob(localStorage.getItem('encryptedLogin'))); // Decode & parse JSON
+  // userRole = this.decryptedLogin.userRole; // Access property
   userRole = localStorage.getItem('userRole');
   ngOnInit(): void {
   }
-
 }

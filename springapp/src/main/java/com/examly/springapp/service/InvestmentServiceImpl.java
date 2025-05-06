@@ -21,7 +21,6 @@ import com.examly.springapp.repository.InvestmentRepo;
  */
 @Service
 public class InvestmentServiceImpl implements InvestmentService {
-
     private final InvestmentRepo investmentRepo;
 
     /**

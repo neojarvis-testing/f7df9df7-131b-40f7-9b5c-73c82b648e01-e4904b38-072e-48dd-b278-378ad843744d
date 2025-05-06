@@ -5,7 +5,9 @@ import { Investment } from 'src/app/models/investment.model';
 import { User } from 'src/app/models/user.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { InvestmentService } from 'src/app/services/investment.service';
- 
+
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-user-add-feedback',
   templateUrl: './user-add-feedback.component.html',
@@ -17,45 +19,45 @@ export class UserAddFeedbackComponent implements OnInit {
     date: new Date(),
     category: ''
   };
-  investmentId:any
+  investmentId: any;
   investments: Investment[] = [];
   categories: string[] = ['Portfolio', 'Advice', 'General'];
- 
-  // todayDate: string = new Date().toISOString().split('T')[0];
- 
- 
-  constructor(private readonly feedbackService: FeedbackService, private readonly investmentService: InvestmentService, private readonly router:Router) {}
- 
+
+  constructor(
+    private readonly feedbackService: FeedbackService,
+    private readonly investmentService: InvestmentService,
+    private readonly router: Router
+  ) {}
+
   ngOnInit(): void {
     this.loadInvestments();
   }
- 
+
   loadInvestments(): void {
     this.investmentService.getAllInvestments().subscribe((data) => {
       this.investments = data;
     });
   }
- 
+
   onSubmit(): void {
-    console.log(this.investmentId)
-    this.feedback.investment={
-      investmentId:this.investmentId
-    }
+    this.feedback.investment = {
+      investmentId: this.investmentId
+    };
     let userId = localStorage.getItem('userId');
-      this.feedback.user={
-        userId: Number(userId)
-      }
-    console.log(this.feedback)
+    this.feedback.user = {
+      userId: Number(userId)
+    };
+
     if (this.feedback.feedbackText && this.feedback.date && this.feedback.category && this.feedback.investment) {
-      // Ensure investment is sent as an object, not a string
-      //this.feedback.investment = this.investments.find(inv => inv.investmentId === this.feedback.investment.investmentId) || {} as Investment;
-     
       this.feedbackService.sendFeedback(this.feedback).subscribe(
         (response) => {
           console.log('Feedback submitted successfully', response);
-          alert('Feedback submitted successfully');
           this.resetForm();
-          this.router.navigate(['user/view-feedback']);
+
+          // Show Bootstrap modal
+          const modalElement = document.getElementById('successModal');
+          const modal = new bootstrap.Modal(modalElement);
+          modal.show();
         },
         (error) => {
           console.error('Error submitting feedback', error);
@@ -63,7 +65,7 @@ export class UserAddFeedbackComponent implements OnInit {
       );
     }
   }
- 
+
   resetForm(): void {
     this.feedback = {
       feedbackText: '',
@@ -72,5 +74,9 @@ export class UserAddFeedbackComponent implements OnInit {
       user: {} as User,
       category: ''
     };
+  }
+
+  navigateToFeedback(): void {
+    this.router.navigate(['user/view-feedback']);
   }
 }
